@@ -75,6 +75,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:id="@+id/textViewExample"
+                android:layout_width="127dp"
+                android:layout_height="58dp" />
         </TableRow>
 
     </TableLayout>
