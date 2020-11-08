@@ -65,6 +65,44 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/cardview_light_background"
+                    android:text="@string/title_1"
+                    android:textColor="@color/design_default_color_primary_dark" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@color/cardview_light_background"
+                    android:text="@string/title_2"
+                    android:textColor="@color/design_default_color_primary_dark" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@color/cardview_light_background"
+                    android:text="@string/title_3"
+                    android:textColor="@color/design_default_color_primary_dark" />
+            </TableRow>
+
+        </TableLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
@@ -74,16 +112,11 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <include
+            layout="@layout/recycler_view_for_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-            <fragment
-                android:id="@+id/fragment"
-                android:name="com.example.taskfox3.fragment.BlankFragmentCollection"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </FrameLayout>
     </androidx.viewpager.widget.ViewPager>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
