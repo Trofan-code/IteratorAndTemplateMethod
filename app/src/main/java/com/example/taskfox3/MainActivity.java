@@ -33,18 +33,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private PageViewModel pageViewModel;
-    private EditText arrayLength;
-    private RecyclerView recyclerView;
-    private List<DataTable> dataList;
-    private ProgressBar progressBar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        init();
-        initialDataTable();
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+        ViewPager viewPager = findViewById(R.id.view_pager);
+        viewPager.setAdapter(sectionsPagerAdapter);
+        TabLayout tabs = findViewById(R.id.tabs);
+        tabs.setupWithViewPager(viewPager);
+
+
 
      /*   Switch sw = (Switch) findViewById(R.id.switchButton);
         sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -58,27 +57,4 @@ public class MainActivity extends AppCompatActivity {
         });*/
     }
 
-    private void init(){
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
-        ViewPager viewPager = findViewById(R.id.view_pager);
-        viewPager.setAdapter(sectionsPagerAdapter);
-        TabLayout tabs = findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
-        progressBar = findViewById(R.id.progressBar);
-        arrayLength = findViewById(R.id.editTextLen);
-        recyclerView = findViewById(R.id.recycler_view_for_tab);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this)); // poczytać o tym
-        DataAdapter adapter = new DataAdapter(dataList);
-        recyclerView.setAdapter(adapter);
-    }
-    private void initialDataTable(){
-        dataList = new ArrayList<>();
-        dataList.add(new DataTable(R.string.name_oper_1,"0",progressBar));
-        dataList.add(new DataTable(R.string.name_oper_2,"0",progressBar));
-        dataList.add(new DataTable(R.string.name_oper_3,"0",progressBar));
-        dataList.add(new DataTable(R.string.name_oper_4,"0",progressBar));
-        dataList.add(new DataTable(R.string.name_oper_5,"0",progressBar));
-        dataList.add(new DataTable(R.string.name_oper_6,"0",progressBar));
-        dataList.add(new DataTable(R.string.name_oper_7,"0",progressBar));
-    }
 }

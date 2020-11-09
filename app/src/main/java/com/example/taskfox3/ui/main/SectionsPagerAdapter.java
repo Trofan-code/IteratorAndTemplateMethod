@@ -27,10 +27,11 @@ import java.util.List;
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
+
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2};
     private final Context mContext;
-    private List<DataTable> dataList;
+
 
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -42,10 +43,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-
-
-               // jak zwrócić ??
-                return null;
+                BlankFragmentCollection blankFragmentCollection= new BlankFragmentCollection();
+                return blankFragmentCollection;
             case 1:
                 BlankFragmentMap blankFragmentMap = new BlankFragmentMap();
                 return blankFragmentMap;
@@ -64,5 +63,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // Show 2 total pages.
         return 2;
     }
+
+
 
 }
