@@ -12,9 +12,11 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.taskfox3.MyViewModel;
 import com.example.taskfox3.R;
 import com.example.taskfox3.ui.main.PageViewModel;
 
@@ -25,7 +27,10 @@ import java.util.List;
 public class BlankFragmentCollection extends Fragment {
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
-    List<DataTable> dataList ;
+    private List<DataTable> dataList ;
+    private MyViewModel model;
+    private boolean isSwitched;
+
 
     public BlankFragmentCollection() {
     }
@@ -42,16 +47,22 @@ public class BlankFragmentCollection extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        initialDataTable();
-        View view = inflater.inflate(R.layout.fragment_blank_collection, container, false);
-        recyclerView = view.findViewById(R.id.recycler_view_for_tab);
-        recyclerView.setLayoutManager(
-                new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
-        progressBar = view.findViewById(R.id.progressBar);
-        DataAdapter adapter = new DataAdapter(dataList);
-        recyclerView.setAdapter(adapter);
 
-        //better GridLayoutManager
+        View view  = inflater.inflate(R.layout.fragment_blank_collection, container, false);
+        recyclerView = view.findViewById(R.id.recycler_view_for_tab);
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
+        progressBar = view.findViewById(R.id.progressBar);
+        DataAdapter adapter;
+        model = new ViewModelProvider(this).get(MyViewModel.class);
+        isSwitched = model.getBtnSwitch();
+
+        if (isSwitched == false) {
+            initialDataTable();
+            adapter= new DataAdapter(dataList);
+            recyclerView.setAdapter(adapter);
+        }else{
+            //delat operaciju
+        }
 
         return view;
     }
@@ -67,4 +78,5 @@ public class BlankFragmentCollection extends Fragment {
         dataList.add(new DataTable(R.string.name_oper_7,"0",progressBar));
         return dataList;
     }
+
 }

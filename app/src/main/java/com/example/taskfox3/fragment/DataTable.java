@@ -30,25 +30,19 @@ public class DataTable {
         return nameOfOperation;
     }
 
-    public void setNameOfOperation(int nameOfOperation) {
-        this.nameOfOperation = nameOfOperation;
-    }
+
 
     public String getTimeOfOperation() {
         return timeOfOperation;
     }
 
-    public void setTimeOfOperation(String timeOfOperation) {
-        this.timeOfOperation = timeOfOperation;
-    }
+
 
     public ProgressBar getProgressBar() {
         return progressBar;
     }
 
-    public void setProgressBar(ProgressBar progressBar) {
-        this.progressBar = progressBar;
-    }
+
 
     private void setStandartValues() {
         dataList.add(new DataTable(R.string.name_oper_1, "0", progressBar));
