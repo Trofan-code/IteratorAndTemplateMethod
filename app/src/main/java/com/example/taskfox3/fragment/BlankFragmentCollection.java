@@ -4,21 +4,16 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.example.taskfox3.MyViewModel;
 import com.example.taskfox3.R;
-import com.example.taskfox3.ui.main.PageViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,13 +47,13 @@ public class BlankFragmentCollection extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_view_for_tab);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
         progressBar = view.findViewById(R.id.progressBar);
-        DataAdapter adapter;
+        RecyclerViewDataAdapter adapter;
         model = new ViewModelProvider(this).get(MyViewModel.class);
         isSwitched = model.getBtnSwitch();
 
         if (isSwitched == false) {
             initialDataTable();
-            adapter= new DataAdapter(dataList);
+            adapter= new RecyclerViewDataAdapter(dataList);
             recyclerView.setAdapter(adapter);
         }else{
             //delat operaciju

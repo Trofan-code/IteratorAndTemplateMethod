@@ -1,25 +1,16 @@
 package com.example.taskfox3.ui.main;
 
 import android.content.Context;
-import android.widget.ProgressBar;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.taskfox3.MainActivity;
 import com.example.taskfox3.R;
 import com.example.taskfox3.fragment.BlankFragmentCollection;
 import com.example.taskfox3.fragment.BlankFragmentMap;
-import com.example.taskfox3.fragment.DataAdapter;
-import com.example.taskfox3.fragment.DataTable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to

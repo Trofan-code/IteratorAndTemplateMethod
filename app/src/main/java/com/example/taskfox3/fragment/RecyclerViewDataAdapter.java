@@ -11,10 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taskfox3.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class DataAdapter extends RecyclerView.Adapter<DataAdapter.AdapterViewHolder> {
+public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDataAdapter.AdapterViewHolder> {
     public class AdapterViewHolder extends RecyclerView.ViewHolder {
         private TextView operationName;
         private TextView operationTime;
@@ -37,7 +36,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.AdapterViewHol
 
     List<DataTable> dataTableList;
 
-    public DataAdapter(List<DataTable> dataTableList) {
+    public RecyclerViewDataAdapter(List<DataTable> dataTableList) {
         this.dataTableList = dataTableList;
     }
 
