@@ -31,32 +31,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/editTextLen"
-                android:layout_width="170dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:background="@color/cardview_light_background"
-                android:digits="0123456789"
-                android:ems="10"
-                android:hint="Only number"
-                android:inputType="textPersonName"
-                android:textColor="@color/design_default_color_on_secondary"
-                android:textColorHighlight="@color/design_default_color_on_secondary"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Switch
-                android:id="@+id/switchButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Switch"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/editTextLen"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
@@ -109,6 +83,26 @@
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <EditText
+            android:id="@+id/editTextLen"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:background="@color/cardview_light_background"
+            android:digits="0123456789"
+            android:ems="10"
+            android:hint="Only number"
+            android:inputType="textPersonName"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textColorHighlight="@color/design_default_color_on_secondary" />
+
+        <Switch
+            android:id="@+id/switchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Switch" />
+    </androidx.viewpager.widget.ViewPager>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

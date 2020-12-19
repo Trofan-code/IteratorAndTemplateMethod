@@ -19,8 +19,6 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
         private TextView operationTime;
         private ProgressBar progressBar;
 
-
-
         public AdapterViewHolder(@NonNull View itemView) {
             super(itemView);
             operationName = itemView.findViewById(R.id.tv_name_operation);
@@ -29,8 +27,6 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
 
             //in AdapterViewHolder create method bintItem(items.get(0)) and use it ---- ??
         }
-
-
     }
     //--------->
 

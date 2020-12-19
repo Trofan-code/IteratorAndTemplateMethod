@@ -18,6 +18,7 @@ import com.example.taskfox3.ui.main.SectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
     private EditText sizeColl;
+    private EditText sizeOfTreads;
     private Switch aSwitch;
     private MyViewModel myViewModel;
     @Override
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
         sizeColl = findViewById(R.id.editTextLen);
+        sizeOfTreads=findViewById(R.id.editTextTreads);
 
         Switch sw = (Switch) findViewById(R.id.switchButton);
         myViewModel = new ViewModelProvider(this).get(MyViewModel.class);
@@ -37,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     if(!isEmpty(sizeColl)){
-                    myViewModel.setSizeOfCollAndMaps(sizeColl.getText().toString());
+                    myViewModel.setSizeOfCollections(sizeColl.getText().toString());
+                    myViewModel.setSizeOfThreads(sizeOfTreads.getText().toString());
                     myViewModel.setBtnSwitch(true);
                     // The toggle is enabled
                 } else {

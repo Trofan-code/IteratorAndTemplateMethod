@@ -1,13 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.BlankFragmentCollection">
 
+    <EditText
+        android:id="@+id/editTextLen2"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/cardview_light_background"
+        android:digits="0123456789"
+        android:ems="10"
+        android:hint="Only number"
+        android:inputType="textPersonName"
+        android:textColor="@color/design_default_color_on_secondary"
+        android:textColorHighlight="@color/design_default_color_on_secondary"
+        app:layout_constraintEnd_toStartOf="@+id/switchButton2"
+        app:layout_constraintTop_toTopOf="@+id/textViewOperations" />
+
+    <EditText
+        android:id="@+id/editTextTreads"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/cardview_light_background"
+        android:digits="0123456789"
+        android:ems="10"
+        android:hint="Only number"
+        android:inputType="textPersonName"
+        android:textColor="@color/design_default_color_on_secondary"
+        android:textColorHighlight="@color/design_default_color_on_secondary"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewThreads"
+        app:layout_constraintEnd_toStartOf="@+id/switchButton2"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLen2"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Switch
+        android:id="@+id/switchButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Switch"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextTreads"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextLen2" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_for_tab"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</FrameLayout>
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTreads" />
+
+    <TextView
+        android:id="@+id/textViewOperations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Operations"
+        app:layout_constraintEnd_toStartOf="@+id/editTextLen2"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewThreads"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Threads"
+        app:layout_constraintStart_toStartOf="@+id/textViewOperations"
+        app:layout_constraintTop_toBottomOf="@+id/textViewOperations" />
+</androidx.constraintlayout.widget.ConstraintLayout>
