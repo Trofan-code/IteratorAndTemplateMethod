@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taskfox3.R;
+import com.example.taskfox3.model.DataTable;
 
 import java.util.List;
 

@@ -2,8 +2,10 @@ package com.example.taskfox3;
 
 import android.os.Bundle;
 
+import com.example.taskfox3.model.DataTable;
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,11 +18,13 @@ import android.widget.Toast;
 
 import com.example.taskfox3.ui.main.SectionsPagerAdapter;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     private EditText sizeColl;
     private EditText sizeOfTreads;
     private Switch aSwitch;
-    private MyViewModel myViewModel;
+    private CollectionViewModel collectionViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,16 +36,27 @@ public class MainActivity extends AppCompatActivity {
         tabs.setupWithViewPager(viewPager);
         sizeColl = findViewById(R.id.editTextLen);
         sizeOfTreads=findViewById(R.id.editTextTreads);
+        collectionViewModel = new ViewModelProvider(this).get(CollectionViewModel.class);//Тем самым получим доступ к провайдеру,
+        // который хранит все ViewModel для этого Activity.
+        collectionViewModel.getDataTable().observe(this, new Observer<List<DataTable>>() {
+            @Override
+            public void onChanged(List<DataTable> dataTables) {
+
+            }
+        });
+
+
+
+
 
         Switch sw = (Switch) findViewById(R.id.switchButton);
-        myViewModel = new ViewModelProvider(this).get(MyViewModel.class);
         sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     if(!isEmpty(sizeColl)){
-                    myViewModel.setSizeOfCollections(sizeColl.getText().toString());
-                    myViewModel.setSizeOfThreads(sizeOfTreads.getText().toString());
-                    myViewModel.setBtnSwitch(true);
+                    collectionViewModel.setSizeOfCollections(sizeColl.getText().toString());
+                    collectionViewModel.setSizeOfThreads(sizeOfTreads.getText().toString());
+                    collectionViewModel.setBtnSwitch(true);
                     // The toggle is enabled
                 } else {
                     Toast toast = Toast.makeText(getApplicationContext(),

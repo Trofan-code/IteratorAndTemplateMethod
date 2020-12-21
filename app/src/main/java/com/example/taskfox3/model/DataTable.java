@@ -1,4 +1,4 @@
-package com.example.taskfox3.fragment;
+package com.example.taskfox3.model;
 
 import android.widget.ProgressBar;
 
@@ -11,10 +11,8 @@ public class DataTable {
     int nameOfOperation;
     String timeOfOperation;
     ProgressBar progressBar;
-
     public DataTable() {
     }
-
     public DataTable(int nameOfOperation, String timeOfOperation, ProgressBar progressBar) {
         this.nameOfOperation = nameOfOperation;
         this.timeOfOperation = timeOfOperation;
@@ -25,25 +23,15 @@ public class DataTable {
     public DataTable(List<DataTable> dataList) {
         this.dataList = dataList;
     }
-
     public int getNameOfOperation() {
         return nameOfOperation;
     }
-
-
-
     public String getTimeOfOperation() {
         return timeOfOperation;
     }
-
-
-
     public ProgressBar getProgressBar() {
         return progressBar;
     }
-
-
-
     private void setStandartValues() {
         dataList.add(new DataTable(R.string.name_oper_1, "0", progressBar));
         dataList.add(new DataTable(R.string.name_oper_2, "0", progressBar));

@@ -2,6 +2,7 @@ package com.example.taskfox3.ui.main;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
@@ -9,8 +10,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.taskfox3.R;
-import com.example.taskfox3.fragment.BlankFragmentCollection;
-import com.example.taskfox3.fragment.BlankFragmentMap;
+import com.example.taskfox3.fragment.BlankFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -18,11 +18,9 @@ import com.example.taskfox3.fragment.BlankFragmentMap;
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2};
     private final Context mContext;
-
 
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -30,15 +28,18 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         mContext = context;
     }
 
+
     @Override
     public Fragment getItem(int position) {
+        BlankFragment blankFragment = new BlankFragment();
         switch (position){
             case 0:
-                BlankFragmentCollection blankFragmentCollection= new BlankFragmentCollection();
-                return blankFragmentCollection;
+
+                return blankFragment;
+
             case 1:
-                BlankFragmentMap blankFragmentMap = new BlankFragmentMap();
-                return blankFragmentMap;
+
+                return blankFragment;
             default:return null;
         }
     }
@@ -47,6 +48,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return mContext.getResources().getString(TAB_TITLES[position]);
+    }
+
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        return super.getItemPosition(object);
     }
 
     @Override

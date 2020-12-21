@@ -3,7 +3,11 @@ package com.example.taskfox3;
 
 import android.widget.EditText;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import com.example.taskfox3.model.DataTable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,48 +28,38 @@ import java.util.concurrent.ThreadPoolExecutor;
 //Состояние кнопки тоже передаешь во вьюМодель,
 // чтобы определить запускать потоки или останавливать
 
-public class MyViewModel extends ViewModel {
-    public MyViewModel() {
+//create a model (data bus) that allow to ViewModel from activity to interact with models from fragments.
+//interface:
+//{
+//void putParams(params);
+//void addParamsListener(ParamsChangedListener listener);
+//void removeParamsListener(ParamsChangedListener listener);
+//}
+//ParamsChangedListener {
+//void onChanged(Params params)
+//}
+
+public class CollectionViewModel extends ViewModel {
+    public CollectionViewModel() {
     }
     List<Integer> intList;
     Boolean btnSwitch = false;
     String sizeOfCollections;
     String sizeOfThreads;
+    private MutableLiveData<List<DataTable>> listMutableLiveData = new MutableLiveData<>();
 
-    public String getSizeOfThreads() {
-        return sizeOfThreads;
-    }
-
-    public void setSizeOfThreads(String sizeOfThreads) {
-        this.sizeOfThreads = sizeOfThreads;
+    public LiveData<List<DataTable>> getDataTable(){
+        return  listMutableLiveData;
     }
 
-    public Boolean getBtnSwitch() {
-        return btnSwitch;
-    }
-    public void setBtnSwitch(Boolean btnSwitch) {
-        this.btnSwitch = btnSwitch;
-    }
-
-    public String getSizeOfCollections() {
-        return sizeOfCollections;
-    }
-
-    public void setSizeOfCollections(String sizeOfCollections) {
-        this.sizeOfCollections = sizeOfCollections;
-    }
-
-    public MyViewModel(String sizeOfCollections) {
-        this.sizeOfCollections = sizeOfCollections;
-    }
 //3. Заполнение коллекции происходит в потоке и каждый поток заполняет свой экземпляр коллекции.
     //Заполняй коллекцию через Colletiins nCopies
     //public static <T> List<T> nCopies(int n,T o)
+ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(sizeOfThreads));
 
     private List addingInTheBeginning(){
         intList = new ArrayList<Integer>();
         intList =  Collections.nCopies(Integer.parseInt(sizeOfCollections), 1);
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(sizeOfThreads));
         executor.submit(() -> {
             intList.add(0, 2);
         });
@@ -74,7 +68,7 @@ public class MyViewModel extends ViewModel {
     private List addingInTheMiddle(){
         intList = new ArrayList<Integer>();
         intList =  Collections.nCopies(Integer.parseInt(sizeOfCollections), 1);
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(sizeOfThreads));
+       // ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(sizeOfThreads));
         executor.submit(() -> {
             intList.add((Integer.parseInt(sizeOfCollections))/2, 2);
         });
@@ -83,7 +77,7 @@ public class MyViewModel extends ViewModel {
     private List addingInTheEnd(){
         intList = new ArrayList<Integer>();
         intList =  Collections.nCopies(Integer.parseInt(sizeOfCollections), 1);
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(sizeOfThreads));
+       // ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(sizeOfThreads));
         executor.submit(() -> {
             intList.add((Integer.parseInt(sizeOfCollections)), 3);
         });
