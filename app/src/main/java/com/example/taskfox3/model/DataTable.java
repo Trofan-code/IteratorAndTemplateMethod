@@ -7,6 +7,7 @@ import com.example.taskfox3.R;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class DataTable {
     int nameOfOperation;
     String timeOfOperation;

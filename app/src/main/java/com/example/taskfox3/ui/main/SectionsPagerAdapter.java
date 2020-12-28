@@ -10,7 +10,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.taskfox3.R;
-import com.example.taskfox3.fragment.BlankFragment;
+import com.example.taskfox3.fragment.BlankFragmentCollection;
+import com.example.taskfox3.fragment.BlankFragmentForMap;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -31,15 +32,15 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        BlankFragment blankFragment = new BlankFragment();
+
         switch (position){
             case 0:
 
-                return blankFragment;
+                return new BlankFragmentCollection();
 
             case 1:
 
-                return blankFragment;
+                return new BlankFragmentForMap();
             default:return null;
         }
     }

@@ -2,12 +2,14 @@ package com.example.taskfox3;
 
 
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.taskfox3.model.DataTable;
+import com.example.taskfox3.ui.main.SectionsPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,24 +44,48 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class CollectionViewModel extends ViewModel {
     public CollectionViewModel() {
     }
-    List<Integer> intList;
-    Boolean btnSwitch = false;
-    String sizeOfCollections;
-    String sizeOfThreads;
-    private MutableLiveData<List<DataTable>> listMutableLiveData = new MutableLiveData<>();
+    private boolean isSwitched;
+    private SectionsPagerAdapter adapter;
+    private List<DataTable> dataList ;
+    private ProgressBar progressBar;
+    private List<Integer> intList;
+    private Boolean btnSwitch = false;
+    private String sizeOfCollections;
+    private String sizeOfThreads;
 
-    public LiveData<List<DataTable>> getDataTable(){
-        return  listMutableLiveData;
+    public String getSizeOfCollections() {
+        return sizeOfCollections;
     }
 
+    public void setSizeOfCollections(String sizeOfCollections) {
+        this.sizeOfCollections = sizeOfCollections;
+    }
+
+    public String getSizeOfThreads() {
+        return sizeOfThreads;
+    }
+
+    public void setSizeOfThreads(String sizeOfThreads) {
+        this.sizeOfThreads = sizeOfThreads;
+    }
+
+    private MutableLiveData<List<DataTable>> myDataTable;
+
+    public LiveData<List<DataTable>> getDataTable(){
+        return  myDataTable;
+    }
+    public void init(){
+
+    }
 //3. Заполнение коллекции происходит в потоке и каждый поток заполняет свой экземпляр коллекции.
     //Заполняй коллекцию через Colletiins nCopies
     //public static <T> List<T> nCopies(int n,T o)
-ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(sizeOfThreads));
+//ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(sizeOfThreads));
 
     private List addingInTheBeginning(){
         intList = new ArrayList<Integer>();
         intList =  Collections.nCopies(Integer.parseInt(sizeOfCollections), 1);
+        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(sizeOfThreads));
         executor.submit(() -> {
             intList.add(0, 2);
         });
@@ -68,7 +94,7 @@ ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(
     private List addingInTheMiddle(){
         intList = new ArrayList<Integer>();
         intList =  Collections.nCopies(Integer.parseInt(sizeOfCollections), 1);
-       // ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(sizeOfThreads));
+        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(sizeOfThreads));
         executor.submit(() -> {
             intList.add((Integer.parseInt(sizeOfCollections))/2, 2);
         });
@@ -77,20 +103,34 @@ ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(
     private List addingInTheEnd(){
         intList = new ArrayList<Integer>();
         intList =  Collections.nCopies(Integer.parseInt(sizeOfCollections), 1);
-       // ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(sizeOfThreads));
+       ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(sizeOfThreads));
         executor.submit(() -> {
             intList.add((Integer.parseInt(sizeOfCollections)), 3);
         });
         return intList;
     };
 
-    /*addingInTheMiddle;
+/*addingInTheMiddle;
      addingInTheEnd;
      searchByValue;
      removingInTheBeginning;
      removingInTheMiddle;
      removingInTheEnd;*/
 
+
+
+
+    public List<DataTable> initialDataTable(){ //move to ViewModel
+        dataList = new ArrayList<DataTable>();
+        dataList.add(new DataTable(R.string.name_oper_1,"0",progressBar));
+        dataList.add(new DataTable(R.string.name_oper_2,"0",progressBar));
+        dataList.add(new DataTable(R.string.name_oper_3,"0",progressBar));
+        dataList.add(new DataTable(R.string.name_oper_4,"0",progressBar));
+        dataList.add(new DataTable(R.string.name_oper_5,"0",progressBar));
+        dataList.add(new DataTable(R.string.name_oper_6,"0",progressBar));
+        dataList.add(new DataTable(R.string.name_oper_7,"0",progressBar));
+        return dataList;
+    }
 
 
 

@@ -5,7 +5,82 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.BlankFragmentMap" >
+    tools:context=".fragment.BlankFragmentForMap" >
 
+
+    <EditText
+        android:id="@+id/editTextLen2Maps"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/cardview_light_background"
+        android:digits="0123456789"
+        android:ems="10"
+        android:hint="@string/hint_only_num"
+        android:inputType="textPersonName"
+        android:textColor="@color/design_default_color_on_secondary"
+        android:textColorHighlight="@color/design_default_color_on_secondary"
+        app:layout_constraintEnd_toStartOf="@+id/switchButton2Maps"
+        app:layout_constraintTop_toTopOf="@+id/textViewOperationsMaps" />
+
+    <EditText
+        android:id="@+id/editTextTreadsMaps"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/cardview_light_background"
+        android:digits="0123456789"
+        android:ems="10"
+        android:hint="@string/hint_only_num"
+        android:inputType="textPersonName"
+        android:textColor="@color/design_default_color_on_secondary"
+        android:textColorHighlight="@color/design_default_color_on_secondary"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewThreadsCollectionMaps"
+        app:layout_constraintEnd_toStartOf="@+id/switchButton2Maps"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLen2Maps"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Switch
+        android:id="@+id/switchButton2Maps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/start"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextTreadsMaps"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextLen2Maps" />
+
+    <TextView
+        android:id="@+id/textViewOperationsMaps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/operations"
+        app:layout_constraintEnd_toStartOf="@+id/editTextLen2Maps"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewThreadsCollectionMaps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/threads"
+        app:layout_constraintStart_toStartOf="@+id/textViewOperationsMaps"
+        app:layout_constraintTop_toBottomOf="@+id/textViewOperationsMaps" />
+
+ <!--   <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_for_tab"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTreadsMaps" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

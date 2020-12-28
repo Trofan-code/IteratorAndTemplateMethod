@@ -41,7 +41,6 @@
                 android:background="@color/cardview_light_background"
                 android:text="@string/title_1"
                 android:textColor="@color/design_default_color_primary_dark"
-                app:layout_anchor="@+id/textView7"
                 app:layout_anchorGravity="end|center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -83,26 +82,6 @@
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <EditText
-            android:id="@+id/editTextLen"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:background="@color/cardview_light_background"
-            android:digits="0123456789"
-            android:ems="10"
-            android:hint="Only number"
-            android:inputType="textPersonName"
-            android:textColor="@color/design_default_color_on_secondary"
-            android:textColorHighlight="@color/design_default_color_on_secondary" />
-
-        <Switch
-            android:id="@+id/switchButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Switch" />
-    </androidx.viewpager.widget.ViewPager>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

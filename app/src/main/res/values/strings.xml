@@ -14,5 +14,9 @@
     <string name="name_oper_5">Removing in the beginning</string>
     <string name="name_oper_6">Removing in the middle</string>
     <string name="name_oper_7">Removing in the end</string>
+    <string name="hint_only_num">Only number</string>
+    <string name="operations">Operations</string>
+    <string name="threads">Threads</string>
+    <string name="start">Start</string>
 
 </resources>
