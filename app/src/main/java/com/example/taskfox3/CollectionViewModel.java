@@ -1,8 +1,11 @@
 package com.example.taskfox3;
 
 
+import android.app.PendingIntent;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -44,14 +47,68 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class CollectionViewModel extends ViewModel {
     public CollectionViewModel() {
     }
-    private boolean isSwitched;
+    //private boolean isSwitched;
+
+
     private SectionsPagerAdapter adapter;
     private List<DataTable> dataList ;
     private ProgressBar progressBar;
     private List<Integer> intList;
+
+    public Boolean getBtnSwitch() {
+        return btnSwitch;
+    }
+
+    public void setBtnSwitch(Boolean btnSwitch) {
+        this.btnSwitch = btnSwitch;
+    }
+
     private Boolean btnSwitch = false;
+
+
+
+    private Switch isSwitched;
+
     private String sizeOfCollections;
     private String sizeOfThreads;
+
+
+    public CollectionViewModel(Switch isSwitched) {
+        this.isSwitched = isSwitched;
+    }
+
+    public Switch getIsSwitched() {
+        return isSwitched;
+    }
+    public void setIsSwitched(Switch isSwitched) {
+        this.isSwitched = isSwitched;
+    }
+
+    public void exampleCheckSwitch(boolean isSwitched) {
+        btnSwitch = isSwitched;
+        exampleChange();
+    }
+
+
+    public List<DataTable> exampleChange() {
+        dataList = new ArrayList<DataTable>();
+        dataList.add(new DataTable(R.string.name_oper_1,"333",progressBar));
+        dataList.add(new DataTable(R.string.name_oper_2,"333",progressBar));
+        dataList.add(new DataTable(R.string.name_oper_3,"333",progressBar));
+        dataList.add(new DataTable(R.string.name_oper_4,"333",progressBar));
+        dataList.add(new DataTable(R.string.name_oper_5,"333",progressBar));
+        dataList.add(new DataTable(R.string.name_oper_6,"333",progressBar));
+        dataList.add(new DataTable(R.string.name_oper_7,"333",progressBar));
+        return dataList;
+    }
+
+    /*public boolean getIsSwitched() {
+        return isSwitched;
+    }
+
+    public void setSwitched(boolean switched) {
+        isSwitched = switched;
+    }*/
 
     public String getSizeOfCollections() {
         return sizeOfCollections;
@@ -116,6 +173,7 @@ public class CollectionViewModel extends ViewModel {
      removingInTheBeginning;
      removingInTheMiddle;
      removingInTheEnd;*/
+
 
 
 

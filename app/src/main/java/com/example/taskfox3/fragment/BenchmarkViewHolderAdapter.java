@@ -14,11 +14,11 @@ import com.example.taskfox3.model.DataTable;
 
 import java.util.List;
 
-public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDataAdapter.AdapterViewHolder> {
+public class BenchmarkViewHolderAdapter extends RecyclerView.Adapter<BenchmarkViewHolderAdapter.AdapterViewHolder> {
     public class AdapterViewHolder extends RecyclerView.ViewHolder {
-        private TextView operationName;
-        private TextView operationTime;
-        private ProgressBar progressBar;
+        private final TextView operationName;
+        private final TextView operationTime;
+        private final ProgressBar progressBar;
 
         public AdapterViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -33,7 +33,7 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
 
     List<DataTable> dataTableList;
 
-    public RecyclerViewDataAdapter(List<DataTable> dataTableList) {
+    public BenchmarkViewHolderAdapter(List<DataTable> dataTableList) {
         this.dataTableList = dataTableList;
     }
 
