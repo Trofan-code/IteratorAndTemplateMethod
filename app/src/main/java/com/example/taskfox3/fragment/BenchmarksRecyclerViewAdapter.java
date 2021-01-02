@@ -15,19 +15,7 @@ import com.example.taskfox3.model.DataTable;
 import java.util.List;
 
 public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<BenchmarksRecyclerViewAdapter.BenchmarkViewHolder> {
-    public class BenchmarkViewHolder extends RecyclerView.ViewHolder {
-        private final TextView operationName;
-        private final TextView operationTime;
-        private final ProgressBar progressBar;
-
-        public BenchmarkViewHolder(@NonNull View itemView) {
-            super(itemView);
-            operationName = itemView.findViewById(R.id.tv_name_operation);
-            operationTime = itemView.findViewById(R.id.tv_time_operation);
-            progressBar = itemView.findViewById(R.id.progressBar);
-            //in BenchmarkViewHolder create method bintItem(items.get(0)) and use it ---- ??
-        }
-    }
+    
     private final List<DataTable> dataTableList;
 
     public BenchmarksRecyclerViewAdapter(List<DataTable> dataTableList) {
@@ -57,4 +45,17 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
     }
 
 
+    public class BenchmarkViewHolder extends RecyclerView.ViewHolder {
+        private final TextView operationName;
+        private final TextView operationTime;
+        private final ProgressBar progressBar;
+
+        public BenchmarkViewHolder(@NonNull View itemView) {
+            super(itemView);
+            operationName = itemView.findViewById(R.id.tv_name_operation);
+            operationTime = itemView.findViewById(R.id.tv_time_operation);
+            progressBar = itemView.findViewById(R.id.progressBar);
+            //in BenchmarkViewHolder create method bintItem(items.get(0)) and use it ---- ??
+        }
+    }
 }
