@@ -73,14 +73,14 @@
         app:layout_constraintStart_toStartOf="@+id/textViewOperationsMaps"
         app:layout_constraintTop_toBottomOf="@+id/textViewOperationsMaps" />
 
- <!--   <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_for_tab"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_for_map"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTreadsMaps" />-->
+        app:layout_constraintTop_toBottomOf="@+id/editTextTreadsMaps" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

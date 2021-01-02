@@ -90,25 +90,6 @@ public class CollectionViewModel extends ViewModel {
     }
 
 
-    public List<DataTable> exampleChange() {
-        dataList = new ArrayList<DataTable>();
-        dataList.add(new DataTable(R.string.name_oper_1,"333",progressBar));
-        dataList.add(new DataTable(R.string.name_oper_2,"333",progressBar));
-        dataList.add(new DataTable(R.string.name_oper_3,"333",progressBar));
-        dataList.add(new DataTable(R.string.name_oper_4,"333",progressBar));
-        dataList.add(new DataTable(R.string.name_oper_5,"333",progressBar));
-        dataList.add(new DataTable(R.string.name_oper_6,"333",progressBar));
-        dataList.add(new DataTable(R.string.name_oper_7,"333",progressBar));
-        return dataList;
-    }
-
-    /*public boolean getIsSwitched() {
-        return isSwitched;
-    }
-
-    public void setSwitched(boolean switched) {
-        isSwitched = switched;
-    }*/
 
     public String getSizeOfCollections() {
         return sizeOfCollections;
@@ -178,7 +159,7 @@ public class CollectionViewModel extends ViewModel {
 
 
 
-    public List<DataTable> initialDataTable(){ //move to ViewModel
+    public List<DataTable> initialDataTableCollection(){ //move to ViewModel
         dataList = new ArrayList<DataTable>();
         dataList.add(new DataTable(R.string.name_oper_1,"0",progressBar));
         dataList.add(new DataTable(R.string.name_oper_2,"0",progressBar));
@@ -187,6 +168,25 @@ public class CollectionViewModel extends ViewModel {
         dataList.add(new DataTable(R.string.name_oper_5,"0",progressBar));
         dataList.add(new DataTable(R.string.name_oper_6,"0",progressBar));
         dataList.add(new DataTable(R.string.name_oper_7,"0",progressBar));
+        return dataList;
+    }
+
+    public List<DataTable> initialDataTableMap(){
+        dataList = new ArrayList<DataTable>();
+        dataList.add(new DataTable(R.string.name_oper_map_1,"0",progressBar));
+        dataList.add(new DataTable(R.string.name_oper_map_2,"0",progressBar));
+        dataList.add(new DataTable(R.string.name_oper_map_3,"0",progressBar));
+        return dataList;
+    }
+    public List<DataTable> exampleChange() {
+        dataList = new ArrayList<DataTable>();
+        dataList.add(new DataTable(R.string.name_oper_1,"333",progressBar));
+        dataList.add(new DataTable(R.string.name_oper_2,"333",progressBar));
+        dataList.add(new DataTable(R.string.name_oper_3,"333",progressBar));
+        dataList.add(new DataTable(R.string.name_oper_4,"333",progressBar));
+        dataList.add(new DataTable(R.string.name_oper_5,"333",progressBar));
+        dataList.add(new DataTable(R.string.name_oper_6,"333",progressBar));
+        dataList.add(new DataTable(R.string.name_oper_7,"333",progressBar));
         return dataList;
     }
 

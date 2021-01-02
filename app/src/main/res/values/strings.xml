@@ -18,5 +18,8 @@
     <string name="operations">Operations</string>
     <string name="threads">Threads</string>
     <string name="start">Start</string>
+    <string name="name_oper_map_1">Adding new</string>
+    <string name="name_oper_map_2">Search by key</string>
+    <string name="name_oper_map_3">Removing</string>
 
 </resources>

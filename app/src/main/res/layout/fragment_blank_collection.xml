@@ -9,13 +9,13 @@
     android:layout_height="match_parent"
     tools:context=".fragment.BlankFragmentCollection">
 
-    <layout>
+    <!--<layout>
     <data>
         <variable
             name="viewModel"
             type="com.example.taskfox3.CollectionViewModel" />
     </data>
-    </layout>
+    </layout>-->
 
 
     <EditText
@@ -63,9 +63,9 @@
         app:layout_constraintBottom_toBottomOf="@+id/editTextTreadsCollection"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editTextLen2Collection"
-        android:checked="@={viewModel.btnSwitched}"
-    <!--AAPT: error: '@={viewModel.btnSwitched}' is incompatible with attribute checked (attr) boolean.-->
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
+        />
+    <!--AAPT: error: '@={viewModel.btnSwitched}' is incompatible with attribute checked (attr) boolean.android:checked="@={viewModel.btnSwitched}"-->
+
 
     <TextView
         android:id="@+id/textViewOperationsCollection"

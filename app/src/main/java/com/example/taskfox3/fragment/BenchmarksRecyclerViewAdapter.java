@@ -14,44 +14,39 @@ import com.example.taskfox3.model.DataTable;
 
 import java.util.List;
 
-public class BenchmarkViewHolderAdapter extends RecyclerView.Adapter<BenchmarkViewHolderAdapter.AdapterViewHolder> {
-    public class AdapterViewHolder extends RecyclerView.ViewHolder {
+public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<BenchmarksRecyclerViewAdapter.BenchmarkViewHolder> {
+    public class BenchmarkViewHolder extends RecyclerView.ViewHolder {
         private final TextView operationName;
         private final TextView operationTime;
         private final ProgressBar progressBar;
 
-        public AdapterViewHolder(@NonNull View itemView) {
+        public BenchmarkViewHolder(@NonNull View itemView) {
             super(itemView);
             operationName = itemView.findViewById(R.id.tv_name_operation);
             operationTime = itemView.findViewById(R.id.tv_time_operation);
             progressBar = itemView.findViewById(R.id.progressBar);
-
-            //in AdapterViewHolder create method bintItem(items.get(0)) and use it ---- ??
+            //in BenchmarkViewHolder create method bintItem(items.get(0)) and use it ---- ??
         }
     }
-    //--------->
+    private final List<DataTable> dataTableList;
 
-    List<DataTable> dataTableList;
-
-    public BenchmarkViewHolderAdapter(List<DataTable> dataTableList) {
+    public BenchmarksRecyclerViewAdapter(List<DataTable> dataTableList) {
         this.dataTableList = dataTableList;
     }
 
     @NonNull
     @Override
-    public AdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BenchmarkViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout_for_tab,parent,false);
-        return new AdapterViewHolder(view);
+        return new BenchmarkViewHolder(view);
         //ponieważ View komponenty zostaną ponownie wykorzystane w tym samym elemencie wizualnym
         //w trakcie życia listy różne dane zostaną ustawione
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BenchmarkViewHolder holder, int position) {
         holder.operationName.setText(dataTableList.get(position).getNameOfOperation());
         holder.operationTime.setText(dataTableList.get(position).getTimeOfOperation() );
-
-
       //  holder.progressBar.setProgress(dataTableList.get(position).progressBar);//??
         // odpowiada za relację między java a obiektem View
     }
