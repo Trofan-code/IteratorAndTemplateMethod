@@ -16,10 +16,9 @@ import java.util.List;
 
 public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<BenchmarksRecyclerViewAdapter.BenchmarkViewHolder> {
     
-    private final List<DataTable> dataTableList;
+    private final List<DataTable> dataTableList =  new ArrayList<>();
 
-    public BenchmarksRecyclerViewAdapter(List<DataTable> dataTableList) {
-        this.dataTableList = dataTableList;
+    public BenchmarksRecyclerViewAdapter() {
     }
 
     @NonNull
@@ -44,6 +43,11 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
         return dataTableList.size();
     }
 
+    public void setItems(List<DataTable> items) {
+        dataTableList.clear();
+        dataTableList.addAll(items);
+        notifyDataSetChanged();
+    }
 
     public class BenchmarkViewHolder extends RecyclerView.ViewHolder {
         private final TextView operationName;
