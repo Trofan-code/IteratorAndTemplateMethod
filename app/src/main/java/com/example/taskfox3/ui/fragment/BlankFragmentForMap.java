@@ -1,6 +1,11 @@
-package com.example.taskfox3.fragment;
+package com.example.taskfox3.ui.fragment;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,13 +14,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.Switch;
-
-import com.example.taskfox3.CollectionViewModel;
 import com.example.taskfox3.R;
 
 public class BlankFragmentForMap extends Fragment {
@@ -41,9 +39,9 @@ public class BlankFragmentForMap extends Fragment {
         adapter = new BenchmarksRecyclerViewAdapter(model.initialDataTableMap());
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
-        swStart = view.findViewById(R.id.switchButton2Collection);
-        editTextOperations = view.findViewById(R.id.editTextLen2Collection);
-        editTextThreads = view.findViewById(R.id.editTextTreadsCollection);
+        swStart = view.findViewById(R.id.btn_start_stop);
+        editTextOperations = view.findViewById(R.id.et_elements);
+        editTextThreads = view.findViewById(R.id.et_threads);
     }
 
     @Override

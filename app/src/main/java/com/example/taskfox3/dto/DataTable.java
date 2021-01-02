@@ -1,4 +1,4 @@
-package com.example.taskfox3.model;
+package com.example.taskfox3.dto;
 
 import android.widget.ProgressBar;
 

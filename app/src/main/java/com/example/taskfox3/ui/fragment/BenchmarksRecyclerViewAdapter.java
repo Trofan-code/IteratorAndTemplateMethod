@@ -1,4 +1,4 @@
-package com.example.taskfox3.fragment;
+package com.example.taskfox3.ui.fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taskfox3.R;
-import com.example.taskfox3.model.DataTable;
+import com.example.taskfox3.dto.DataTable;
 
 import java.util.List;
 

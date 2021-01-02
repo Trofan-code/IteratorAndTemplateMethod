@@ -1,25 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.BlankFragmentCollection">
-
-    <!--<layout>
-    <data>
-        <variable
-            name="viewModel"
-            type="com.example.taskfox3.CollectionViewModel" />
-    </data>
-    </layout>-->
-
+    android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/editTextLen2Collection"
+        android:id="@+id/et_elements"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -31,11 +18,11 @@
         android:inputType="textPersonName"
         android:textColor="@color/design_default_color_on_secondary"
         android:textColorHighlight="@color/design_default_color_on_secondary"
-        app:layout_constraintEnd_toStartOf="@+id/switchButton2Collection"
+        app:layout_constraintEnd_toStartOf="@+id/btn_start_stop"
         app:layout_constraintTop_toTopOf="@+id/textViewOperationsCollection" />
 
     <EditText
-        android:id="@+id/editTextTreadsCollection"
+        android:id="@+id/et_threads"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -48,24 +35,21 @@
         android:textColor="@color/design_default_color_on_secondary"
         android:textColorHighlight="@color/design_default_color_on_secondary"
         app:layout_constraintBottom_toBottomOf="@+id/textViewThreadsCollectionMaps"
-        app:layout_constraintEnd_toStartOf="@+id/switchButton2Collection"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLen2Collection"
+        app:layout_constraintEnd_toStartOf="@+id/btn_start_stop"
+        app:layout_constraintTop_toBottomOf="@+id/et_elements"
         app:layout_constraintVertical_bias="1.0" />
 
 
     <Switch
-        android:id="@+id/switchButton2Collection"
+        android:id="@+id/btn_start_stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:text="@string/start"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTreadsCollection"
+        app:layout_constraintBottom_toBottomOf="@+id/et_threads"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextLen2Collection"
-        />
-    <!--AAPT: error: '@={viewModel.btnSwitched}' is incompatible with attribute checked (attr) boolean.android:checked="@={viewModel.btnSwitched}"-->
-
+        app:layout_constraintTop_toTopOf="@+id/et_elements" />
 
     <TextView
         android:id="@+id/textViewOperationsCollection"
@@ -73,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/operations"
-        app:layout_constraintEnd_toStartOf="@+id/editTextLen2Collection"
+        app:layout_constraintEnd_toStartOf="@+id/et_elements"
         app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -95,5 +79,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTreadsCollection" />
+        app:layout_constraintTop_toBottomOf="@+id/et_threads" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
