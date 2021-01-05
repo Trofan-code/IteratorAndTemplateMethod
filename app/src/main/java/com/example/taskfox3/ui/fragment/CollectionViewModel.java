@@ -3,8 +3,12 @@ package com.example.taskfox3.ui.fragment;
 import androidx.lifecycle.ViewModel;
 
 public class CollectionViewModel extends ViewModel {
+    private int sizeOfOperations;
+    private int sizeOfThreads;
 
-    public CollectionViewModel() {
+    public CollectionViewModel(int sizeOfOperations,int sizeOfThreads) {
+        this.sizeOfOperations=sizeOfOperations;
+        this.sizeOfThreads=sizeOfThreads;
     }
 
 //3. Заполнение коллекции происходит в потоке и каждый поток заполняет свой экземпляр коллекции.
@@ -47,34 +51,34 @@ public class CollectionViewModel extends ViewModel {
 //     removingInTheMiddle;
 //     removingInTheEnd;*/
 
-//    public List<DataTable> initialDataTableCollection(){ //move to ViewModel
-//        dataList = new ArrayList<DataTable>();
-//        dataList.add(new DataTable(R.string.name_oper_1,"0",progressBar));
-//        dataList.add(new DataTable(R.string.name_oper_2,"0",progressBar));
-//        dataList.add(new DataTable(R.string.name_oper_3,"0",progressBar));
-//        dataList.add(new DataTable(R.string.name_oper_4,"0",progressBar));
-//        dataList.add(new DataTable(R.string.name_oper_5,"0",progressBar));
-//        dataList.add(new DataTable(R.string.name_oper_6,"0",progressBar));
-//        dataList.add(new DataTable(R.string.name_oper_7,"0",progressBar));
+//    public List<BenchmarkItem> initialDataTableCollection(){ //move to ViewModel
+//        dataList = new ArrayList<BenchmarkItem>();
+//        dataList.add(new BenchmarkItem(R.string.name_oper_1,"0",progressBar));
+//        dataList.add(new BenchmarkItem(R.string.name_oper_2,"0",progressBar));
+//        dataList.add(new BenchmarkItem(R.string.name_oper_3,"0",progressBar));
+//        dataList.add(new BenchmarkItem(R.string.name_oper_4,"0",progressBar));
+//        dataList.add(new BenchmarkItem(R.string.name_oper_5,"0",progressBar));
+//        dataList.add(new BenchmarkItem(R.string.name_oper_6,"0",progressBar));
+//        dataList.add(new BenchmarkItem(R.string.name_oper_7,"0",progressBar));
 //        return dataList;
 //    }
 //
-//    public List<DataTable> initialDataTableMap(){
-//        dataList = new ArrayList<DataTable>();
-//        dataList.add(new DataTable(R.string.name_oper_map_1,"0",progressBar));
-//        dataList.add(new DataTable(R.string.name_oper_map_2,"0",progressBar));
-//        dataList.add(new DataTable(R.string.name_oper_map_3,"0",progressBar));
+//    public List<BenchmarkItem> initialDataTableMap(){
+//        dataList = new ArrayList<BenchmarkItem>();
+//        dataList.add(new BenchmarkItem(R.string.name_oper_map_1,"0",progressBar));
+//        dataList.add(new BenchmarkItem(R.string.name_oper_map_2,"0",progressBar));
+//        dataList.add(new BenchmarkItem(R.string.name_oper_map_3,"0",progressBar));
 //        return dataList;
 //    }
-//    public List<DataTable> exampleChange() {
-//        dataList = new ArrayList<DataTable>();
-//        dataList.add(new DataTable(R.string.name_oper_1,"333",progressBar));
-//        dataList.add(new DataTable(R.string.name_oper_2,"333",progressBar));
-//        dataList.add(new DataTable(R.string.name_oper_3,"333",progressBar));
-//        dataList.add(new DataTable(R.string.name_oper_4,"333",progressBar));
-//        dataList.add(new DataTable(R.string.name_oper_5,"333",progressBar));
-//        dataList.add(new DataTable(R.string.name_oper_6,"333",progressBar));
-//        dataList.add(new DataTable(R.string.name_oper_7,"333",progressBar));
+//    public List<BenchmarkItem> exampleChange() {
+//        dataList = new ArrayList<BenchmarkItem>();
+//        dataList.add(new BenchmarkItem(R.string.name_oper_1,"333",progressBar));
+//        dataList.add(new BenchmarkItem(R.string.name_oper_2,"333",progressBar));
+//        dataList.add(new BenchmarkItem(R.string.name_oper_3,"333",progressBar));
+//        dataList.add(new BenchmarkItem(R.string.name_oper_4,"333",progressBar));
+//        dataList.add(new BenchmarkItem(R.string.name_oper_5,"333",progressBar));
+//        dataList.add(new BenchmarkItem(R.string.name_oper_6,"333",progressBar));
+//        dataList.add(new BenchmarkItem(R.string.name_oper_7,"333",progressBar));
 //        return dataList;
 //    }
 

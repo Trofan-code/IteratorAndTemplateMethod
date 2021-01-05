@@ -1,6 +1,7 @@
 package com.example.taskfox3.ui.fragment;
 
 import android.os.Bundle;
+import android.renderscript.Sampler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +17,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.taskfox3.R;
+import com.example.taskfox3.dto.FactoryCollectionViewModel;
 
 public class BenchmarkFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
     private final BenchmarksRecyclerViewAdapter adapter = new BenchmarksRecyclerViewAdapter();
     private CollectionViewModel model;
     private EditText editTextOperations;
     private EditText editTextThreads;
+    private int sizeOfOperations;
+    private int sizeOfThreads;
     private Switch swStart;
 
     public static BenchmarkFragment newInstance(int type) {
@@ -33,7 +37,9 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // access to arguments and receive a type
-        model = new ViewModelProvider(this).get(CollectionViewModel.class);
+        model = new ViewModelProvider(this,
+                new FactoryCollectionViewModel(sizeOfOperations,sizeOfThreads).get(CollectionViewModel.class));
+        // get ???????????????????
         // receive data from model via listener
 
         if (adapter.getItemCount() == 0) {
@@ -55,8 +61,13 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
         swStart = view.findViewById(R.id.btn_start_stop);
         editTextOperations = view.findViewById(R.id.et_elements);
         editTextThreads = view.findViewById(R.id.et_threads);
+        sizeOfOperations = Integer.parseInt(editTextOperations.getText().toString());
+        sizeOfThreads = Integer.parseInt(editTextThreads.getText().toString());
+
 
         swStart.setOnCheckedChangeListener(this);
+        //запросить количество столбцов из viewModel
+        // request amount of columns from viewModel
     }
 
     @Override

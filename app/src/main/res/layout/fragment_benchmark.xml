@@ -15,7 +15,6 @@
         android:digits="0123456789"
         android:ems="10"
         android:hint="@string/hint_only_num"
-        android:inputType="textPersonName"
         android:textColor="@color/design_default_color_on_secondary"
         android:textColorHighlight="@color/design_default_color_on_secondary"
         app:layout_constraintEnd_toStartOf="@+id/btn_start_stop"
