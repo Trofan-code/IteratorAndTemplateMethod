@@ -1,15 +1,52 @@
 package com.example.taskfox3.ui.fragment;
 
+import android.os.Bundle;
+import android.util.Log;
+
 import androidx.lifecycle.ViewModel;
 
-public class CollectionViewModel extends ViewModel {
-    private int sizeOfOperations;
-    private int sizeOfThreads;
+import static android.content.ContentValues.TAG;
+import static com.example.taskfox3.dto.Types.SIZE_OF_OPERATION;
 
-    public CollectionViewModel(int sizeOfOperations,int sizeOfThreads) {
-        this.sizeOfOperations=sizeOfOperations;
-        this.sizeOfThreads=sizeOfThreads;
+public class CollectionViewModel extends ViewModel {
+
+
+    private Bundle bundleBenchmarkFragment;
+    private String sizeOfElements;
+
+
+    public CollectionViewModel(Bundle benchmarkFragment) {
+        this.bundleBenchmarkFragment=benchmarkFragment;
     }
+
+
+
+    public void setupItems() {
+
+        // set list of items into ui
+    }
+
+    public void onCalculationStateChangeClicked(String elements, String threads, boolean isStart) {
+        elements = getBundleString(bundleBenchmarkFragment,SIZE_OF_OPERATION," ");
+
+
+        // start or stop calculation?
+
+        // validate in case of start, stop - other way
+        // Use TreadPool
+    }
+    public String getBundleString(Bundle b, String key, String def)
+    {
+        String value = b.getString(key);
+        if (value == null)
+            value = def;
+        return value;
+    }
+
+
+
+
+
 
 //3. Заполнение коллекции происходит в потоке и каждый поток заполняет свой экземпляр коллекции.
     //Заполняй коллекцию через Colletiins nCopies
@@ -82,15 +119,6 @@ public class CollectionViewModel extends ViewModel {
 //        return dataList;
 //    }
 
-    public void setupItems() {
-        // set list of items into ui
-    }
-
-    public void onCalculationStateChangeClicked(String elements, String threads, boolean isStart) {
-        // start or stop calculation?
-        // validate in case of start, stop - other way
-        // Use TreadPool
-    }
 }
 
 

@@ -17,8 +17,8 @@ public interface BenchmarkModlel {
 
     List<BenchmarkItem> dataListCollections = new ArrayList<>();
     List<BenchmarkItem> dataListMaps = new ArrayList<>();
-    long timeForCollections=0l;
-    long timeForMaps=0l;
+    long timeForCollections=0L;
+    long timeForMaps=0L;
 
 
 
