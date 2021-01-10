@@ -14,10 +14,10 @@ import java.util.List;
 //Создай нужную модель в кастомной фабрике из п.2 и передай ее в конструктор вьюМодели
 
 public interface BenchmarkModlel {
-    public List<BenchmarkItem> setupItemsCollection();
-    public List<BenchmarkItem> setupItemsMaps();
-    public long countTimeCollection();
-    public long countTimeMaps();
+    public List<BenchmarkItem> setupItems();
+
+    public long countTime();
+
 
 
 

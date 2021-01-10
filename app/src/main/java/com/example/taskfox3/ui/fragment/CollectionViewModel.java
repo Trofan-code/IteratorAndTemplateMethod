@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.taskfox3.R;
 import com.example.taskfox3.dto.BenchmarkItem;
-import com.example.taskfox3.dto.BenchmarkModlel;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,10 +15,10 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
-import static android.content.ContentValues.TAG;
 
 
-public class CollectionViewModel extends ViewModel implements BenchmarkModlel {
+
+public class CollectionViewModel extends ViewModel {
     private int sizeOfOperations;
     private int sizeOfThreads;
     private Bundle bundleBenchmarkFragment;
@@ -44,9 +44,7 @@ public class CollectionViewModel extends ViewModel implements BenchmarkModlel {
     public void onCalculationStateChangeClicked(String elements, String threads, boolean isStart) {
 
         if(isStart){
-            addingInTheBeginning(elements,threads);
-            addingInTheMiddle(elements,threads);
-            addingInTheEnd(elements,threads);
+
         }
 
         // start or stop calculation?
@@ -74,13 +72,7 @@ public class CollectionViewModel extends ViewModel implements BenchmarkModlel {
 
         return dataList;
     }
-    public long countTimeCollection(){
-        long startTime = System.nanoTime();
-        // methodToTrackTimeFor();
-        long endTime = System.nanoTime();
-        long duration = (endTime - startTime);
-        return duration;
-    }
+
     public long countTimeMaps(){
         long startTime = System.nanoTime();
         // methodToTrackTimeFor();
