@@ -62,6 +62,7 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
             operationTime = itemView.findViewById(R.id.tv_time_operation);
             progressBar = itemView.findViewById(R.id.progressBar);
             //in BenchmarkViewHolder create method bintItem(items.get(0)) and use it ---- ??
+
         }
     }
 }

@@ -49,10 +49,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         return mContext.getResources().getString(TAB_TITLES[position]);
     }
 
-    public int getItemPosition(@NonNull Object object) {
-        return super.getItemPosition(object);
-    }
-
     @Override
     public int getCount() {
         return 2;

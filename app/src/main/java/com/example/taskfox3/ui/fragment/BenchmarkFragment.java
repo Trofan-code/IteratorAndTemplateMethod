@@ -18,18 +18,20 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.taskfox3.R;
 
+import com.example.taskfox3.dto.BenchmarkItem;
 import com.example.taskfox3.dto.FactoryCollectionViewModel;
 import com.example.taskfox3.dto.Types;
+
+import java.util.Collection;
 
 
 public class BenchmarkFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
     private final BenchmarksRecyclerViewAdapter adapter = new BenchmarksRecyclerViewAdapter();
     private CollectionViewModel model;
-    private static EditText editTextOperations;
-    private static EditText editTextThreads;
+    private  EditText editTextOperations;
+    private  EditText editTextThreads;
     private Switch swStart;
     private static Bundle args;
-    //Единственное, что тебе нужно передать в фабрику - параметр из аргументов фрагмента.
 
 
     public static BenchmarkFragment newInstance(int type) {
@@ -37,9 +39,7 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
         // use arguments to store type
         BenchmarkFragment benchmarkFragment = new BenchmarkFragment();
         args = new Bundle();
-        args.putString(Types.SIZE_OF_OPERATION, String.valueOf(editTextOperations));
-        args.putString(Types.SIZE_OF_THREADS, String.valueOf(editTextThreads));
-
+        args.putInt("type",type);
         benchmarkFragment.setArguments(args);
         return benchmarkFragment;
     }
@@ -48,17 +48,18 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
         super.onCreate(savedInstanceState);
         // access to arguments and receive a type
         // доступ к аргументам и получение типа
-
-
-        //model = new ViewModelProvider(this, new FactoryCollectionViewModel(newInstance(adapter.getItemCount()))).get(CollectionViewModel.class);
-        model = new ViewModelProvider(this, new FactoryCollectionViewModel(args)).get(CollectionViewModel.class);
+           model = new ViewModelProvider(this, new FactoryCollectionViewModel(args)).get(CollectionViewModel.class);
 
         // receive data from model via listener
         // получаем данные из модели через слушателя
 
         if (adapter.getItemCount() == 0) {
-            model.setupItems();
+            model.setupItemsCollection();
+
         }
+       /* else if(adapter.getItemCount() == 1){
+            model.setupItemsMaps();
+        }*/
     }
 
 
@@ -79,6 +80,7 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
         editTextOperations = view.findViewById(R.id.et_elements);
         editTextThreads = view.findViewById(R.id.et_threads);
         swStart.setOnCheckedChangeListener(this);
+
         //запросить количество столбцов из viewModel
         // request amount of columns from viewModel
     }

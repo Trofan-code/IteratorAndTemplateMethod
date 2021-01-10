@@ -5,20 +5,35 @@ import android.util.Log;
 
 import androidx.lifecycle.ViewModel;
 
+import com.example.taskfox3.R;
+import com.example.taskfox3.dto.BenchmarkItem;
+import com.example.taskfox3.dto.BenchmarkModlel;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+
 import static android.content.ContentValues.TAG;
-import static com.example.taskfox3.dto.Types.SIZE_OF_OPERATION;
-
-public class CollectionViewModel extends ViewModel {
 
 
+public class CollectionViewModel extends ViewModel implements BenchmarkModlel {
+    private int sizeOfOperations;
+    private int sizeOfThreads;
     private Bundle bundleBenchmarkFragment;
-    private String sizeOfElements;
+    private List<BenchmarkItem> dataList;
+    private List<Integer> dataListBenchmark;
 
-
-    public CollectionViewModel(Bundle benchmarkFragment) {
-        this.bundleBenchmarkFragment=benchmarkFragment;
+    public CollectionViewModel(int sizeOfOperations,int sizeOfThreads) {
+        this.sizeOfOperations = sizeOfOperations;
+        this.sizeOfThreads = sizeOfThreads;
     }
 
+    public CollectionViewModel(Bundle bundle) {
+        this.bundleBenchmarkFragment = bundle;
+
+    }
 
 
     public void setupItems() {
@@ -27,59 +42,82 @@ public class CollectionViewModel extends ViewModel {
     }
 
     public void onCalculationStateChangeClicked(String elements, String threads, boolean isStart) {
-        elements = getBundleString(bundleBenchmarkFragment,SIZE_OF_OPERATION," ");
 
+        if(isStart){
+            addingInTheBeginning(elements,threads);
+            addingInTheMiddle(elements,threads);
+            addingInTheEnd(elements,threads);
+        }
 
         // start or stop calculation?
 
         // validate in case of start, stop - other way
         // Use TreadPool
     }
-    public String getBundleString(Bundle b, String key, String def)
-    {
-        String value = b.getString(key);
-        if (value == null)
-            value = def;
-        return value;
+
+    public List<BenchmarkItem> setupItemsCollection(){
+        dataList = new ArrayList<BenchmarkItem>();
+        dataList.add(new BenchmarkItem(R.string.name_oper_1));
+        dataList.add(new BenchmarkItem(R.string.name_oper_2));
+        dataList.add(new BenchmarkItem(R.string.name_oper_3));
+        dataList.add(new BenchmarkItem(R.string.name_oper_4));
+        dataList.add(new BenchmarkItem(R.string.name_oper_5));
+        dataList.add(new BenchmarkItem(R.string.name_oper_6));
+        dataList.add(new BenchmarkItem(R.string.name_oper_7));
+        return dataList;
+    }
+    public List<BenchmarkItem> setupItemsMaps(){
+        dataList = new ArrayList<BenchmarkItem>();
+        dataList.add(new BenchmarkItem(R.string.name_oper_map_1));
+        dataList.add(new BenchmarkItem(R.string.name_oper_map_2));
+        dataList.add(new BenchmarkItem(R.string.name_oper_map_3));
+
+        return dataList;
+    }
+    public long countTimeCollection(){
+        long startTime = System.nanoTime();
+        // methodToTrackTimeFor();
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime);
+        return duration;
+    }
+    public long countTimeMaps(){
+        long startTime = System.nanoTime();
+        // methodToTrackTimeFor();
+        long endTime = System.nanoTime();
+
+        long duration = (endTime - startTime);
+        return duration;
     }
 
+    private List addingInTheBeginning(String elements, String threads){
+        dataListBenchmark = new ArrayList<Integer>();
+        dataListBenchmark =  Collections.nCopies(Integer.parseInt(elements), 1);
+        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
+        executor.submit(() -> {
+            dataListBenchmark.add(0, 2);
+        });
+        return  dataListBenchmark;
+    };
 
-
-
-
-
-//3. Заполнение коллекции происходит в потоке и каждый поток заполняет свой экземпляр коллекции.
-    //Заполняй коллекцию через Colletiins nCopies
-    //public static <T> List<T> nCopies(int n,T o)
-//ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(sizeOfThreads));
-
-//    private List addingInTheBeginning(){
-//        intList = new ArrayList<Integer>();
-//        intList =  Collections.nCopies(Integer.parseInt(sizeOfCollections), 1);
-//        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(sizeOfThreads));
-//        executor.submit(() -> {
-//            intList.add(0, 2);
-//        });
-//        return intList;
-//    };
-//    private List addingInTheMiddle(){
-//        intList = new ArrayList<Integer>();
-//        intList =  Collections.nCopies(Integer.parseInt(sizeOfCollections), 1);
-//        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(sizeOfThreads));
-//        executor.submit(() -> {
-//            intList.add((Integer.parseInt(sizeOfCollections))/2, 2);
-//        });
-//        return intList;
-//    };
-//    private List addingInTheEnd(){
-//        intList = new ArrayList<Integer>();
-//        intList =  Collections.nCopies(Integer.parseInt(sizeOfCollections), 1);
-//       ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(sizeOfThreads));
-//        executor.submit(() -> {
-//            intList.add((Integer.parseInt(sizeOfCollections)), 3);
-//        });
-//        return intList;
-//    };
+    private List addingInTheMiddle(String elements, String threads){
+        dataListBenchmark = new ArrayList<Integer>();
+        dataListBenchmark =  Collections.nCopies(Integer.parseInt(elements), 1);
+        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
+        executor.submit(() -> {
+            dataListBenchmark.add((Integer.parseInt(elements))/2, 2);
+        });
+        return dataListBenchmark;
+    };
+    private List addingInTheEnd(String elements, String threads){
+        dataListBenchmark = new ArrayList<Integer>();
+        dataListBenchmark =  Collections.nCopies(Integer.parseInt(elements), 1);
+       ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
+        executor.submit(() -> {
+            dataListBenchmark.add((Integer.parseInt(elements)), 3);
+        });
+        return dataListBenchmark;
+    };
 //
 ///*addingInTheMiddle;
 //     addingInTheEnd;
@@ -118,6 +156,13 @@ public class CollectionViewModel extends ViewModel {
 //        dataList.add(new BenchmarkItem(R.string.name_oper_7,"333",progressBar));
 //        return dataList;
 //    }
+/*public String getBundleString(Bundle b, String key, String def)
+{
+    String value = b.getString(key);
+    if (value == null)
+        value = def;
+    return value;
+}*/
 
 }
 
