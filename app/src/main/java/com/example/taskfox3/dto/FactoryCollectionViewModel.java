@@ -16,18 +16,25 @@ import com.example.taskfox3.ui.fragment.CollectionViewModel;
 public class FactoryCollectionViewModel extends ViewModelProvider.NewInstanceFactory {
 
 
-    private  Bundle bundle;
-    public FactoryCollectionViewModel(Bundle bundle) {
-        this.bundle = bundle;
+    private  int type;
+    public FactoryCollectionViewModel(int type) {
+        this.type = type;
     }
-
+//В фабрике решить какую реализацию интерфейса (коллекции/мапы) передавать во вьюМодель
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        if(modelClass == CollectionViewModel.class){
-            return (T) new CollectionViewModel(bundle);
+        if(type == Types.COLLECTIONS){
+            BenchmarkModlel benchmarkModlelColl = new CollectionImplementation();
+           return (T) new CollectionViewModel(benchmarkModlelColl);
+        }else if(type == Types.MAPS){
+            BenchmarkModlel benchmarkModlelMaps = new MapsImplementation();
+            return (T) new CollectionViewModel(benchmarkModlelMaps);
         }
-        return null;
+        else{
+            throw new RuntimeException();
+        }
+
     }
 
 }

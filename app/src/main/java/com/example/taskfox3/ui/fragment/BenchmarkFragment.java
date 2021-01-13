@@ -39,7 +39,7 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
         // use arguments to store type
         BenchmarkFragment benchmarkFragment = new BenchmarkFragment();
         args = new Bundle();
-        args.putInt("type",type);
+        args.putInt(Types.TYPE,type);
         benchmarkFragment.setArguments(args);
         return benchmarkFragment;
     }
@@ -48,7 +48,10 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
         super.onCreate(savedInstanceState);
         // access to arguments and receive a type
         // доступ к аргументам и получение типа
-           model = new ViewModelProvider(this, new FactoryCollectionViewModel(args)).get(CollectionViewModel.class);
+
+
+        int type = args.getInt("type", 0);
+        model = new ViewModelProvider(this, new FactoryCollectionViewModel(type)).get(CollectionViewModel.class);
 
         // receive data from model via listener
         // получаем данные из модели через слушателя

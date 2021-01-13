@@ -1,12 +1,12 @@
 package com.example.taskfox3.ui.fragment;
 
-import android.os.Bundle;
-import android.util.Log;
-
 import androidx.lifecycle.ViewModel;
 
 import com.example.taskfox3.R;
 import com.example.taskfox3.dto.BenchmarkItem;
+import com.example.taskfox3.dto.BenchmarkModlel;
+import com.example.taskfox3.dto.CollectionImplementation;
+import com.example.taskfox3.dto.MapsImplementation;
 
 
 import java.util.ArrayList;
@@ -19,21 +19,43 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 
 public class CollectionViewModel extends ViewModel {
-    private int sizeOfOperations;
-    private int sizeOfThreads;
-    private Bundle bundleBenchmarkFragment;
+    private String sizeOfThreads;
+    private String sizeOfOperations;
     private List<BenchmarkItem> dataList;
     private List<Integer> dataListBenchmark;
+    private int type;
+    private CollectionImplementation collectionImplementation;
+    private MapsImplementation mapsImplementation;
+    BenchmarkModlel benchmarkModlel;
 
-    public CollectionViewModel(int sizeOfOperations,int sizeOfThreads) {
+    public String getSizeOfOperations() {
+        return sizeOfOperations;
+    }
+
+    public void setSizeOfOperations(String sizeOfOperations) {
+        this.sizeOfOperations = sizeOfOperations;
+    }
+
+
+
+    public String getSizeOfThreads() {
+        return sizeOfThreads;
+    }
+
+    public void setSizeOfThreads(String sizeOfThreads) {
+        this.sizeOfThreads = sizeOfThreads;
+    }
+
+    public CollectionViewModel(BenchmarkModlel benchmarkModlel) {
+        this.benchmarkModlel = benchmarkModlel;
+    }
+
+    public CollectionViewModel(String sizeOfOperations, String sizeOfThreads) {
         this.sizeOfOperations = sizeOfOperations;
         this.sizeOfThreads = sizeOfThreads;
     }
 
-    public CollectionViewModel(Bundle bundle) {
-        this.bundleBenchmarkFragment = bundle;
-
-    }
+    //https://www.youtube.com/watch?v=TwIjjTC5g7g
 
 
     public void setupItems() {
@@ -44,6 +66,9 @@ public class CollectionViewModel extends ViewModel {
     public void onCalculationStateChangeClicked(String elements, String threads, boolean isStart) {
 
         if(isStart){
+            CollectionImplementation collectionImplementation = new CollectionImplementation();
+            collectionImplementation.setupItems();
+
 
         }
 
