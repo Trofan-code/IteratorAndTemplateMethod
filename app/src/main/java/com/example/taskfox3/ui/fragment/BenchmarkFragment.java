@@ -32,6 +32,7 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     private  EditText editTextThreads;
     private Switch swStart;
     private static Bundle args;
+    int colums;
 
 
     public static BenchmarkFragment newInstance(int type) {
@@ -57,11 +58,11 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
         // получаем данные из модели через слушателя
 
         if (adapter.getItemCount() == 0) {
-            model.setupItemsCollection();
+
 
         }
        /* else if(adapter.getItemCount() == 1){
-            model.setupItemsMaps();
+
         }*/
     }
 
@@ -83,8 +84,7 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
         editTextOperations = view.findViewById(R.id.et_elements);
         editTextThreads = view.findViewById(R.id.et_threads);
         swStart.setOnCheckedChangeListener(this);
-
-        //запросить количество столбцов из viewModel
+        colums = model.benchmarkModlel.returnNumOfColums();
         // request amount of columns from viewModel
     }
 

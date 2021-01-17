@@ -15,8 +15,8 @@ import java.util.List;
 
 public interface BenchmarkModlel {
     public List<BenchmarkItem> setupItems();
+    public int returnNumOfColums();
 
-    public long countTime();
 
 
 

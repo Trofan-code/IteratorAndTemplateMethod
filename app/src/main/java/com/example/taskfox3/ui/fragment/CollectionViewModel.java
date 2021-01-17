@@ -23,7 +23,7 @@ public class CollectionViewModel extends ViewModel {
     private String sizeOfOperations;
     private List<BenchmarkItem> dataList;
     private List<Integer> dataListBenchmark;
-    private int type;
+    private int numOfColums;
     private CollectionImplementation collectionImplementation;
     private MapsImplementation mapsImplementation;
     BenchmarkModlel benchmarkModlel;
@@ -31,12 +31,9 @@ public class CollectionViewModel extends ViewModel {
     public String getSizeOfOperations() {
         return sizeOfOperations;
     }
-
     public void setSizeOfOperations(String sizeOfOperations) {
         this.sizeOfOperations = sizeOfOperations;
     }
-
-
 
     public String getSizeOfThreads() {
         return sizeOfThreads;
@@ -55,10 +52,12 @@ public class CollectionViewModel extends ViewModel {
         this.sizeOfThreads = sizeOfThreads;
     }
 
+
     //https://www.youtube.com/watch?v=TwIjjTC5g7g
 
 
     public void setupItems() {
+        benchmarkModlel.setupItems();
 
         // set list of items into ui
     }
@@ -98,88 +97,6 @@ public class CollectionViewModel extends ViewModel {
         return dataList;
     }
 
-    public long countTimeMaps(){
-        long startTime = System.nanoTime();
-        // methodToTrackTimeFor();
-        long endTime = System.nanoTime();
-
-        long duration = (endTime - startTime);
-        return duration;
-    }
-
-    private List addingInTheBeginning(String elements, String threads){
-        dataListBenchmark = new ArrayList<Integer>();
-        dataListBenchmark =  Collections.nCopies(Integer.parseInt(elements), 1);
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
-        executor.submit(() -> {
-            dataListBenchmark.add(0, 2);
-        });
-        return  dataListBenchmark;
-    };
-
-    private List addingInTheMiddle(String elements, String threads){
-        dataListBenchmark = new ArrayList<Integer>();
-        dataListBenchmark =  Collections.nCopies(Integer.parseInt(elements), 1);
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
-        executor.submit(() -> {
-            dataListBenchmark.add((Integer.parseInt(elements))/2, 2);
-        });
-        return dataListBenchmark;
-    };
-    private List addingInTheEnd(String elements, String threads){
-        dataListBenchmark = new ArrayList<Integer>();
-        dataListBenchmark =  Collections.nCopies(Integer.parseInt(elements), 1);
-       ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
-        executor.submit(() -> {
-            dataListBenchmark.add((Integer.parseInt(elements)), 3);
-        });
-        return dataListBenchmark;
-    };
-//
-///*addingInTheMiddle;
-//     addingInTheEnd;
-//     searchByValue;
-//     removingInTheBeginning;
-//     removingInTheMiddle;
-//     removingInTheEnd;*/
-
-//    public List<BenchmarkItem> initialDataTableCollection(){ //move to ViewModel
-//        dataList = new ArrayList<BenchmarkItem>();
-//        dataList.add(new BenchmarkItem(R.string.name_oper_1,"0",progressBar));
-//        dataList.add(new BenchmarkItem(R.string.name_oper_2,"0",progressBar));
-//        dataList.add(new BenchmarkItem(R.string.name_oper_3,"0",progressBar));
-//        dataList.add(new BenchmarkItem(R.string.name_oper_4,"0",progressBar));
-//        dataList.add(new BenchmarkItem(R.string.name_oper_5,"0",progressBar));
-//        dataList.add(new BenchmarkItem(R.string.name_oper_6,"0",progressBar));
-//        dataList.add(new BenchmarkItem(R.string.name_oper_7,"0",progressBar));
-//        return dataList;
-//    }
-//
-//    public List<BenchmarkItem> initialDataTableMap(){
-//        dataList = new ArrayList<BenchmarkItem>();
-//        dataList.add(new BenchmarkItem(R.string.name_oper_map_1,"0",progressBar));
-//        dataList.add(new BenchmarkItem(R.string.name_oper_map_2,"0",progressBar));
-//        dataList.add(new BenchmarkItem(R.string.name_oper_map_3,"0",progressBar));
-//        return dataList;
-//    }
-//    public List<BenchmarkItem> exampleChange() {
-//        dataList = new ArrayList<BenchmarkItem>();
-//        dataList.add(new BenchmarkItem(R.string.name_oper_1,"333",progressBar));
-//        dataList.add(new BenchmarkItem(R.string.name_oper_2,"333",progressBar));
-//        dataList.add(new BenchmarkItem(R.string.name_oper_3,"333",progressBar));
-//        dataList.add(new BenchmarkItem(R.string.name_oper_4,"333",progressBar));
-//        dataList.add(new BenchmarkItem(R.string.name_oper_5,"333",progressBar));
-//        dataList.add(new BenchmarkItem(R.string.name_oper_6,"333",progressBar));
-//        dataList.add(new BenchmarkItem(R.string.name_oper_7,"333",progressBar));
-//        return dataList;
-//    }
-/*public String getBundleString(Bundle b, String key, String def)
-{
-    String value = b.getString(key);
-    if (value == null)
-        value = def;
-    return value;
-}*/
 
 }
 
