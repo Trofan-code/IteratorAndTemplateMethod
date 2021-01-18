@@ -1,7 +1,6 @@
 package com.example.taskfox3.ui.fragment;
 
 import android.os.Bundle;
-import android.renderscript.Sampler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,60 +12,51 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.taskfox3.R;
 
-import com.example.taskfox3.dto.BenchmarkItem;
 import com.example.taskfox3.dto.FactoryCollectionViewModel;
-import com.example.taskfox3.dto.Types;
-
-import java.util.Collection;
 
 
 public class BenchmarkFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
-    private final BenchmarksRecyclerViewAdapter adapter = new BenchmarksRecyclerViewAdapter();
+    private BenchmarksRecyclerViewAdapter adapter;
     private CollectionViewModel model;
-    private  EditText editTextOperations;
-    private  EditText editTextThreads;
+    private EditText editTextOperations;
+    private EditText editTextThreads;
     private Switch swStart;
-    private static Bundle args;
-    int colums;
+    public static final String TYPE = "type";
 
 
     public static BenchmarkFragment newInstance(int type) {
-
+        Bundle args = new Bundle();
         // use arguments to store type
         BenchmarkFragment benchmarkFragment = new BenchmarkFragment();
-        args = new Bundle();
-        args.putInt(Types.TYPE,type);
+        args.putInt(TYPE, type);
         benchmarkFragment.setArguments(args);
         return benchmarkFragment;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // access to arguments and receive a type
         // доступ к аргументам и получение типа
-
-
-        int type = args.getInt("type", 0);
+        Bundle args = new Bundle();
+        int type = args.getInt("type", 1);
         model = new ViewModelProvider(this, new FactoryCollectionViewModel(type)).get(CollectionViewModel.class);
 
         // receive data from model via listener
         // получаем данные из модели через слушателя
-
-        if (adapter.getItemCount() == 0) {
-
-
-        }
-       /* else if(adapter.getItemCount() == 1){
-
-        }*/
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
 
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -79,13 +69,14 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
         super.onViewCreated(view, savedInstanceState);
         final RecyclerView recyclerView = view.findViewById(R.id.recycler_view_for_tab);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
+        adapter = new BenchmarksRecyclerViewAdapter(model.getSetupItemsImpl());
         recyclerView.setAdapter(adapter);
         swStart = view.findViewById(R.id.btn_start_stop);
         editTextOperations = view.findViewById(R.id.et_elements);
         editTextThreads = view.findViewById(R.id.et_threads);
         swStart.setOnCheckedChangeListener(this);
-        colums = model.benchmarkModlel.returnNumOfColums();
         // request amount of columns from viewModel
+
     }
 
     @Override

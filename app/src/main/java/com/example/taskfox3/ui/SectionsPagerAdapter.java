@@ -32,14 +32,15 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        switch (position){
+        switch (position) {
             case 0:
                 return BenchmarkFragment.newInstance(Types.COLLECTIONS);
 
             case 1:
                 return BenchmarkFragment.newInstance(Types.MAPS);
 
-            default:return null;
+            default:
+                return null;
         }
     }
 

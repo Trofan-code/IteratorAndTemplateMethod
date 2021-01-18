@@ -1,6 +1,5 @@
 package com.example.taskfox3.ui.fragment;
 
-import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +16,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<BenchmarksRecyclerViewAdapter.BenchmarkViewHolder> {
-    
-    private final List<BenchmarkItem> benchmarkItemList =  new ArrayList<>();
-    public BenchmarksRecyclerViewAdapter() {
+
+    private final List<BenchmarkItem> myBenchmarkItemList;
+
+
+    public BenchmarksRecyclerViewAdapter(List<BenchmarkItem> setupItems) {
+        this.myBenchmarkItemList = setupItems;
     }
 
     @NonNull
     @Override
     public BenchmarkViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout_for_tab,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout_for_tab, parent, false);
         return new BenchmarkViewHolder(view);
         //ponieważ View komponenty zostaną ponownie wykorzystane w tym samym elemencie wizualnym
         //w trakcie życia listy różne dane zostaną ustawione
@@ -34,20 +36,18 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
 
     @Override
     public void onBindViewHolder(@NonNull BenchmarkViewHolder holder, int position) {
-        holder.operationName.setText(benchmarkItemList.get(position).getNameOfOperation());
-        holder.operationTime.setText(String.valueOf(benchmarkItemList.get(position).getTimeOfOperation()));
-        //in BenchmarkViewHolder create method bintItem(items.get(0)) and move this code there
-
+        holder.setItems(myBenchmarkItemList.get(position));
     }
 
     @Override
     public int getItemCount() { //odpowiada za illość elementów
-        return benchmarkItemList.size();
+
+        return myBenchmarkItemList.size();
     }
 
-    public void setItems(List<BenchmarkItem> items) {
-        benchmarkItemList.clear();
-        benchmarkItemList.addAll(items);
+    public void updateItems(List<BenchmarkItem> items) {
+        myBenchmarkItemList.clear();
+        myBenchmarkItemList.addAll(items);
         notifyDataSetChanged();
     }
 
@@ -61,8 +61,12 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
             operationName = itemView.findViewById(R.id.tv_name_operation);
             operationTime = itemView.findViewById(R.id.tv_time_operation);
             progressBar = itemView.findViewById(R.id.progressBar);
-            //in BenchmarkViewHolder create method bintItem(items.get(0)) and use it ---- ??
-            
+        }
+
+        public void setItems(BenchmarkItem benchmarkItem) {
+            operationName.setText(benchmarkItem.getNameOfOperation());
+            operationTime.setText(String.valueOf(benchmarkItem.getTimeOfOperation()));
+            //operationName.setText(benchmarkItem.getNameOfOperation());
 
         }
     }
