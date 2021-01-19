@@ -12,22 +12,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.taskfox3.R;
 
+import com.example.taskfox3.dto.BenchmarkModel;
 import com.example.taskfox3.dto.FactoryCollectionViewModel;
 
 
 public class BenchmarkFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
     private BenchmarksRecyclerViewAdapter adapter;
-    private CollectionViewModel model;
+    private CollectionViewModel viewModel;
     private EditText editTextOperations;
     private EditText editTextThreads;
     private Switch swStart;
     public static final String TYPE = "type";
+
 
 
     public static BenchmarkFragment newInstance(int type) {
@@ -45,8 +46,8 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
         // access to arguments and receive a type
         // доступ к аргументам и получение типа
         Bundle args = new Bundle();
-        int type = args.getInt("type", 1);
-        model = new ViewModelProvider(this, new FactoryCollectionViewModel(type)).get(CollectionViewModel.class);
+        int type = args.getInt(TYPE, 1);
+        viewModel = new ViewModelProvider(this, new FactoryCollectionViewModel(type)).get(CollectionViewModel.class);
 
         // receive data from model via listener
         // получаем данные из модели через слушателя
@@ -69,19 +70,22 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
         super.onViewCreated(view, savedInstanceState);
         final RecyclerView recyclerView = view.findViewById(R.id.recycler_view_for_tab);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
-        adapter = new BenchmarksRecyclerViewAdapter(model.getSetupItemsImpl());
+        //restore as it was before this commit. you can use adapter.setItems(items)
+        // я так и не поняла как это сделать
+        adapter = new BenchmarksRecyclerViewAdapter(viewModel.setupItems());
         recyclerView.setAdapter(adapter);
         swStart = view.findViewById(R.id.btn_start_stop);
         editTextOperations = view.findViewById(R.id.et_elements);
         editTextThreads = view.findViewById(R.id.et_threads);
         swStart.setOnCheckedChangeListener(this);
+
         // request amount of columns from viewModel
 
     }
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        model.onCalculationStateChangeClicked(getString(editTextOperations), getString(editTextThreads), b);
+        viewModel.onCalculationStateChangeClicked(getString(editTextOperations), getString(editTextThreads), b);
     }
 
     private String getString(EditText editText) {

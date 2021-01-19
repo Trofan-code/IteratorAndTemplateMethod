@@ -12,17 +12,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.taskfox3.R;
 import com.example.taskfox3.dto.BenchmarkItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<BenchmarksRecyclerViewAdapter.BenchmarkViewHolder> {
 
+
     private final List<BenchmarkItem> myBenchmarkItemList;
 
+
+
+    public List<BenchmarkItem> getMyBenchmarkItemList() {
+        return myBenchmarkItemList;
+    }
 
     public BenchmarksRecyclerViewAdapter(List<BenchmarkItem> setupItems) {
         this.myBenchmarkItemList = setupItems;
     }
+
+
 
     @NonNull
     @Override
@@ -44,6 +51,7 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
 
         return myBenchmarkItemList.size();
     }
+
 
     public void updateItems(List<BenchmarkItem> items) {
         myBenchmarkItemList.clear();

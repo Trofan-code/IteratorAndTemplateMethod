@@ -10,7 +10,9 @@ import com.example.taskfox3.ui.fragment.CollectionViewModel;
 public class FactoryCollectionViewModel extends ViewModelProvider.NewInstanceFactory {
 
 
-    private int type;
+    private final int type;
+    private final int coll = 1;
+    private final int map = 2;
 
     public FactoryCollectionViewModel(int type) {
         super();
@@ -21,9 +23,9 @@ public class FactoryCollectionViewModel extends ViewModelProvider.NewInstanceFac
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (type == Types.COLLECTIONS) {
-            return (T) new CollectionViewModel(new CollectionImplementation().setupItems());
+            return (T) new CollectionViewModel(new CollectionImplementation(),coll);
         } else if (type == Types.MAPS) {
-            return (T) new CollectionViewModel(new MapsImplementation().setupItems());
+            return (T) new CollectionViewModel(new MapsImplementation(),map);
         } else {
             throw new RuntimeException("Type is empty");
         }
