@@ -11,8 +11,7 @@ public class FactoryCollectionViewModel extends ViewModelProvider.NewInstanceFac
 
 
     private final int type;
-    private final int coll = 1;
-    private final int map = 2;
+
 
     public FactoryCollectionViewModel(int type) {
         super();
@@ -23,9 +22,9 @@ public class FactoryCollectionViewModel extends ViewModelProvider.NewInstanceFac
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (type == Types.COLLECTIONS) {
-            return (T) new CollectionViewModel(new CollectionImplementation(),coll);
+            return (T) new CollectionViewModel(new CollectionImplementation());
         } else if (type == Types.MAPS) {
-            return (T) new CollectionViewModel(new MapsImplementation(),map);
+            return (T) new CollectionViewModel(new MapsImplementation());
         } else {
             throw new RuntimeException("Type is empty");
         }

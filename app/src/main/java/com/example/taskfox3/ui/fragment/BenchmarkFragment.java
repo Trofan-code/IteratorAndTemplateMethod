@@ -30,7 +30,6 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     public static final String TYPE = "type";
 
 
-
     public static BenchmarkFragment newInstance(int type) {
         Bundle args = new Bundle();
         // use arguments to store type
@@ -85,7 +84,13 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        viewModel.onCalculationStateChangeClicked(getString(editTextOperations), getString(editTextThreads), b);
+        if (getString(editTextOperations).length() == 0) {
+            editTextOperations.setError("Num of operation is required!");
+        } else if (getString(editTextThreads).length() == 0) {
+            editTextThreads.setError("Num of threads is required!");
+        } else {
+            viewModel.onCalculationStateChangeClicked(getString(editTextOperations), getString(editTextThreads), b);
+        }
     }
 
     private String getString(EditText editText) {
