@@ -18,11 +18,10 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.example.taskfox3.R;
 
 import com.example.taskfox3.dto.FactoryCollectionViewModel;
-import com.example.taskfox3.dto.MyCustomObject;
 import com.example.taskfox3.dto.MyCustomObjectListener;
 
 
-public class BenchmarkFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
+public class BenchmarkFragment extends Fragment  implements CompoundButton.OnCheckedChangeListener, MyCustomObjectListener  {
     private BenchmarksRecyclerViewAdapter adapter;
     private CollectionViewModel viewModel;
     private EditText editTextOperations;
@@ -48,7 +47,7 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
         Bundle args = new Bundle();
         int type = args.getInt(TYPE, 1);
         viewModel = new ViewModelProvider(this, new FactoryCollectionViewModel(type)).get(CollectionViewModel.class);
-
+        viewModel.setMyCustomObjectListener(this);
 
 
         // receive data from model via listener
@@ -77,25 +76,31 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
         swStart = view.findViewById(R.id.btn_start_stop);
         editTextOperations = view.findViewById(R.id.et_elements);
         editTextThreads = view.findViewById(R.id.et_threads);
-
-
-
+        swStart = view.findViewById(R.id.btn_start_stop);
+        swStart.setOnCheckedChangeListener(this::onCheckedChanged);
         // request amount of columns from viewModel
-
     }
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        MyCustomObject myMyCustomObject = new MyCustomObject();
-        if(myMyCustomObject.canWeStartCalc(b)){
-            viewModel.onCalculationStateChangeClicked(getString(editTextOperations), getString(editTextThreads), b);
-        }else {
-            myMyCustomObject.error(getString(editTextOperations), getString(editTextThreads));
-        }
+        canWeStartCalc(getString(editTextOperations), getString(editTextThreads), b);
 
     }
 
     private String getString(EditText editText) {
         return editText.getText().toString();
+    }
+
+
+    @Override
+    public void canWeStartCalc(String operation, String threads,boolean b) {
+        if(getString(editTextOperations).length() != 0&&getString(editTextThreads).length() != 0){
+            viewModel.onCalculationStateChangeClicked(getString(editTextOperations), getString(editTextThreads), b);
+        }else if (getString(editTextOperations).length() == 0) {
+            editTextOperations.setError("Num of operation is required!");
+        } else if (getString(editTextThreads).length() == 0) {
+            editTextThreads.setError("Num of threads is required!");
+        }
+
     }
 }

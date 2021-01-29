@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface BenchmarkModel {
 
-    List<BenchmarkItem> returnMapOrColl(String elements, String threads);
+    List<BenchmarkItem> returnNewData(String elements, String threads);
 
     List<BenchmarkItem> setupItems();
 

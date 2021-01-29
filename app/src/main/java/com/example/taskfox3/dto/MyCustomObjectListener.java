@@ -6,8 +6,9 @@ import android.view.MotionEvent;
 public interface MyCustomObjectListener {
 
 
-    public boolean  canWeStartCalc(Boolean b); //Object... anyDataYouWantToPassToActivity
-    public void error(String operation, String threads);
+
+    public void canWeStartCalc(String operation, String threads,boolean b);
+
 
 
 }

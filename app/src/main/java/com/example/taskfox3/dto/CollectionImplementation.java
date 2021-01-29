@@ -17,7 +17,7 @@ public class CollectionImplementation implements BenchmarkModel {
     long durationRemovingInTheBeginning, durationRemovingInTheMiddle, durationRemovingInTheEnd;
 
     @Override
-    public List<BenchmarkItem> returnMapOrColl(String elements, String threads) {
+    public List<BenchmarkItem> returnNewData(String elements, String threads) {
         dataList = new ArrayList<BenchmarkItem>();
         dataList.add(new BenchmarkItem(R.string.name_oper_1, addingInTheBeginning(elements, threads)));
         dataList.add(new BenchmarkItem(R.string.name_oper_2, addingInTheMiddle(elements, threads)));
@@ -44,91 +44,70 @@ public class CollectionImplementation implements BenchmarkModel {
     private long addingInTheBeginning(String elements, String threads) {
         dataListBenchmark = new ArrayList<Integer>();
         dataListBenchmark = Collections.nCopies(Integer.parseInt(elements), 1);
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
-        executor.submit(() -> {
-            long startTime = System.nanoTime();
-            dataListBenchmark.add(0, 2);
-            long endTime = System.nanoTime();
-            durationAddBeginning = (endTime - startTime);
-        });
+        long startTime = System.nanoTime();
+        dataListBenchmark.add(0, 2);
+        long endTime = System.nanoTime();
+        durationAddBeginning = (endTime - startTime);
         return durationAddBeginning;
     }
 
     private long addingInTheMiddle(String elements, String threads) {
         dataListBenchmark = new ArrayList<Integer>();
         dataListBenchmark = Collections.nCopies(Integer.parseInt(elements), 1);
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
-        executor.submit(() -> {
-            long startTime = System.nanoTime();
-            dataListBenchmark.add((Integer.parseInt(elements)) / 2, 2);
-            long endTime = System.nanoTime();
-            durationAddMiddle = (endTime - startTime);
-        });
+        long startTime = System.nanoTime();
+        dataListBenchmark.add((Integer.parseInt(elements)) / 2, 2);
+        long endTime = System.nanoTime();
+        durationAddMiddle = (endTime - startTime);
         return durationAddMiddle;
     }
 
     private long addingInTheEnd(String elements, String threads) {
         dataListBenchmark = new ArrayList<Integer>();
         dataListBenchmark = Collections.nCopies(Integer.parseInt(elements), 1);
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
-        executor.submit(() -> {
-            long startTime = System.nanoTime();
-            dataListBenchmark.add((Integer.parseInt(elements)), 3);
-            long endTime = System.nanoTime();
-            durationAddInTheEnd = (endTime - startTime);
-        });
+        long startTime = System.nanoTime();
+        dataListBenchmark.add((Integer.parseInt(elements)), 3);
+        long endTime = System.nanoTime();
+        durationAddInTheEnd = (endTime - startTime);
         return durationAddInTheEnd;
     }
 
     private long searchByValue(String elements, String threads) {
         dataListBenchmark = new ArrayList<Integer>();
         dataListBenchmark = Collections.nCopies(Integer.parseInt(elements), 1);
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
-        executor.submit(() -> {
-            long startTime = System.nanoTime();
-            dataListBenchmark.contains(374);
-            long endTime = System.nanoTime();
-            durationSearchByValue = (endTime - startTime);
-        });
+        long startTime = System.nanoTime();
+        dataListBenchmark.contains(374);
+        long endTime = System.nanoTime();
+        durationSearchByValue = (endTime - startTime);
         return durationSearchByValue;
     }
 
     private long removingInTheBeginning(String elements, String threads) {
         dataListBenchmark = new ArrayList<Integer>();
         dataListBenchmark = Collections.nCopies(Integer.parseInt(elements), 1);
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
-        executor.submit(() -> {
-            long startTime = System.nanoTime();
-            dataListBenchmark.remove(0);
-            long endTime = System.nanoTime();
-            durationRemovingInTheBeginning = (endTime - startTime);
-        });
+        long startTime = System.nanoTime();
+        dataListBenchmark.remove(0);
+        long endTime = System.nanoTime();
+        durationRemovingInTheBeginning = (endTime - startTime);
         return durationRemovingInTheBeginning;
     }
 
     private long removingInTheMiddle(String elements, String threads) {
         dataListBenchmark = new ArrayList<Integer>();
         dataListBenchmark = Collections.nCopies(Integer.parseInt(elements), 1);
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
-        executor.submit(() -> {
-            long startTime = System.nanoTime();
-            dataListBenchmark.remove((Integer.parseInt(elements)) / 2);
-            long endTime = System.nanoTime();
-            durationRemovingInTheMiddle = (endTime - startTime);
-        });
+        long startTime = System.nanoTime();
+        dataListBenchmark.remove((Integer.parseInt(elements)) / 2);
+        long endTime = System.nanoTime();
+        durationRemovingInTheMiddle = (endTime - startTime);
         return durationRemovingInTheMiddle;
     }
 
     private long removingInTheEnd(String elements, String threads) {
         dataListBenchmark = new ArrayList<Integer>();
         dataListBenchmark = Collections.nCopies(Integer.parseInt(elements), 1);
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
-        executor.submit(() -> {
-            long startTime = System.nanoTime();
-            dataListBenchmark.remove(Integer.parseInt(elements) - 1);
-            long endTime = System.nanoTime();
-            durationRemovingInTheEnd = (endTime - startTime);
-        });
+        long startTime = System.nanoTime();
+        dataListBenchmark.remove(Integer.parseInt(elements) - 1);
+        long endTime = System.nanoTime();
+        durationRemovingInTheEnd = (endTime - startTime);
         return durationRemovingInTheEnd;
     }
 

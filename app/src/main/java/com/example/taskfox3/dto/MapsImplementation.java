@@ -13,13 +13,11 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 public class MapsImplementation implements BenchmarkModel {
     private List<BenchmarkItem> dataList;
-    int numOfColums;
     private Map<Integer, Integer> operationHashMap;
-    private CollectionViewModel model;
     long durationAddingNew, durationSearchByKey, durationRemoving;
 
     @Override
-    public List<BenchmarkItem> returnMapOrColl(String elements, String threads) {
+    public List<BenchmarkItem> returnNewData(String elements, String threads) {
         dataList = new ArrayList<BenchmarkItem>();
         dataList.add(new BenchmarkItem(R.string.name_oper_1, addingNew(elements, threads)));
         dataList.add(new BenchmarkItem(R.string.name_oper_2, searchByKey(elements, threads)));
@@ -53,37 +51,28 @@ public class MapsImplementation implements BenchmarkModel {
 
     private long addingNew(String elements, String threads) {
         operationHashMap = returnHashMap(elements);
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
-        executor.submit(() -> {
-            long startTime = System.nanoTime();
-            operationHashMap.put(0, 0);
-            long endTime = System.nanoTime();
-            durationAddingNew = (endTime - startTime);
-        });
+        long startTime = System.nanoTime();
+        operationHashMap.put(0, 0);
+        long endTime = System.nanoTime();
+        durationAddingNew = (endTime - startTime);
         return durationAddingNew;
     }
 
     private long searchByKey(String elements, String threads) {
         operationHashMap = returnHashMap(elements);
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
-        executor.submit(() -> {
-            long startTime = System.nanoTime();
-            operationHashMap.put(0, 0);
-            long endTime = System.nanoTime();
-            durationSearchByKey = (endTime - startTime);
-        });
+        long startTime = System.nanoTime();
+        operationHashMap.put(0, 0);
+        long endTime = System.nanoTime();
+        durationSearchByKey = (endTime - startTime);
         return durationSearchByKey;
     }
 
     private long removing(String elements, String threads) {
         operationHashMap = returnHashMap(elements);
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
-        executor.submit(() -> {
-            long startTime = System.nanoTime();
-            operationHashMap.put(0, 0);
-            long endTime = System.nanoTime();
-            durationRemoving = (endTime - startTime);
-        });
+        long startTime = System.nanoTime();
+        operationHashMap.put(0, 0);
+        long endTime = System.nanoTime();
+        durationRemoving = (endTime - startTime);
         return durationRemoving;
     }
 

@@ -29,29 +29,30 @@ public class CollectionViewModel extends ViewModel {
 
     }
 
-    //https://www.youtube.com/watch?v=TwIjjTC5g7g
-
-
     public List<BenchmarkItem> setupItems() {
         return benchmarkModel.setupItems();
         // set list of items into ui
     }
 
     public void onCalculationStateChangeClicked(String elements, String threads, boolean isStart) {
+        List<BenchmarkItem> copyItems = setupItems();
+        for (int i=0;i<copyItems.size();i++) {
+        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
+        executor.submit(() -> {
+            if(copyItems!=null){
+                benchmarkModel.returnNewData(elements,threads).get(i);
 
-        if (isStart&&elements==null) {
-            benchmarkModel.returnMapOrColl(elements, threads);
-        } else if (!isStart) {
-
+                //Удаляй посчитаные элементы из копии. Список пуст - все
+                //Я понимаю,что тут не так,но я пока не нашла вариант,как сделать такое
+            }
+            copyItems.remove(i); //Variable used in lambda expression should be final or effectively final
+        });
         }
-//        if (getString(editTextOperations).length() == 0) {
-//            editTextOperations.setError("Num of operation is required!");
-//        } else if (getString(editTextThreads).length() == 0) {
-//            editTextThreads.setError("Num of threads is required!");
-//        } else {
-//            viewModel.onCalculationStateChangeClicked(getString(editTextOperations), getString(editTextThreads), b);
-//        }
 
+
+        //Тебе нужно получить новый список элементов + создать его копию + пул потоков.
+        //Итерируешь по списку и кидаешь задачи в пул. Копия списка нужна чтобы знать когда расчет полность завершится
+        //Удаляй посчитаные элементы из копии. Список пуст - все
         // start or stop calculation?
         // validate in case of start, stop - other way
         // Use TreadPool
