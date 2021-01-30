@@ -22,6 +22,9 @@ public class CollectionViewModel extends ViewModel {
     public void setMyCustomObjectListener(MyCustomObjectListener myCustomObjectListener) {
         this.myCustomObjectListener = myCustomObjectListener;
     }
+    public void removeMyCustomObjectListener(MyCustomObjectListener myCustomObjectListener) {
+        this.myCustomObjectListener = null;
+    }
 
 
     public CollectionViewModel(BenchmarkModel benchmarkModel) {

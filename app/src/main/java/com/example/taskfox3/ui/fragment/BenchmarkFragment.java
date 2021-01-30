@@ -82,6 +82,13 @@ public class BenchmarkFragment extends Fragment  implements CompoundButton.OnChe
     }
 
     @Override
+    public void onDetach() {
+
+        super.onDetach();
+        viewModel.removeMyCustomObjectListener(this);
+    }
+
+    @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         canWeStartCalc(getString(editTextOperations), getString(editTextThreads), b);
 
@@ -97,9 +104,9 @@ public class BenchmarkFragment extends Fragment  implements CompoundButton.OnChe
         if(getString(editTextOperations).length() != 0&&getString(editTextThreads).length() != 0){
             viewModel.onCalculationStateChangeClicked(getString(editTextOperations), getString(editTextThreads), b);
         }else if (getString(editTextOperations).length() == 0) {
-            editTextOperations.setError("Num of operation is required!");
+            editTextOperations.setError(getText(R.string.error_1));
         } else if (getString(editTextThreads).length() == 0) {
-            editTextThreads.setError("Num of threads is required!");
+            editTextThreads.setError(getText(R.string.error_2));
         }
 
     }
