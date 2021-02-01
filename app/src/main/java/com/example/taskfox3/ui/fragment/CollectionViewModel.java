@@ -7,10 +7,7 @@ import com.example.taskfox3.dto.BenchmarkModel;
 import com.example.taskfox3.dto.MyCustomObjectListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -18,10 +15,12 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class CollectionViewModel extends ViewModel {
     private final BenchmarkModel benchmarkModel;
     private MyCustomObjectListener myCustomObjectListener;
+    private List<BenchmarkItem> newCountItems = new ArrayList<>();
 
     public void setMyCustomObjectListener(MyCustomObjectListener myCustomObjectListener) {
         this.myCustomObjectListener = myCustomObjectListener;
     }
+
     public void removeMyCustomObjectListener(MyCustomObjectListener myCustomObjectListener) {
         this.myCustomObjectListener = null;
     }
@@ -38,27 +37,37 @@ public class CollectionViewModel extends ViewModel {
     }
 
     public void onCalculationStateChangeClicked(String elements, String threads, boolean isStart) {
+        benchmarkModel.putElements(elements);
         List<BenchmarkItem> copyItems = setupItems();
-        for (int i=0;i<copyItems.size();i++) {
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
-        executor.submit(() -> {
-            if(copyItems!=null){
-                benchmarkModel.returnNewData(elements,threads).get(i);
-
-                //Удаляй посчитаные элементы из копии. Список пуст - все
-                //Я понимаю,что тут не так,но я пока не нашла вариант,как сделать такое
-            }
-            copyItems.remove(i); //Variable used in lambda expression should be final or effectively final
-        });
+        if (elements.length() != 0 && threads.length() != 0 && isStart) {
+            ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
+            executor.submit(() -> {
+                for (int i = 0; i < copyItems.size(); i++) {
+                    if (copyItems != null) {
+                        // benchmarkModel.returnNewData().get(i);
+                        newCountItems.add(i, benchmarkModel.returnNewData().get(i));
+                        copyItems.remove(i);
+                    }
+                }
+            });
+        } else if (elements.length() == 0 && isStart) {
+            myCustomObjectListener.returnOperationError();
+        } else if (threads.length() == 0 && isStart) {
+            myCustomObjectListener.returnThreadsError();
         }
-
-
-        //Тебе нужно получить новый список элементов + создать его копию + пул потоков.
-        //Итерируешь по списку и кидаешь задачи в пул. Копия списка нужна чтобы знать когда расчет полность завершится
-        //Удаляй посчитаные элементы из копии. Список пуст - все
         // start or stop calculation?
         // validate in case of start, stop - other way
         // Use TreadPool
+    }
+
+    public List<BenchmarkItem> setNewItems2() {
+        return benchmarkModel.returnNewData();
+        // set list of items into ui
+    }
+
+    public List setNewItems() {
+        return newCountItems;
+        // set new list of items into ui
     }
 
 

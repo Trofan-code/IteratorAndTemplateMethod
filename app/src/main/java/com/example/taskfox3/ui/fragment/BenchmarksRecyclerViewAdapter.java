@@ -20,7 +20,6 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
     private final List<BenchmarkItem> myBenchmarkItemList;
 
 
-
     public List<BenchmarkItem> getMyBenchmarkItemList() {
         return myBenchmarkItemList;
     }
@@ -28,7 +27,6 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
     public BenchmarksRecyclerViewAdapter(List<BenchmarkItem> setupItems) {
         this.myBenchmarkItemList = setupItems;
     }
-
 
 
     @NonNull
@@ -48,7 +46,6 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
 
     @Override
     public int getItemCount() { //odpowiada za illość elementów
-
         return myBenchmarkItemList.size();
     }
 

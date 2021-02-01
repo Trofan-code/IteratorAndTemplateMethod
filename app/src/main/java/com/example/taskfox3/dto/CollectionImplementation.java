@@ -1,31 +1,34 @@
 package com.example.taskfox3.dto;
 
 import com.example.taskfox3.R;
-import com.example.taskfox3.ui.fragment.CollectionViewModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
 public class CollectionImplementation implements BenchmarkModel {
     private static long TIME = -1;
+    private String elements;
     private List<BenchmarkItem> dataList;
     private List<Integer> dataListBenchmark;
     long durationAddBeginning, durationAddMiddle, durationAddInTheEnd, durationSearchByValue;
     long durationRemovingInTheBeginning, durationRemovingInTheMiddle, durationRemovingInTheEnd;
 
     @Override
-    public List<BenchmarkItem> returnNewData(String elements, String threads) {
+    public String putElements(String elements) {
+        return this.elements = elements;
+    }
+
+    @Override
+    public List<BenchmarkItem> returnNewData() {
         dataList = new ArrayList<BenchmarkItem>();
-        dataList.add(new BenchmarkItem(R.string.name_oper_1, addingInTheBeginning(elements, threads)));
-        dataList.add(new BenchmarkItem(R.string.name_oper_2, addingInTheMiddle(elements, threads)));
-        dataList.add(new BenchmarkItem(R.string.name_oper_3, addingInTheEnd(elements, threads)));
-        dataList.add(new BenchmarkItem(R.string.name_oper_4, searchByValue(elements, threads)));
-        dataList.add(new BenchmarkItem(R.string.name_oper_5, removingInTheBeginning(elements, threads)));
-        dataList.add(new BenchmarkItem(R.string.name_oper_6, removingInTheMiddle(elements, threads)));
-        dataList.add(new BenchmarkItem(R.string.name_oper_7, removingInTheEnd(elements, threads)));
+        dataList.add(new BenchmarkItem(R.string.name_oper_1, addingInTheBeginning()));
+        dataList.add(new BenchmarkItem(R.string.name_oper_2, addingInTheMiddle()));
+        dataList.add(new BenchmarkItem(R.string.name_oper_3, addingInTheEnd()));
+        dataList.add(new BenchmarkItem(R.string.name_oper_4, searchByValue()));
+        dataList.add(new BenchmarkItem(R.string.name_oper_5, removingInTheBeginning()));
+        dataList.add(new BenchmarkItem(R.string.name_oper_6, removingInTheMiddle()));
+        dataList.add(new BenchmarkItem(R.string.name_oper_7, removingInTheEnd()));
         return dataList;
     }
 
@@ -41,18 +44,18 @@ public class CollectionImplementation implements BenchmarkModel {
         return dataList;
     }
 
-    private long addingInTheBeginning(String elements, String threads) {
-        dataListBenchmark = new ArrayList<Integer>();
+    private long addingInTheBeginning() {
+        dataListBenchmark = new ArrayList<>();
         dataListBenchmark = Collections.nCopies(Integer.parseInt(elements), 1);
         long startTime = System.nanoTime();
-        dataListBenchmark.add(0, 2);
+        dataListBenchmark.add(0, 2); //UnsupportedOperationException
         long endTime = System.nanoTime();
         durationAddBeginning = (endTime - startTime);
         return durationAddBeginning;
     }
 
-    private long addingInTheMiddle(String elements, String threads) {
-        dataListBenchmark = new ArrayList<Integer>();
+    private long addingInTheMiddle() {
+        dataListBenchmark = new ArrayList<>();
         dataListBenchmark = Collections.nCopies(Integer.parseInt(elements), 1);
         long startTime = System.nanoTime();
         dataListBenchmark.add((Integer.parseInt(elements)) / 2, 2);
@@ -61,8 +64,8 @@ public class CollectionImplementation implements BenchmarkModel {
         return durationAddMiddle;
     }
 
-    private long addingInTheEnd(String elements, String threads) {
-        dataListBenchmark = new ArrayList<Integer>();
+    private long addingInTheEnd() {
+        dataListBenchmark = new ArrayList<>();
         dataListBenchmark = Collections.nCopies(Integer.parseInt(elements), 1);
         long startTime = System.nanoTime();
         dataListBenchmark.add((Integer.parseInt(elements)), 3);
@@ -71,8 +74,8 @@ public class CollectionImplementation implements BenchmarkModel {
         return durationAddInTheEnd;
     }
 
-    private long searchByValue(String elements, String threads) {
-        dataListBenchmark = new ArrayList<Integer>();
+    private long searchByValue() {
+        dataListBenchmark = new ArrayList<>();
         dataListBenchmark = Collections.nCopies(Integer.parseInt(elements), 1);
         long startTime = System.nanoTime();
         dataListBenchmark.contains(374);
@@ -81,8 +84,8 @@ public class CollectionImplementation implements BenchmarkModel {
         return durationSearchByValue;
     }
 
-    private long removingInTheBeginning(String elements, String threads) {
-        dataListBenchmark = new ArrayList<Integer>();
+    private long removingInTheBeginning() {
+        dataListBenchmark = new ArrayList<>();
         dataListBenchmark = Collections.nCopies(Integer.parseInt(elements), 1);
         long startTime = System.nanoTime();
         dataListBenchmark.remove(0);
@@ -91,8 +94,8 @@ public class CollectionImplementation implements BenchmarkModel {
         return durationRemovingInTheBeginning;
     }
 
-    private long removingInTheMiddle(String elements, String threads) {
-        dataListBenchmark = new ArrayList<Integer>();
+    private long removingInTheMiddle() {
+        dataListBenchmark = new ArrayList<>();
         dataListBenchmark = Collections.nCopies(Integer.parseInt(elements), 1);
         long startTime = System.nanoTime();
         dataListBenchmark.remove((Integer.parseInt(elements)) / 2);
@@ -101,8 +104,8 @@ public class CollectionImplementation implements BenchmarkModel {
         return durationRemovingInTheMiddle;
     }
 
-    private long removingInTheEnd(String elements, String threads) {
-        dataListBenchmark = new ArrayList<Integer>();
+    private long removingInTheEnd() {
+        dataListBenchmark = new ArrayList<>();
         dataListBenchmark = Collections.nCopies(Integer.parseInt(elements), 1);
         long startTime = System.nanoTime();
         dataListBenchmark.remove(Integer.parseInt(elements) - 1);

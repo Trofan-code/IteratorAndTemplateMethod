@@ -1,27 +1,30 @@
 package com.example.taskfox3.dto;
 
 import com.example.taskfox3.R;
-import com.example.taskfox3.ui.fragment.CollectionViewModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
 public class MapsImplementation implements BenchmarkModel {
     private List<BenchmarkItem> dataList;
+    private String elements;
     private Map<Integer, Integer> operationHashMap;
     long durationAddingNew, durationSearchByKey, durationRemoving;
 
     @Override
-    public List<BenchmarkItem> returnNewData(String elements, String threads) {
+    public String putElements(String elements) {
+        return this.elements = elements;
+    }
+
+    @Override
+    public List<BenchmarkItem> returnNewData() {
         dataList = new ArrayList<BenchmarkItem>();
-        dataList.add(new BenchmarkItem(R.string.name_oper_1, addingNew(elements, threads)));
-        dataList.add(new BenchmarkItem(R.string.name_oper_2, searchByKey(elements, threads)));
-        dataList.add(new BenchmarkItem(R.string.name_oper_3, removing(elements, threads)));
+        dataList.add(new BenchmarkItem(R.string.name_oper_1, addingNew()));
+        dataList.add(new BenchmarkItem(R.string.name_oper_2, searchByKey()));
+        dataList.add(new BenchmarkItem(R.string.name_oper_3, removing()));
         return dataList;
 
     }
@@ -49,7 +52,7 @@ public class MapsImplementation implements BenchmarkModel {
     }
 
 
-    private long addingNew(String elements, String threads) {
+    private long addingNew() {
         operationHashMap = returnHashMap(elements);
         long startTime = System.nanoTime();
         operationHashMap.put(0, 0);
@@ -58,7 +61,7 @@ public class MapsImplementation implements BenchmarkModel {
         return durationAddingNew;
     }
 
-    private long searchByKey(String elements, String threads) {
+    private long searchByKey() {
         operationHashMap = returnHashMap(elements);
         long startTime = System.nanoTime();
         operationHashMap.put(0, 0);
@@ -67,7 +70,7 @@ public class MapsImplementation implements BenchmarkModel {
         return durationSearchByKey;
     }
 
-    private long removing(String elements, String threads) {
+    private long removing() {
         operationHashMap = returnHashMap(elements);
         long startTime = System.nanoTime();
         operationHashMap.put(0, 0);

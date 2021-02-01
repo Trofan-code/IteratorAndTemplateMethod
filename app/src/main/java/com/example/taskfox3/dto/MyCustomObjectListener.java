@@ -3,12 +3,14 @@ package com.example.taskfox3.dto;
 import android.content.Context;
 import android.view.MotionEvent;
 
+import java.util.List;
+
 public interface MyCustomObjectListener {
 
 
+    void returnOperationError();
 
-    public void canWeStartCalc(String operation, String threads,boolean b);
-
+    void returnThreadsError();
 
 
 }

@@ -20,8 +20,10 @@ import com.example.taskfox3.R;
 import com.example.taskfox3.dto.FactoryCollectionViewModel;
 import com.example.taskfox3.dto.MyCustomObjectListener;
 
+import java.util.List;
 
-public class BenchmarkFragment extends Fragment  implements CompoundButton.OnCheckedChangeListener, MyCustomObjectListener  {
+
+public class BenchmarkFragment extends Fragment implements CompoundButton.OnCheckedChangeListener, MyCustomObjectListener {
     private BenchmarksRecyclerViewAdapter adapter;
     private CollectionViewModel viewModel;
     private EditText editTextOperations;
@@ -73,6 +75,8 @@ public class BenchmarkFragment extends Fragment  implements CompoundButton.OnChe
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
         adapter = new BenchmarksRecyclerViewAdapter(viewModel.setupItems());
         recyclerView.setAdapter(adapter);
+
+
         swStart = view.findViewById(R.id.btn_start_stop);
         editTextOperations = view.findViewById(R.id.et_elements);
         editTextThreads = view.findViewById(R.id.et_threads);
@@ -82,15 +86,16 @@ public class BenchmarkFragment extends Fragment  implements CompoundButton.OnChe
     }
 
     @Override
-    public void onDetach() {
-
-        super.onDetach();
+    public void onDestroy() {
+        super.onDestroy();
         viewModel.removeMyCustomObjectListener(this);
     }
 
+
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        canWeStartCalc(getString(editTextOperations), getString(editTextThreads), b);
+        viewModel.onCalculationStateChangeClicked(getString(editTextOperations), getString(editTextThreads), b);
+        adapter.updateItems(viewModel.setNewItems2());
 
     }
 
@@ -98,16 +103,15 @@ public class BenchmarkFragment extends Fragment  implements CompoundButton.OnChe
         return editText.getText().toString();
     }
 
+    @Override
+    public void returnOperationError() {
+        editTextOperations.setError(getText(R.string.error_1));
+    }
 
     @Override
-    public void canWeStartCalc(String operation, String threads,boolean b) {
-        if(getString(editTextOperations).length() != 0&&getString(editTextThreads).length() != 0){
-            viewModel.onCalculationStateChangeClicked(getString(editTextOperations), getString(editTextThreads), b);
-        }else if (getString(editTextOperations).length() == 0) {
-            editTextOperations.setError(getText(R.string.error_1));
-        } else if (getString(editTextThreads).length() == 0) {
-            editTextThreads.setError(getText(R.string.error_2));
-        }
+    public void returnThreadsError() {
+        editTextThreads.setError(getText(R.string.error_2));
 
     }
+
 }

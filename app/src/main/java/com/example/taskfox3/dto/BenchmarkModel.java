@@ -10,8 +10,9 @@ import java.util.List;
 //Создай нужную модель в кастомной фабрике из п.2 и передай ее в конструктор вьюМодели
 
 public interface BenchmarkModel {
+    String putElements(String elements);
 
-    List<BenchmarkItem> returnNewData(String elements, String threads);
+    List<BenchmarkItem> returnNewData();
 
     List<BenchmarkItem> setupItems();
 
