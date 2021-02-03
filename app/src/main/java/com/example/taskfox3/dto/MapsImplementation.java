@@ -20,7 +20,7 @@ public class MapsImplementation implements BenchmarkModel {
     }
 
     @Override
-    public List<BenchmarkItem> returnNewData() {
+    public List<BenchmarkItem> itemsAfterCount() {
         dataList = new ArrayList<BenchmarkItem>();
         dataList.add(new BenchmarkItem(R.string.name_oper_1, addingNew()));
         dataList.add(new BenchmarkItem(R.string.name_oper_2, searchByKey()));

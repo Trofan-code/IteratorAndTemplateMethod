@@ -8,9 +8,9 @@ import java.util.List;
 public interface MyCustomObjectListener {
 
 
-    void returnOperationError();
+    void operationError();
 
-    void returnThreadsError();
+    void threadsError();
 
 
 }

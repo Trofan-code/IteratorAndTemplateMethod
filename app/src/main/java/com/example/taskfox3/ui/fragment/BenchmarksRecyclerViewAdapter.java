@@ -20,10 +20,6 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
     private final List<BenchmarkItem> myBenchmarkItemList;
 
 
-    public List<BenchmarkItem> getMyBenchmarkItemList() {
-        return myBenchmarkItemList;
-    }
-
     public BenchmarksRecyclerViewAdapter(List<BenchmarkItem> setupItems) {
         this.myBenchmarkItemList = setupItems;
     }

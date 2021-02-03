@@ -97,6 +97,7 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
         viewModel.onCalculationStateChangeClicked(getString(editTextOperations), getString(editTextThreads), b);
         adapter.updateItems(viewModel.setNewItems2());
 
+
     }
 
     private String getString(EditText editText) {
@@ -104,12 +105,12 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     }
 
     @Override
-    public void returnOperationError() {
+    public void operationError() {
         editTextOperations.setError(getText(R.string.error_1));
     }
 
     @Override
-    public void returnThreadsError() {
+    public void threadsError() {
         editTextThreads.setError(getText(R.string.error_2));
 
     }

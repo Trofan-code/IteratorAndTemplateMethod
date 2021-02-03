@@ -1,6 +1,7 @@
 package com.example.taskfox3.dto;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -12,9 +13,10 @@ import java.util.List;
 public interface BenchmarkModel {
     String putElements(String elements);
 
-    List<BenchmarkItem> returnNewData();
+    List<BenchmarkItem> itemsAfterCount();
 
     List<BenchmarkItem> setupItems();
+    long itemMeasureTime(ArrayList<Integer> dataListBenchmark, int amount);
 
 }
 

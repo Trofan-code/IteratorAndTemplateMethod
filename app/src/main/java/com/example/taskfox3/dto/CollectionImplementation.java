@@ -5,12 +5,12 @@ import com.example.taskfox3.R;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class CollectionImplementation implements BenchmarkModel {
     private static long TIME = -1;
     private String elements;
-    private List<BenchmarkItem> dataList;
-    private List<Integer> dataListBenchmark;
+    //Сделай метод: item measureTime(item, amount)
     long durationAddBeginning, durationAddMiddle, durationAddInTheEnd, durationSearchByValue;
     long durationRemovingInTheBeginning, durationRemovingInTheMiddle, durationRemovingInTheEnd;
 
@@ -19,16 +19,30 @@ public class CollectionImplementation implements BenchmarkModel {
         return this.elements = elements;
     }
 
+
+
     @Override
-    public List<BenchmarkItem> returnNewData() {
-        dataList = new ArrayList<BenchmarkItem>();
-        dataList.add(new BenchmarkItem(R.string.name_oper_1, addingInTheBeginning()));
-        dataList.add(new BenchmarkItem(R.string.name_oper_2, addingInTheMiddle()));
+    public List<BenchmarkItem> itemsAfterCount() {
+        List<BenchmarkItem> dataList = new ArrayList<BenchmarkItem>();
+        dataList.add(new BenchmarkItem(R.string.name_oper_1,timer(addingInTheBeginning(),TimeUnit.SECONDS)));
+        dataList.add(new BenchmarkItem(R.string.name_oper_2, timer(addingInTheMiddle(),TimeUnit.SECONDS)));
         dataList.add(new BenchmarkItem(R.string.name_oper_3, addingInTheEnd()));
         dataList.add(new BenchmarkItem(R.string.name_oper_4, searchByValue()));
         dataList.add(new BenchmarkItem(R.string.name_oper_5, removingInTheBeginning()));
         dataList.add(new BenchmarkItem(R.string.name_oper_6, removingInTheMiddle()));
         dataList.add(new BenchmarkItem(R.string.name_oper_7, removingInTheEnd()));
+        return dataList;
+    }
+    private ArrayList<Long> arrayList(){
+        ArrayList<Long> longTimeArrayList = new ArrayList<>();
+        longTimeArrayList.add(0,itemMeasureTime(new ArrayList<Integer>(Collections.nCopies(Integer.parseInt(elements), 1)),));
+        return longTimeArrayList;
+
+    }
+    public List<BenchmarkItem> exampl() {
+        List<BenchmarkItem> dataList = new ArrayList<BenchmarkItem>();
+        dataList.add(new BenchmarkItem(R.string.name_oper_1,timer(addingInTheBeginning(),TimeUnit.NANOSECONDS)));
+        dataList.add(new BenchmarkItem(R.string.name_oper_2, timer(addingInTheMiddle(),TimeUnit.NANOSECONDS)));
         return dataList;
     }
 
@@ -44,39 +58,47 @@ public class CollectionImplementation implements BenchmarkModel {
         return dataList;
     }
 
-    private long addingInTheBeginning() {
-        dataListBenchmark = new ArrayList<>();
-        dataListBenchmark = Collections.nCopies(Integer.parseInt(elements), 1);
+    @Override
+    public long itemMeasureTime(ArrayList<Integer> dataListBenchmark, int amount) {
         long startTime = System.nanoTime();
-        dataListBenchmark.add(0, 2); //UnsupportedOperationException
+        itemsAfterCount().get(amount);
         long endTime = System.nanoTime();
-        durationAddBeginning = (endTime - startTime);
-        return durationAddBeginning;
+        return (endTime - startTime);
     }
 
-    private long addingInTheMiddle() {
-        dataListBenchmark = new ArrayList<>();
-        dataListBenchmark = Collections.nCopies(Integer.parseInt(elements), 1);
-        long startTime = System.nanoTime();
+    private long timer(Runnable method, TimeUnit timeUnit) {
+        long time = System.nanoTime();
+        method.run();
+        time = System.nanoTime() - time;
+        return TimeUnit.NANOSECONDS.convert(time, timeUnit);
+    }
+
+
+
+    private void addingInTheBeginning() {
+        ArrayList<Integer> dataListBenchmark =  new ArrayList<Integer>(Collections.nCopies(Integer.parseInt(elements), 1));
+        dataListBenchmark.add(0, 2);
+
+    }
+
+    private Runnable addingInTheMiddle() {
+        ArrayList<Integer> dataListBenchmark =  new ArrayList<Integer>(Collections.nCopies(Integer.parseInt(elements), 1));
         dataListBenchmark.add((Integer.parseInt(elements)) / 2, 2);
-        long endTime = System.nanoTime();
-        durationAddMiddle = (endTime - startTime);
-        return durationAddMiddle;
+        return addingInTheMiddle();
+
     }
 
     private long addingInTheEnd() {
-        dataListBenchmark = new ArrayList<>();
-        dataListBenchmark = Collections.nCopies(Integer.parseInt(elements), 1);
+        ArrayList<Integer> dataListBenchmark =  new ArrayList<Integer>(Collections.nCopies(Integer.parseInt(elements), 1));
         long startTime = System.nanoTime();
         dataListBenchmark.add((Integer.parseInt(elements)), 3);
         long endTime = System.nanoTime();
         durationAddInTheEnd = (endTime - startTime);
-        return durationAddInTheEnd;
+        return (durationAddInTheEnd/ 1000) % 60;
     }
 
     private long searchByValue() {
-        dataListBenchmark = new ArrayList<>();
-        dataListBenchmark = Collections.nCopies(Integer.parseInt(elements), 1);
+        ArrayList<Integer> dataListBenchmark =  new ArrayList<Integer>(Collections.nCopies(Integer.parseInt(elements), 1));
         long startTime = System.nanoTime();
         dataListBenchmark.contains(374);
         long endTime = System.nanoTime();
@@ -85,8 +107,7 @@ public class CollectionImplementation implements BenchmarkModel {
     }
 
     private long removingInTheBeginning() {
-        dataListBenchmark = new ArrayList<>();
-        dataListBenchmark = Collections.nCopies(Integer.parseInt(elements), 1);
+        ArrayList<Integer> dataListBenchmark =  new ArrayList<Integer>(Collections.nCopies(Integer.parseInt(elements), 1));
         long startTime = System.nanoTime();
         dataListBenchmark.remove(0);
         long endTime = System.nanoTime();
@@ -95,8 +116,7 @@ public class CollectionImplementation implements BenchmarkModel {
     }
 
     private long removingInTheMiddle() {
-        dataListBenchmark = new ArrayList<>();
-        dataListBenchmark = Collections.nCopies(Integer.parseInt(elements), 1);
+        ArrayList<Integer> dataListBenchmark =  new ArrayList<Integer>(Collections.nCopies(Integer.parseInt(elements), 1));
         long startTime = System.nanoTime();
         dataListBenchmark.remove((Integer.parseInt(elements)) / 2);
         long endTime = System.nanoTime();
@@ -105,8 +125,7 @@ public class CollectionImplementation implements BenchmarkModel {
     }
 
     private long removingInTheEnd() {
-        dataListBenchmark = new ArrayList<>();
-        dataListBenchmark = Collections.nCopies(Integer.parseInt(elements), 1);
+        ArrayList<Integer> dataListBenchmark =  new ArrayList<Integer>(Collections.nCopies(Integer.parseInt(elements), 1));
         long startTime = System.nanoTime();
         dataListBenchmark.remove(Integer.parseInt(elements) - 1);
         long endTime = System.nanoTime();

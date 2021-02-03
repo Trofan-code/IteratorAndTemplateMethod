@@ -38,22 +38,27 @@ public class CollectionViewModel extends ViewModel {
 
     public void onCalculationStateChangeClicked(String elements, String threads, boolean isStart) {
         benchmarkModel.putElements(elements);
+        List<BenchmarkItem> newCountItems = new ArrayList<>();
         List<BenchmarkItem> copyItems = setupItems();
+        int[] arr = {0};
         if (elements.length() != 0 && threads.length() != 0 && isStart) {
-            ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
-            executor.submit(() -> {
-                for (int i = 0; i < copyItems.size(); i++) {
+            for (int i = 0; i < copyItems.size(); i++) {
+                ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
+                executor.submit(() -> {
+
                     if (copyItems != null) {
                         // benchmarkModel.returnNewData().get(i);
-                        newCountItems.add(i, benchmarkModel.returnNewData().get(i));
-                        copyItems.remove(i);
+                       // newCountItems.add(arr[0],benchmarkModel.itemMeasureTime(benchmarkModel.itemsAfterCount().get(0),0));
+                        newCountItems.add(arr[0]++, benchmarkModel.itemsAfterCount().get(arr[0]++));
+                        copyItems.remove(arr[0]++);
                     }
-                }
-            });
+
+                });
+            }
         } else if (elements.length() == 0 && isStart) {
-            myCustomObjectListener.returnOperationError();
+            myCustomObjectListener.operationError();
         } else if (threads.length() == 0 && isStart) {
-            myCustomObjectListener.returnThreadsError();
+            myCustomObjectListener.threadsError();
         }
         // start or stop calculation?
         // validate in case of start, stop - other way
@@ -61,7 +66,7 @@ public class CollectionViewModel extends ViewModel {
     }
 
     public List<BenchmarkItem> setNewItems2() {
-        return benchmarkModel.returnNewData();
+        return benchmarkModel.itemsAfterCount();
         // set list of items into ui
     }
 
