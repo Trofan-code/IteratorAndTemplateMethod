@@ -16,26 +16,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.taskfox3.R;
-
-import com.example.taskfox3.dto.FactoryCollectionViewModel;
-import com.example.taskfox3.dto.MyCustomObjectListener;
+import com.example.taskfox3.dto.BenchmarkItem;
+import com.example.taskfox3.model.BenchmarkView;
+import com.example.taskfox3.model.FactoryCollectionViewModel;
 
 import java.util.List;
 
 
-public class BenchmarkFragment extends Fragment implements CompoundButton.OnCheckedChangeListener, MyCustomObjectListener {
-    private BenchmarksRecyclerViewAdapter adapter;
+public class BenchmarkFragment extends Fragment implements CompoundButton.OnCheckedChangeListener, BenchmarkView {
+
+    public static final String TYPE = "type";
+
+    private final BenchmarksRecyclerViewAdapter adapter = new BenchmarksRecyclerViewAdapter();
     private CollectionViewModel viewModel;
     private EditText editTextOperations;
     private EditText editTextThreads;
     private Switch swStart;
-    public static final String TYPE = "type";
-
 
     public static BenchmarkFragment newInstance(int type) {
-        Bundle args = new Bundle();
+        final Bundle args = new Bundle();
         // use arguments to store type
-        BenchmarkFragment benchmarkFragment = new BenchmarkFragment();
+        final BenchmarkFragment benchmarkFragment = new BenchmarkFragment();
         args.putInt(TYPE, type);
         benchmarkFragment.setArguments(args);
         return benchmarkFragment;
@@ -44,28 +45,16 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // access to arguments and receive a type
-        // доступ к аргументам и получение типа
-        Bundle args = new Bundle();
-        int type = args.getInt(TYPE, 1);
+
+        final Bundle args = new Bundle();
+        final int type = args.getInt(TYPE, 1);
         viewModel = new ViewModelProvider(this, new FactoryCollectionViewModel(type)).get(CollectionViewModel.class);
-        viewModel.setMyCustomObjectListener(this);
-
-
-        // receive data from model via listener
-        // получаем данные из модели через слушателя
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
+        viewModel.setBenchmarkView(this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_benchmark, container, false);
-
     }
 
     @Override
@@ -73,7 +62,6 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
         super.onViewCreated(view, savedInstanceState);
         final RecyclerView recyclerView = view.findViewById(R.id.recycler_view_for_tab);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
-        adapter = new BenchmarksRecyclerViewAdapter(viewModel.setupItems());
         recyclerView.setAdapter(adapter);
 
 
@@ -81,8 +69,15 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
         editTextOperations = view.findViewById(R.id.et_elements);
         editTextThreads = view.findViewById(R.id.et_threads);
         swStart = view.findViewById(R.id.btn_start_stop);
-        swStart.setOnCheckedChangeListener(this::onCheckedChanged);
-        // request amount of columns from viewModel
+        swStart.setOnCheckedChangeListener(this);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (adapter.isEmpty()) {
+            viewModel.getNewItemsList();
+        }
     }
 
     @Override
@@ -95,9 +90,6 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         viewModel.onCalculationStateChangeClicked(getString(editTextOperations), getString(editTextThreads), b);
-        adapter.updateItems(viewModel.setNewItems2());
-
-
     }
 
     private String getString(EditText editText) {
@@ -112,7 +104,10 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     @Override
     public void threadsError() {
         editTextThreads.setError(getText(R.string.error_2));
-
     }
 
+    @Override
+    public void setTasks(List<BenchmarkItem> newTasks) {
+        adapter.setItems(newTasks);
+    }
 }

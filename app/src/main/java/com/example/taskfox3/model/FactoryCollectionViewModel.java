@@ -1,9 +1,10 @@
-package com.example.taskfox3.dto;
+package com.example.taskfox3.model;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.taskfox3.dto.Types;
 import com.example.taskfox3.ui.fragment.CollectionViewModel;
 
 

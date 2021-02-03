@@ -12,47 +12,46 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.taskfox3.R;
 import com.example.taskfox3.dto.BenchmarkItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<BenchmarksRecyclerViewAdapter.BenchmarkViewHolder> {
 
+    private final List<BenchmarkItem> items = new ArrayList<>();
 
-    private final List<BenchmarkItem> myBenchmarkItemList;
-
-
-    public BenchmarksRecyclerViewAdapter(List<BenchmarkItem> setupItems) {
-        this.myBenchmarkItemList = setupItems;
+    public BenchmarksRecyclerViewAdapter() {
     }
-
 
     @NonNull
     @Override
     public BenchmarkViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout_for_tab, parent, false);
         return new BenchmarkViewHolder(view);
-        //ponieważ View komponenty zostaną ponownie wykorzystane w tym samym elemencie wizualnym
-        //w trakcie życia listy różne dane zostaną ustawione
     }
-
 
     @Override
     public void onBindViewHolder(@NonNull BenchmarkViewHolder holder, int position) {
-        holder.setItems(myBenchmarkItemList.get(position));
+        holder.bindItem(items.get(position));
     }
 
     @Override
     public int getItemCount() { //odpowiada za illość elementów
-        return myBenchmarkItemList.size();
+        return items.size();
     }
 
 
-    public void updateItems(List<BenchmarkItem> items) {
-        myBenchmarkItemList.clear();
-        myBenchmarkItemList.addAll(items);
+    public void setItems(List<BenchmarkItem> items) {
+        this.items.clear();
+        this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public class BenchmarkViewHolder extends RecyclerView.ViewHolder {
+    public boolean isEmpty() {
+        return items.isEmpty();
+    }
+
+
+    public static class BenchmarkViewHolder extends RecyclerView.ViewHolder {
         private final TextView operationName;
         private final TextView operationTime;
         private final ProgressBar progressBar;
@@ -64,9 +63,9 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
             progressBar = itemView.findViewById(R.id.progressBar);
         }
 
-        public void setItems(BenchmarkItem benchmarkItem) {
-            operationName.setText(benchmarkItem.getNameOfOperation());
-            operationTime.setText(String.valueOf(benchmarkItem.getTimeOfOperation()));
+        public void bindItem(BenchmarkItem benchmarkItem) {
+            operationName.setText(benchmarkItem.getTaskName());
+            operationTime.setText(String.valueOf(benchmarkItem.getMeasuredTime()));
             //operationName.setText(benchmarkItem.getNameOfOperation());
 
         }

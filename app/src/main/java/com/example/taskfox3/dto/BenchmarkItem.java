@@ -1,52 +1,23 @@
 package com.example.taskfox3.dto;
 
-import android.widget.ProgressBar;
-
-import com.example.taskfox3.R;
-
-import java.util.ArrayList;
-import java.util.List;
-
-
 public class BenchmarkItem {
+    public static final int DEFAULT_TIME = -1;
 
+    private final int taskName;
+    private long measuredTime;
 
-    private int nameOfOperation;
-    private long timeOfOperation;
-    private ProgressBar progressBar;
-    List<BenchmarkItem> dataList = new ArrayList<>();
-
-    //all fields can be private
-    // and final (timeOfOperation - non final)
-
-    public BenchmarkItem(int nameOfOperation) {
-        this.nameOfOperation = nameOfOperation;
-    }
-
-    public BenchmarkItem(int nameOfOperation, long timeOfOperation) {
-        this.nameOfOperation = nameOfOperation;
-        this.timeOfOperation = timeOfOperation;
+    public BenchmarkItem(int taskName) {
+        this.taskName = taskName;
+        this.measuredTime = DEFAULT_TIME;
         //this.progressBar = progressBar;
     }
 
-
-    public BenchmarkItem(List<BenchmarkItem> dataList) {
-        this.dataList = dataList;
+    public int getTaskName() {
+        return taskName;
     }
 
-    public BenchmarkItem() {
-    }
-
-    public int getNameOfOperation() {
-        return nameOfOperation;
-    }
-
-    public long getTimeOfOperation() {
-        return timeOfOperation;
-    }
-
-    public ProgressBar getProgressBar() {
-        return progressBar;
+    public long getMeasuredTime() {
+        return measuredTime;
     }
 
 }
