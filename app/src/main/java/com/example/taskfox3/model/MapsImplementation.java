@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MapsImplementation implements BenchmarkModel {
+public class  MapsImplementation implements BenchmarkModel {
 
     @Override
     public List<BenchmarkItem> createNewTasks() {
@@ -42,6 +42,13 @@ public class MapsImplementation implements BenchmarkModel {
         return myHashMap;
     }
 
+    /*private long addingInTheBeginning(ArrayList<Integer> dataListBenchmark) {
+        long time = System.nanoTime();
+        dataListBenchmark.add(0, 2);
+        time = System.nanoTime() - time;
+        return time;
+    }
+
 
     private long addingNew() {
         operationHashMap = returnHashMap(elements);
@@ -68,6 +75,6 @@ public class MapsImplementation implements BenchmarkModel {
         long endTime = System.nanoTime();
         durationRemoving = (endTime - startTime);
         return durationRemoving;
-    }
+    }*/
 
 }

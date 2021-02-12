@@ -50,20 +50,17 @@ public class CollectionViewModel extends ViewModel {
             if (elements.length() != 0 && threads.length() != 0) {
                 final List<BenchmarkItem> newCountItems = benchmarkModel.createNewTasks();
                 final List<BenchmarkItem> copyItems = new ArrayList<>(newCountItems);
-
+                int[] arr = {0};
+                ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
                 for (int i = 0; i < copyItems.size(); i++) {
-                    ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
                     executor.submit(() -> {
-
                         if (copyItems != null) {
-                            // benchmarkModel.returnNewData().get(i);
-                            // newCountItems.add(arr[0],benchmarkModel.itemMeasureTime(benchmarkModel.itemsAfterCount().get(0),0));
-                            newCountItems.add(arr[0]++, benchmarkModel.itemsAfterCount().get(arr[0]++));
-                            copyItems.remove(arr[0]++);
+                            benchmarkModel.measureTime(copyItems.get(0),Integer.parseInt(elements));
+                            copyItems.remove(0);
                         }
-
                     });
-                }
+                } //konec fora
+                benchmarkView.setTasks(newCountItems); // kak wstawit time
             }
         } else {
 
