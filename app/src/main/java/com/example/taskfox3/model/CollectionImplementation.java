@@ -24,6 +24,30 @@ public class CollectionImplementation implements BenchmarkModel {
         items.add(new BenchmarkItem(R.string.name_oper_7));
         return items;
     }
+    @Override
+    public int getPosition(BenchmarkItem task) {
+        int position=0;
+        switch (task.getTaskName()) {
+            case R.string.name_oper_1:
+                return position=0;
+            case R.string.name_oper_2:
+                return position=1;
+            case R.string.name_oper_3:
+                return position=2;
+            case R.string.name_oper_4:
+                return position=3;
+            case R.string.name_oper_5:
+                return position=4;
+            case R.string.name_oper_6:
+                return position=5;
+            case R.string.name_oper_7:
+                return position=6;
+            default:
+                return position;
+        }
+
+
+    }
 
     @Override
     public long measureTime(BenchmarkItem task, int amount) {
@@ -32,21 +56,29 @@ public class CollectionImplementation implements BenchmarkModel {
         switch (task.getTaskName()) {
             case R.string.name_oper_1:
                 task.setMeasuredTime(addingInTheBeginning(dataListBenchmark));
+                break;
             case R.string.name_oper_2:
                 task.setMeasuredTime(addingInTheMiddle(dataListBenchmark));
+                break;
             case R.string.name_oper_3:
                 task.setMeasuredTime(addingInTheEnd(dataListBenchmark));
+                break;
             case R.string.name_oper_4:
                 task.setMeasuredTime(searchByValue(dataListBenchmark));
+                break;
             case R.string.name_oper_5:
                 task.setMeasuredTime(removingInTheBeginning(dataListBenchmark));
+                break;
             case R.string.name_oper_6:
                 task.setMeasuredTime(removingInTheMiddle(dataListBenchmark));
+                break;
             case R.string.name_oper_7:
                 task.setMeasuredTime(removingInTheEnd(dataListBenchmark));
+                break;
             default:
                 throw new RuntimeException("Exeption in calculation time");
         }
+        return task.getMeasuredTime();
         // create collection
         // fill it
         // measure time

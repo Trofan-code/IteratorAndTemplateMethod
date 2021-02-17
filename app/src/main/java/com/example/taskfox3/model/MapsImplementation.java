@@ -12,6 +12,11 @@ import java.util.Map;
 public class  MapsImplementation implements BenchmarkModel {
 
     @Override
+    public int getPosition(BenchmarkItem task) {
+        return 0;
+    }
+
+    @Override
     public List<BenchmarkItem> createNewTasks() {
         final List<BenchmarkItem> dataList = new ArrayList<BenchmarkItem>();
         dataList.add(new BenchmarkItem(R.string.name_oper_map_1));

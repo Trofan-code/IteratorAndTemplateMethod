@@ -55,17 +55,18 @@ public class CollectionViewModel extends ViewModel {
                 final List<BenchmarkItem> newCountItems = benchmarkModel.createNewTasks();
                 final List<BenchmarkItem> copyItems = new ArrayList<>(newCountItems);
                 ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
-                for (BenchmarkItem items : newCountItems) {
+                for (BenchmarkItem item : newCountItems) {
+                    int i=0;
                     executor.submit(() -> {
-                        benchmarkModel.measureTime(items, Integer.parseInt(elements));// imia kotoroe 0 i wremia toze
+                        Log.d(TAG, "JA w potokie");
+                        benchmarkModel.measureTime(item, Integer.parseInt(elements));// imia kotoroe 0 i wremia toze
                         if (copyItems != null) {
-                            benchmarkView.setTasks(newCountItems);
-                            copyItems.remove(items);
-                            Log.d(TAG, "JA w potokie");
+                            benchmarkView.setNewItem(item,benchmarkModel.getPosition(item));
+                            copyItems.remove(item);
                         }
-                        Log.d(TAG, "Posle potokow");
                         System.out.println("ddddddddddddddddddddddddddddddddddddddd");
                     });//koniec potoka
+                    Log.d(TAG, "Posle potokow");
 
 
                 }

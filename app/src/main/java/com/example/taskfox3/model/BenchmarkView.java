@@ -12,5 +12,5 @@ public interface BenchmarkView {
 
     void setTasks(List<BenchmarkItem> newTasks);
 
-    void setNewItem(BenchmarkItem newItem);
+    void setNewItem(BenchmarkItem newItem,int position);
 }

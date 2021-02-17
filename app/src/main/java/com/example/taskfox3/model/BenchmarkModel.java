@@ -9,7 +9,8 @@ import java.util.List;
 // Сделай 2 реализации: для коллекций и для мап.
 //Создай нужную модель в кастомной фабрике из п.2 и передай ее в конструктор вьюМодели
 public interface BenchmarkModel {
-    ;
+
+    int getPosition(BenchmarkItem task);
 
     List<BenchmarkItem> createNewTasks();
 

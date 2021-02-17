@@ -121,7 +121,7 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     }
 
     @Override
-    public void setNewItem(BenchmarkItem newItem) {
-        adapter.setNewItem(newItem);
+    public void setNewItem(BenchmarkItem newItem,int position) {
+        adapter.setNewItem(newItem, position);
     }
 }
