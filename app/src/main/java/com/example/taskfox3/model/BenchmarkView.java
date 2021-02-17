@@ -11,4 +11,6 @@ public interface BenchmarkView {
     void threadsError();
 
     void setTasks(List<BenchmarkItem> newTasks);
+
+    void setNewItem(BenchmarkItem newItem);
 }

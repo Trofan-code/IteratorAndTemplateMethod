@@ -9,7 +9,6 @@ public class BenchmarkItem {
     public BenchmarkItem(int taskName) {
         this.taskName = taskName;
         this.measuredTime = DEFAULT_TIME;
-        //this.progressBar = progressBar;
     }
 
     public int getTaskName() {
@@ -18,6 +17,9 @@ public class BenchmarkItem {
 
     public long getMeasuredTime() {
         return measuredTime;
+    }
+    public void setMeasuredTime(long measuredTime) {
+        this.measuredTime = measuredTime;
     }
 
 }
