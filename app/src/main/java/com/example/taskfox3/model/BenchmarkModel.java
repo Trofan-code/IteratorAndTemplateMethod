@@ -10,7 +10,7 @@ import java.util.List;
 //Создай нужную модель в кастомной фабрике из п.2 и передай ее в конструктор вьюМодели
 public interface BenchmarkModel {
 
-    int getPosition(BenchmarkItem task);
+
 
     List<BenchmarkItem> createNewTasks();
 

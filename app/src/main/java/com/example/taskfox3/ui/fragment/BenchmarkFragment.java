@@ -1,6 +1,7 @@
 package com.example.taskfox3.ui.fragment;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.taskfox3.R;
 import com.example.taskfox3.dto.BenchmarkItem;
-import com.example.taskfox3.model.BenchmarkView;
+import com.example.taskfox3.dto.Types;
 import com.example.taskfox3.model.FactoryCollectionViewModel;
 
 import java.util.List;
@@ -34,10 +35,12 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     private Switch swStart;
     private static final String TAG = "MyApp";
 
-    public static BenchmarkFragment newInstance(int type) {
-        final Bundle args = new Bundle();
-        // use arguments to store type
+
+    public static BenchmarkFragment newInstance(int type) { //prichodit 0-coll, 1-mapy
         final BenchmarkFragment benchmarkFragment = new BenchmarkFragment();
+        // use arguments to store type
+        final Bundle args = new Bundle();
+
         args.putInt(TYPE, type);
         benchmarkFragment.setArguments(args);
         return benchmarkFragment;
@@ -46,8 +49,10 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final Bundle args = new Bundle();
-        final int type = args.getInt(TYPE, 1);
+        final BenchmarkFragment benchmarkFragment = new BenchmarkFragment();
+        benchmarkFragment.getArguments();
+        final Bundle args = this.getArguments();
+        final int type = args.getInt(TYPE, Types.COLLECTIONS);
         viewModel = new ViewModelProvider(this, new FactoryCollectionViewModel(type)).get(CollectionViewModel.class);
         viewModel.setBenchmarkView(this);
     }
@@ -77,6 +82,7 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
         if (adapter.isEmpty()) {
             viewModel.getNewItemsList();
         }
+
 
     }
 
@@ -121,7 +127,7 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     }
 
     @Override
-    public void setNewItem(BenchmarkItem newItem,int position) {
+    public void updateItem(BenchmarkItem newItem, int position) {
         adapter.setNewItem(newItem, position);
     }
 }

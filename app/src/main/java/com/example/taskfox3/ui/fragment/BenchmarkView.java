@@ -1,4 +1,4 @@
-package com.example.taskfox3.model;
+package com.example.taskfox3.ui.fragment;
 
 import com.example.taskfox3.dto.BenchmarkItem;
 
@@ -12,5 +12,5 @@ public interface BenchmarkView {
 
     void setTasks(List<BenchmarkItem> newTasks);
 
-    void setNewItem(BenchmarkItem newItem,int position);
+    void updateItem(BenchmarkItem newItem, int position);
 }

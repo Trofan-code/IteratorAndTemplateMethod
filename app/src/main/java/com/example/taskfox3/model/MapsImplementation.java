@@ -11,10 +11,7 @@ import java.util.Map;
 
 public class  MapsImplementation implements BenchmarkModel {
 
-    @Override
-    public int getPosition(BenchmarkItem task) {
-        return 0;
-    }
+
 
     @Override
     public List<BenchmarkItem> createNewTasks() {
@@ -27,59 +24,58 @@ public class  MapsImplementation implements BenchmarkModel {
 
     @Override
     public long measureTime(BenchmarkItem task, int amount) {
-        // create collection
-        // fill it
-        // measure time
-        return 0;
+
+        Map<Integer,Integer> map = returnHashMap(amount);
+
+        switch (task.getTaskName()) {
+            case R.string.name_oper_map_1:
+                addingNew(map);
+                break;
+            case R.string.name_oper_map_2:
+               searchByKey(map);
+                break;
+            case R.string.name_oper_map_3:
+                removing(map);
+                break;
+            default:
+                throw new RuntimeException("Exeption in calculation time");
+        }
+        return task.getMeasuredTime();
     }
 
-    public Map<Integer, Integer> returnHashMap(String elements) {
+    public Map<Integer, Integer> returnHashMap(int elements) {
         Map<Integer, Integer> myHashMap = new HashMap<>();
         List<Integer> keyAndValue = new ArrayList<Integer>();
-        for (int i = 0; i < Integer.parseInt(elements) - 1; i++) {
+        for (int i = 0; i < elements - 1; i++) {
             keyAndValue.add(i, i + 1);
         }
         List<Integer> value = new ArrayList<Integer>();
-        value = Collections.nCopies(Integer.parseInt(elements), 5);
+        value = Collections.nCopies(elements, 5);
         for (int i = 0; i < keyAndValue.size(); i++) {
             myHashMap.put(keyAndValue.get(i), keyAndValue.get(i));
         }
         return myHashMap;
     }
 
-    /*private long addingInTheBeginning(ArrayList<Integer> dataListBenchmark) {
+    private long addingNew(Map<Integer,Integer> map) {
         long time = System.nanoTime();
-        dataListBenchmark.add(0, 2);
+        map.put(0, 0);
         time = System.nanoTime() - time;
         return time;
     }
 
-
-    private long addingNew() {
-        operationHashMap = returnHashMap(elements);
-        long startTime = System.nanoTime();
-        operationHashMap.put(0, 0);
-        long endTime = System.nanoTime();
-        durationAddingNew = (endTime - startTime);
-        return durationAddingNew;
+    private long searchByKey(Map<Integer,Integer> map) {
+        long time = System.nanoTime();
+        map.put(0, 0);
+        time = System.nanoTime() - time;
+        return time;
     }
 
-    private long searchByKey() {
-        operationHashMap = returnHashMap(elements);
-        long startTime = System.nanoTime();
-        operationHashMap.put(0, 0);
-        long endTime = System.nanoTime();
-        durationSearchByKey = (endTime - startTime);
-        return durationSearchByKey;
+    private long removing(Map<Integer,Integer> map) {
+        long time = System.nanoTime();
+        map.put(0, 0);
+        time = System.nanoTime() - time;
+        return time;
     }
-
-    private long removing() {
-        operationHashMap = returnHashMap(elements);
-        long startTime = System.nanoTime();
-        operationHashMap.put(0, 0);
-        long endTime = System.nanoTime();
-        durationRemoving = (endTime - startTime);
-        return durationRemoving;
-    }*/
 
 }

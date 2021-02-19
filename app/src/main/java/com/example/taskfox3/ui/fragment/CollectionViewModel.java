@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.taskfox3.dto.BenchmarkItem;
 import com.example.taskfox3.model.BenchmarkModel;
-import com.example.taskfox3.model.BenchmarkView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,19 +55,21 @@ public class CollectionViewModel extends ViewModel {
                 final List<BenchmarkItem> copyItems = new ArrayList<>(newCountItems);
                 ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
                 for (BenchmarkItem item : newCountItems) {
-                    int i=0;
-                    executor.submit(() -> {
-                        Log.d(TAG, "JA w potokie");
-                        benchmarkModel.measureTime(item, Integer.parseInt(elements));// imia kotoroe 0 i wremia toze
-                        if (copyItems != null) {
-                            benchmarkView.setNewItem(item,benchmarkModel.getPosition(item));
-                            copyItems.remove(item);
-                        }
-                        System.out.println("ddddddddddddddddddddddddddddddddddddddd");
-                    });//koniec potoka
+                    try {
+                        executor.submit(() -> {
+                            Log.d(TAG, "JA w potokie");
+                            item.setMeasuredTime(benchmarkModel.measureTime(item, Integer.parseInt(elements)));
+                            Log.d(TAG, "setMeasuredTime");
+                            if (!copyItems.isEmpty()) {
+                                Log.d(TAG, "Vnutri if isEmpty copyItems");
+                                benchmarkView.updateItem(item, newCountItems.indexOf(item));
+                                copyItems.remove(item);
+                            }
+                        });//koniec potoka
+                    } catch (Throwable exception) {
+                        throw new RuntimeException("Lambda exeption");
+                    }
                     Log.d(TAG, "Posle potokow");
-
-
                 }
 
             }

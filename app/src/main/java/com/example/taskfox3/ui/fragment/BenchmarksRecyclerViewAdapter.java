@@ -41,14 +41,15 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
 
 
     public void setItems(List<BenchmarkItem> items) {
-        this.items.clear();
+       // this.items.clear();
         this.items.addAll(items);
         notifyDataSetChanged();
     }
     public void setNewItem(BenchmarkItem item,int position) { //в адаптер (в адаптере нужно заменить существующий айтем на новый)
 
         items.set(position,item);
-        notifyDataSetChanged();
+        notifyItemChanged(position);
+
     }
 
     public boolean isEmpty() {
