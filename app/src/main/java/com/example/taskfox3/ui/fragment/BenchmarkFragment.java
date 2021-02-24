@@ -1,6 +1,8 @@
 package com.example.taskfox3.ui.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,7 +42,6 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
         final BenchmarkFragment benchmarkFragment = new BenchmarkFragment();
         // use arguments to store type
         final Bundle args = new Bundle();
-
         args.putInt(TYPE, type);
         benchmarkFragment.setArguments(args);
         return benchmarkFragment;
@@ -49,12 +50,13 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final BenchmarkFragment benchmarkFragment = new BenchmarkFragment();
-        benchmarkFragment.getArguments();
+
         final Bundle args = this.getArguments();
         final int type = args.getInt(TYPE, Types.COLLECTIONS);
         viewModel = new ViewModelProvider(this, new FactoryCollectionViewModel(type)).get(CollectionViewModel.class);
         viewModel.setBenchmarkView(this);
+
+
     }
 
     @Override
@@ -102,6 +104,8 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+
         Log.d(TAG, "onCheckedChanged");
         viewModel.onCalculationStateChangeClicked(getString(editTextOperations), getString(editTextThreads), b);
 
@@ -128,6 +132,7 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
 
     @Override
     public void updateItem(BenchmarkItem newItem, int position) {
+
         adapter.setNewItem(newItem, position);
     }
 }

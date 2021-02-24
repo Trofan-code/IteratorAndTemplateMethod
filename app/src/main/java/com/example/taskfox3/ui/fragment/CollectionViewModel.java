@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel;
 import com.example.taskfox3.dto.BenchmarkItem;
 import com.example.taskfox3.model.BenchmarkModel;
 
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -55,26 +57,45 @@ public class CollectionViewModel extends ViewModel {
                 final List<BenchmarkItem> copyItems = new ArrayList<>(newCountItems);
                 ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
                 for (BenchmarkItem item : newCountItems) {
-                    try {
-                        executor.submit(() -> {
-                            Log.d(TAG, "JA w potokie");
-                            item.setMeasuredTime(benchmarkModel.measureTime(item, Integer.parseInt(elements)));
-                            Log.d(TAG, "setMeasuredTime");
-                            if (!copyItems.isEmpty()) {
-                                Log.d(TAG, "Vnutri if isEmpty copyItems");
-                                benchmarkView.updateItem(item, newCountItems.indexOf(item));
-                                copyItems.remove(item);
-                            }
-                        });//koniec potoka
-                    } catch (Throwable exception) {
-                        throw new RuntimeException("Lambda exeption");
-                    }
-                    Log.d(TAG, "Posle potokow");
-                }
+                    new Thread(new Runnable() {
+                        public void run() {
 
+
+                            executor.submit(() -> {
+                                try {
+                                    Log.d(TAG, "JA w potokie");
+                                    item.setMeasuredTime(benchmarkModel.measureTime(item, Integer.parseInt(elements)));
+                                    Log.d(TAG, "setMeasuredTime");
+                                    if (!copyItems.isEmpty()) {
+                                        Log.d(TAG, "Vnutri if isEmpty copyItems");
+                                        benchmarkView.updateItem(item, newCountItems.indexOf(item));
+                                        copyItems.remove(item);
+                                        benchmarkView.updateItem(item, newCountItems.indexOf(item));
+                                        copyItems.remove(item);
+                                        if (copyItems.isEmpty()) {
+                                            Log.d(TAG, "Vnutri if isEmpty copyItems");
+                                            // show some message that calculation is done
+                                        }
+                                    }
+
+                                } catch (Exception e) {
+                                    System.out.println("Ошибка - Exception Exception Exception Exception Exception ");
+                                    //  System.err.println( e.getStackTrace());
+                                    e.printStackTrace();
+
+                                    //String stackTrace = Log.getStackTraceString(e);
+
+                                }
+
+
+                                Log.d(TAG, "Posle potokow");
+                            });
+
+                        }
+                    }).start();
+                }  // koniec ifa ot isStart
             }
-        } else {
-        } // koniec ifa ot isStart
+        }
     }
 }
 

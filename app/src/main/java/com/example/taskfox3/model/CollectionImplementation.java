@@ -32,30 +32,29 @@ public class CollectionImplementation implements BenchmarkModel {
 
         switch (task.getTaskName()) {
             case R.string.name_oper_1:
-                addingInTheBeginning(dataListBenchmark);
-                break;
+                return addingInTheBeginning(dataListBenchmark);
+
             case R.string.name_oper_2:
-                addingInTheMiddle(dataListBenchmark);
-                break;
+                return addingInTheMiddle(dataListBenchmark);
+
             case R.string.name_oper_3:
-                addingInTheEnd(dataListBenchmark);
-                break;
+                return  addingInTheEnd(dataListBenchmark);
+
             case R.string.name_oper_4:
-                searchByValue(dataListBenchmark);
-                break;
+                return searchByValue(dataListBenchmark);
+
             case R.string.name_oper_5:
-                removingInTheBeginning(dataListBenchmark);
-                break;
+                return removingInTheBeginning(dataListBenchmark);
+
             case R.string.name_oper_6:
-                removingInTheMiddle(dataListBenchmark);
-                break;
+                return removingInTheMiddle(dataListBenchmark);
+
             case R.string.name_oper_7:
-                removingInTheEnd(dataListBenchmark);
-                break;
+                return removingInTheEnd(dataListBenchmark);
+
             default:
                 throw new RuntimeException("Exeption in calculation time");
         }
-        return task.getMeasuredTime();
         // create collection
         // fill it
         // measure time

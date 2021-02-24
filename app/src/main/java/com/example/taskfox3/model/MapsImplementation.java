@@ -29,18 +29,18 @@ public class  MapsImplementation implements BenchmarkModel {
 
         switch (task.getTaskName()) {
             case R.string.name_oper_map_1:
-                addingNew(map);
-                break;
+               return   addingNew(map);
+
             case R.string.name_oper_map_2:
-               searchByKey(map);
-                break;
+              return searchByKey(map);
+
             case R.string.name_oper_map_3:
-                removing(map);
-                break;
+               return removing(map);
+
             default:
                 throw new RuntimeException("Exeption in calculation time");
         }
-        return task.getMeasuredTime();
+       
     }
 
     public Map<Integer, Integer> returnHashMap(int elements) {
