@@ -3,6 +3,7 @@ package com.example.taskfox3.ui.fragment;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,6 +37,7 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     private EditText editTextThreads;
     private Switch swStart;
     private static final String TAG = "MyApp";
+    final Handler handler =  new Handler(Looper.getMainLooper());
 
 
     public static BenchmarkFragment newInstance(int type) { //prichodit 0-coll, 1-mapy
@@ -55,6 +57,8 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
         final int type = args.getInt(TYPE, Types.COLLECTIONS);
         viewModel = new ViewModelProvider(this, new FactoryCollectionViewModel(type)).get(CollectionViewModel.class);
         viewModel.setBenchmarkView(this);
+
+
 
 
     }
@@ -102,11 +106,15 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     }
 
 
+
+
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
 
         Log.d(TAG, "onCheckedChanged");
+
+
         viewModel.onCalculationStateChangeClicked(getString(editTextOperations), getString(editTextThreads), b);
 
     }
@@ -132,7 +140,16 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
 
     @Override
     public void updateItem(BenchmarkItem newItem, int position) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                adapter.setNewItem(newItem, position);
+                Log.d(TAG, " updateItem  updateItem  updateItem  updateItem updateItem");
 
-        adapter.setNewItem(newItem, position);
+
+            }
+        });
     }
+
+
 }

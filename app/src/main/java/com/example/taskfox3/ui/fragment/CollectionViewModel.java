@@ -1,5 +1,8 @@
 package com.example.taskfox3.ui.fragment;
 
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
 import android.util.Log;
 
 import androidx.lifecycle.ViewModel;
@@ -13,12 +16,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.logging.LogRecord;
 
 
 public class CollectionViewModel extends ViewModel {
     private final BenchmarkModel benchmarkModel;
     private BenchmarkView benchmarkView;
     private static final String TAG = "MyApp";
+
 
     public void setBenchmarkView(BenchmarkView benchmarkView) {
         this.benchmarkView = benchmarkView;
@@ -46,6 +51,8 @@ public class CollectionViewModel extends ViewModel {
 
 
     public void onCalculationStateChangeClicked(String elements, String threads, boolean isStart) {
+
+
         if (isStart) {
             if (elements.length() == 0) {
                 benchmarkView.operationError();
@@ -57,8 +64,6 @@ public class CollectionViewModel extends ViewModel {
                 final List<BenchmarkItem> copyItems = new ArrayList<>(newCountItems);
                 ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
                 for (BenchmarkItem item : newCountItems) {
-                    new Thread(new Runnable() {
-                        public void run() {
 
 
                             executor.submit(() -> {
@@ -68,10 +73,12 @@ public class CollectionViewModel extends ViewModel {
                                     Log.d(TAG, "setMeasuredTime");
                                     if (!copyItems.isEmpty()) {
                                         Log.d(TAG, "Vnutri if isEmpty copyItems");
+
+
+
                                         benchmarkView.updateItem(item, newCountItems.indexOf(item));
                                         copyItems.remove(item);
-                                        benchmarkView.updateItem(item, newCountItems.indexOf(item));
-                                        copyItems.remove(item);
+
                                         if (copyItems.isEmpty()) {
                                             Log.d(TAG, "Vnutri if isEmpty copyItems");
                                             // show some message that calculation is done
@@ -91,8 +98,7 @@ public class CollectionViewModel extends ViewModel {
                                 Log.d(TAG, "Posle potokow");
                             });
 
-                        }
-                    }).start();
+
                 }  // koniec ifa ot isStart
             }
         }
