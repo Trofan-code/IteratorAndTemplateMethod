@@ -1,17 +1,22 @@
 package com.example.taskfox3.ui.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.PersistableBundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,6 +41,8 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     private EditText editTextOperations;
     private EditText editTextThreads;
     private Switch swStart;
+
+    private View layout;
     private static final String TAG = "MyApp";
     final Handler handler =  new Handler(Looper.getMainLooper());
 
@@ -53,10 +60,12 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         final Bundle args = this.getArguments();
         final int type = args.getInt(TYPE, Types.COLLECTIONS);
         viewModel = new ViewModelProvider(this, new FactoryCollectionViewModel(type)).get(CollectionViewModel.class);
         viewModel.setBenchmarkView(this);
+        setRetainInstance(true);
 
 
 
@@ -71,14 +80,17 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+       // progressBar = view.findViewById(R.id.progressBar);
         final RecyclerView recyclerView = view.findViewById(R.id.recycler_view_for_tab);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
-        swStart = view.findViewById(R.id.btn_start_stop);
         editTextOperations = view.findViewById(R.id.et_elements);
         editTextThreads = view.findViewById(R.id.et_threads);
         swStart = view.findViewById(R.id.btn_start_stop);
         swStart.setOnCheckedChangeListener(this);
+
+
+
     }
 
     @Override
@@ -110,14 +122,20 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
-
         Log.d(TAG, "onCheckedChanged");
-
-
         viewModel.onCalculationStateChangeClicked(getString(editTextOperations), getString(editTextThreads), b);
 
     }
+
+    @Override
+    public void buttonPositionReturnBack(){
+        swStart.toggle();
+
+        swStart.setClickable(false);
+        // как вернуть обратно
+
+    }
+
 
     private String getString(EditText editText) {
         return editText.getText().toString();
@@ -149,6 +167,31 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
 
             }
         });
+    }
+
+    @Override
+    public void startProgressBar(boolean b) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if(b) {
+                    getView().findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
+                }//else if(!b) getView().findViewById(R.id.progressBar).setVisibility(View.INVISIBLE);
+            }
+        });
+    }
+
+
+
+    @Override
+    public void returnMessageCalcDone() {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getActivity(),"Calculation is over!!!!!!!!!!!!",Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
 

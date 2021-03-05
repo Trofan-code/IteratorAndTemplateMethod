@@ -13,4 +13,10 @@ public interface BenchmarkView {
     void setTasks(List<BenchmarkItem> newTasks);
 
     void updateItem(BenchmarkItem newItem, int position);
+
+    void startProgressBar(boolean b);
+
+    void returnMessageCalcDone();
+
+    void buttonPositionReturnBack();
 }

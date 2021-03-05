@@ -19,6 +19,7 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
 
     private final List<BenchmarkItem> items = new ArrayList<>();
 
+
     public BenchmarksRecyclerViewAdapter() {
     }
 
@@ -26,6 +27,8 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
     @Override
     public BenchmarkViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout_for_tab, parent, false);
+
+
         return new BenchmarkViewHolder(view);
     }
 
@@ -51,6 +54,11 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
         notifyItemChanged(position);
 
     }
+   /* public ProgressBar progressBar(){
+        ProgressBar progressBar = new BenchmarkViewHolder().getProgressBar();
+        return  progressBar();
+    }*/
+
 
     public boolean isEmpty() {
         return items.isEmpty();
@@ -60,7 +68,15 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
     public static class BenchmarkViewHolder extends RecyclerView.ViewHolder {
         private final TextView operationName;
         private final TextView operationTime;
-        private final ProgressBar progressBar;
+        public ProgressBar progressBar;
+
+
+
+        /*public ProgressBar getProgressBar() {
+            return progressBar;
+        }*/
+
+
 
         public BenchmarkViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,8 +88,10 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
         public void bindItem(BenchmarkItem benchmarkItem) {
             operationName.setText(benchmarkItem.getTaskName());
             operationTime.setText(String.valueOf(benchmarkItem.getMeasuredTime()));
-            //operationName.setText(benchmarkItem.getNameOfOperation());
+
 
         }
+
+
     }
 }

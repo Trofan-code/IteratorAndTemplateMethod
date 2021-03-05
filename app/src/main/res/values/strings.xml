@@ -24,5 +24,6 @@
     <string name="time_zero">0</string>
     <string name="error_1">Num of operation is required!</string>
     <string name="error_2">Num of threads is required!</string>
+    <string name="default_time">--.--</string>
 
 </resources>

@@ -6,9 +6,11 @@ public class BenchmarkItem {
     private final int taskName;
     private long measuredTime;
 
+
     public BenchmarkItem(int taskName) {
         this.taskName = taskName;
         this.measuredTime = DEFAULT_TIME;
+        this.measuredTime =
     }
 
     public int getTaskName() {

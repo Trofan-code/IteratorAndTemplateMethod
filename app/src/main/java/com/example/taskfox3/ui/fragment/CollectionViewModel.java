@@ -56,32 +56,38 @@ public class CollectionViewModel extends ViewModel {
         if (isStart) {
             if (elements.length() == 0) {
                 benchmarkView.operationError();
+                benchmarkView.buttonPositionReturnBack();
+
             } else if (threads.length() == 0) {
                 benchmarkView.threadsError();
+                benchmarkView.buttonPositionReturnBack();
             }
             if (elements.length() != 0 && threads.length() != 0) {
+
                 final List<BenchmarkItem> newCountItems = benchmarkModel.createNewTasks();
                 final List<BenchmarkItem> copyItems = new ArrayList<>(newCountItems);
                 ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
+                benchmarkView.startProgressBar(true);
                 for (BenchmarkItem item : newCountItems) {
 
 
                             executor.submit(() -> {
                                 try {
                                     Log.d(TAG, "JA w potokie");
+
+
                                     item.setMeasuredTime(benchmarkModel.measureTime(item, Integer.parseInt(elements)));
                                     Log.d(TAG, "setMeasuredTime");
                                     if (!copyItems.isEmpty()) {
                                         Log.d(TAG, "Vnutri if isEmpty copyItems");
-
-
-
                                         benchmarkView.updateItem(item, newCountItems.indexOf(item));
                                         copyItems.remove(item);
 
                                         if (copyItems.isEmpty()) {
                                             Log.d(TAG, "Vnutri if isEmpty copyItems");
                                             // show some message that calculation is done
+                                            benchmarkView.returnMessageCalcDone();
+                                            benchmarkView.buttonPositionReturnBack();
                                         }
                                     }
 
@@ -93,13 +99,9 @@ public class CollectionViewModel extends ViewModel {
                                     //String stackTrace = Log.getStackTraceString(e);
 
                                 }
-
-
                                 Log.d(TAG, "Posle potokow");
                             });
-
-
-                }  // koniec ifa ot isStart
+                }
             }
         }
     }
