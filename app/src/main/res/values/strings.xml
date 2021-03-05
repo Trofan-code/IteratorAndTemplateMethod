@@ -7,6 +7,7 @@
     <string name="title_1">Название операции</string>
     <string name="title_2">Среднее время</string>
     <string name="title_3">Прогресс</string>
+
     <string name="name_oper_1">Adding in the beginning</string>
     <string name="name_oper_2">Adding in the middle</string>
     <string name="name_oper_3">Adding in the end</string>
@@ -17,7 +18,10 @@
     <string name="hint_only_num">Only number</string>
     <string name="operations">Operations</string>
     <string name="threads">Threads</string>
+
     <string name="start">Start</string>
+    <string name="stop">Stop</string>
+
     <string name="name_oper_map_1">Adding new</string>
     <string name="name_oper_map_2">Search by key</string>
     <string name="name_oper_map_3">Removing</string>

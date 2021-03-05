@@ -87,7 +87,7 @@ public class CollectionViewModel extends ViewModel {
                                             Log.d(TAG, "Vnutri if isEmpty copyItems");
                                             // show some message that calculation is done
                                             benchmarkView.returnMessageCalcDone();
-                                            benchmarkView.buttonPositionReturnBack();
+
                                         }
                                     }
 

@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,9 +41,7 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     private CollectionViewModel viewModel;
     private EditText editTextOperations;
     private EditText editTextThreads;
-    private Switch swStart;
-
-    private View layout;
+    private ToggleButton swStart;
     private static final String TAG = "MyApp";
     final Handler handler =  new Handler(Looper.getMainLooper());
 
@@ -131,8 +130,20 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     public void buttonPositionReturnBack(){
         swStart.toggle();
 
-        swStart.setClickable(false);
+
+
         // как вернуть обратно
+
+    }
+
+    @Override
+    public void showProgress() {
+        //adapter.showProgress();
+    }
+
+    @Override
+    public void hideProgress() {
+        //adapter.hideProgress();
 
     }
 
@@ -172,6 +183,7 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     @Override
     public void startProgressBar(boolean b) {
         handler.post(new Runnable() {
+
             @Override
             public void run() {
                 if(b) {
@@ -189,6 +201,16 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
             @Override
             public void run() {
                 Toast.makeText(getActivity(),"Calculation is over!!!!!!!!!!!!",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+    @Override
+    public void returnMessageCalcIsStopped() {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getActivity(),"Calculation is stopped!",Toast.LENGTH_SHORT).show();
             }
         });
 

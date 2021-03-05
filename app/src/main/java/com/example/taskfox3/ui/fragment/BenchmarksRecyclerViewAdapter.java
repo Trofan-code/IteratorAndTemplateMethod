@@ -44,19 +44,30 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
 
 
     public void setItems(List<BenchmarkItem> items) {
-       // this.items.clear();
+        // this.items.clear();
         this.items.addAll(items);
         notifyDataSetChanged();
     }
-    public void setNewItem(BenchmarkItem item,int position) { //в адаптер (в адаптере нужно заменить существующий айтем на новый)
 
-        items.set(position,item);
+    public void setNewItem(BenchmarkItem item, int position) { //в адаптер (в адаптере нужно заменить существующий айтем на новый)
+
+        items.set(position, item);
         notifyItemChanged(position);
 
     }
-   /* public ProgressBar progressBar(){
-        ProgressBar progressBar = new BenchmarkViewHolder().getProgressBar();
-        return  progressBar();
+
+    /*public void showProgress(BenchmarkViewHolder holder) {
+        for (BenchmarkItem item : items) {
+            //В нем перебери по циклу айтемы и поставь каждому setProgress(true)
+           holder.bindItemProgressBar(true);
+        }
+    }
+
+    public void hideProgress(BenchmarkViewHolder holder) {
+        for (BenchmarkItem item : items) {
+            //В нем перебери по циклу айтемы и поставь каждому setProgress(true)
+            holder.bindItemProgressBar(false);
+        }
     }*/
 
 
@@ -70,14 +81,6 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
         private final TextView operationTime;
         public ProgressBar progressBar;
 
-
-
-        /*public ProgressBar getProgressBar() {
-            return progressBar;
-        }*/
-
-
-
         public BenchmarkViewHolder(@NonNull View itemView) {
             super(itemView);
             operationName = itemView.findViewById(R.id.tv_name_operation);
@@ -87,11 +90,13 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
 
         public void bindItem(BenchmarkItem benchmarkItem) {
             operationName.setText(benchmarkItem.getTaskName());
-            operationTime.setText(String.valueOf(benchmarkItem.getMeasuredTime()));
-
-
+            operationTime.setText("--.--");
         }
-
+        public void bindItemProgressBar(boolean b) {
+            if(b){
+               progressBar.setVisibility(View.VISIBLE);
+            }else progressBar.setVisibility(View.INVISIBLE);
+        }
 
     }
 }
