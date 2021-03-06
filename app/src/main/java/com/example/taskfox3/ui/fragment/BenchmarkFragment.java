@@ -187,9 +187,10 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
 
             @Override
             public void run() {
-                if(b) {
-                    getView().findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
-                }//else if(!b) getView().findViewById(R.id.progressBar).setVisibility(View.INVISIBLE);
+
+
+                adapter.setStateOfProgressBar(b);
+
             }
         });
     }

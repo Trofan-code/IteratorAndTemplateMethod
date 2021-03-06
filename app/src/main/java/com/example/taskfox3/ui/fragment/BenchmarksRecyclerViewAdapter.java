@@ -43,9 +43,13 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
         return items.size();
     }
 
-    public void stateOfProgressBar (BenchmarkViewHolder holder){
-        for (BenchmarkItem item : items){
-            holder.showProgress(item);
+    public void setStateOfProgressBar ( boolean b){
+       for (BenchmarkItem benchmarkItem : items){
+
+           benchmarkItem.setStartOrNotProgressBar(b);
+           notifyDataSetChanged();
+
+
 
         }
 
@@ -91,13 +95,13 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
             }else {
                 operationTime.setText(String.valueOf(benchmarkItem.getMeasuredTime()));
             }
-            showProgress(benchmarkItem);
+            showProgress(benchmarkItem.isStartOrNotProgressBar());
 
         }
-        public void showProgress(BenchmarkItem benchmarkItem){
-            if(benchmarkItem.isStartOrNotProgressBar()){
+        public void showProgress(boolean b){
+            if(b){
                 progressBar.setVisibility(View.VISIBLE);
-            }else if(!benchmarkItem.isStartOrNotProgressBar()){
+            }else if(!b){
                 progressBar.setVisibility(View.INVISIBLE);
             }
         }

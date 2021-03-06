@@ -14,7 +14,7 @@ public interface BenchmarkView {
 
     void updateItem(BenchmarkItem newItem, int position);
 
-    void startProgressBar(boolean b);
+    void startProgressBar( boolean b);
 
     void returnMessageCalcDone();
 
