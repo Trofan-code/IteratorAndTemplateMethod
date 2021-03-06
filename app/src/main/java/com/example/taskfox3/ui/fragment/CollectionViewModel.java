@@ -14,6 +14,9 @@ public class CollectionViewModel extends ViewModel {
     private final BenchmarkModel benchmarkModel;
     private BenchmarkView benchmarkView;
 
+    public CollectionViewModel(BenchmarkModel benchmarkModel) {
+        this.benchmarkModel = benchmarkModel;
+    }
 
     public void setBenchmarkView(BenchmarkView benchmarkView) {
         this.benchmarkView = benchmarkView;
@@ -21,11 +24,6 @@ public class CollectionViewModel extends ViewModel {
 
     public void removeMyCustomObjectListener(BenchmarkView benchmarkView) {
         this.benchmarkView = null;
-    }
-
-
-    public CollectionViewModel(BenchmarkModel benchmarkModel) {
-        this.benchmarkModel = benchmarkModel;
     }
 
     public void getNewItemsList() {
