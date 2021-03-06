@@ -67,27 +67,29 @@ public class CollectionViewModel extends ViewModel {
                 final List<BenchmarkItem> newCountItems = benchmarkModel.createNewTasks();
                 final List<BenchmarkItem> copyItems = new ArrayList<>(newCountItems);
                 ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
-                benchmarkView.startProgressBar(true);
+               // benchmarkView.startProgressBar(true);
                 for (BenchmarkItem item : newCountItems) {
 
-
+                    item.setStartOrNotProgressBar(true);
                             executor.submit(() -> {
                                 try {
                                     Log.d(TAG, "JA w potokie");
-
-
                                     item.setMeasuredTime(benchmarkModel.measureTime(item, Integer.parseInt(elements)));
+
                                     Log.d(TAG, "setMeasuredTime");
                                     if (!copyItems.isEmpty()) {
+
                                         Log.d(TAG, "Vnutri if isEmpty copyItems");
                                         benchmarkView.updateItem(item, newCountItems.indexOf(item));
+                                        item.setStartOrNotProgressBar(false);
                                         copyItems.remove(item);
+
 
                                         if (copyItems.isEmpty()) {
                                             Log.d(TAG, "Vnutri if isEmpty copyItems");
                                             // show some message that calculation is done
-                                            benchmarkView.returnMessageCalcDone();
 
+                                            benchmarkView.returnMessageCalcDone();
                                         }
                                     }
 

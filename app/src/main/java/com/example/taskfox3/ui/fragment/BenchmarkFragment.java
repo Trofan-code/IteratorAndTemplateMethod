@@ -83,6 +83,7 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
         final RecyclerView recyclerView = view.findViewById(R.id.recycler_view_for_tab);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
+
         editTextOperations = view.findViewById(R.id.et_elements);
         editTextThreads = view.findViewById(R.id.et_threads);
         swStart = view.findViewById(R.id.btn_start_stop);
@@ -138,7 +139,7 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
 
     @Override
     public void showProgress() {
-        //adapter.showProgress();
+        //adapter.stateOfProgressBar();
     }
 
     @Override

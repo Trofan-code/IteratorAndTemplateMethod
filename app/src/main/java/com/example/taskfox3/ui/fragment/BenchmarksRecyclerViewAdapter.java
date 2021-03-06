@@ -35,11 +35,20 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
     @Override
     public void onBindViewHolder(@NonNull BenchmarkViewHolder holder, int position) {
         holder.bindItem(items.get(position));
+
     }
 
     @Override
     public int getItemCount() { //odpowiada za illość elementów
         return items.size();
+    }
+
+    public void stateOfProgressBar (BenchmarkViewHolder holder){
+        for (BenchmarkItem item : items){
+            holder.showProgress(item);
+
+        }
+
     }
 
 
@@ -56,19 +65,6 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
 
     }
 
-    /*public void showProgress(BenchmarkViewHolder holder) {
-        for (BenchmarkItem item : items) {
-            //В нем перебери по циклу айтемы и поставь каждому setProgress(true)
-           holder.bindItemProgressBar(true);
-        }
-    }
-
-    public void hideProgress(BenchmarkViewHolder holder) {
-        for (BenchmarkItem item : items) {
-            //В нем перебери по циклу айтемы и поставь каждому setProgress(true)
-            holder.bindItemProgressBar(false);
-        }
-    }*/
 
 
     public boolean isEmpty() {
@@ -90,13 +86,22 @@ public class BenchmarksRecyclerViewAdapter extends RecyclerView.Adapter<Benchmar
 
         public void bindItem(BenchmarkItem benchmarkItem) {
             operationName.setText(benchmarkItem.getTaskName());
-            operationTime.setText("--.--");
+            if (benchmarkItem.getMeasuredTime()==-1){
+                operationTime.setText("--.--");
+            }else {
+                operationTime.setText(String.valueOf(benchmarkItem.getMeasuredTime()));
+            }
+            showProgress(benchmarkItem);
+
         }
-        public void bindItemProgressBar(boolean b) {
-            if(b){
-               progressBar.setVisibility(View.VISIBLE);
-            }else progressBar.setVisibility(View.INVISIBLE);
+        public void showProgress(BenchmarkItem benchmarkItem){
+            if(benchmarkItem.isStartOrNotProgressBar()){
+                progressBar.setVisibility(View.VISIBLE);
+            }else if(!benchmarkItem.isStartOrNotProgressBar()){
+                progressBar.setVisibility(View.INVISIBLE);
+            }
         }
+
 
     }
 }

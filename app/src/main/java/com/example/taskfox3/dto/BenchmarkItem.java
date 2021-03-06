@@ -9,17 +9,21 @@ import com.example.taskfox3.R;
 public class BenchmarkItem {
     public static final int DEFAULT_TIME = -1;
 
+    private boolean startOrNotProgressBar = false;
     private final int taskName;
     private long measuredTime;
-    private ProgressBar progressBar;
 
-    /*public ProgressBar getProgressBar() {
-        return progressBar;
+
+
+    public boolean isStartOrNotProgressBar() {
+        return startOrNotProgressBar;
     }
 
-    public void setProgressBar(boolean b) {
-        this.progressBar = progressBar;
-    }*/
+    public void setStartOrNotProgressBar(boolean startOrNotProgressBar) {
+        this.startOrNotProgressBar = startOrNotProgressBar;
+    }
+
+
 
     public BenchmarkItem(int taskName) {
         this.taskName = taskName;
