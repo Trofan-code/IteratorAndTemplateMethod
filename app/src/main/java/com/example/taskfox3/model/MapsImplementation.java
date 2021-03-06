@@ -11,11 +11,9 @@ import java.util.Map;
 
 public class  MapsImplementation implements BenchmarkModel {
 
-
-
     @Override
     public List<BenchmarkItem> createNewTasks() {
-        final List<BenchmarkItem> dataList = new ArrayList<BenchmarkItem>();
+        final List<BenchmarkItem> dataList = new ArrayList<>();
         dataList.add(new BenchmarkItem(R.string.name_oper_map_1));
         dataList.add(new BenchmarkItem(R.string.name_oper_map_2));
         dataList.add(new BenchmarkItem(R.string.name_oper_map_3));
@@ -77,5 +75,4 @@ public class  MapsImplementation implements BenchmarkModel {
         time = System.nanoTime() - time;
         return time;
     }
-
 }

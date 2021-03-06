@@ -7,12 +7,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.taskfox3.dto.Types;
 import com.example.taskfox3.ui.fragment.CollectionViewModel;
 
-
 public class FactoryCollectionViewModel extends ViewModelProvider.NewInstanceFactory {
 
-
     private final int type;
-
 
     public FactoryCollectionViewModel(int type) {
         super();

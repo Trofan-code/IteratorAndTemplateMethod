@@ -14,15 +14,13 @@ public interface BenchmarkView {
 
     void updateItem(BenchmarkItem newItem, int position);
 
-    void startProgressBar( boolean b);
-
     void returnMessageCalcDone();
 
-    public void returnMessageCalcIsStopped();
+    void returnMessageCalcIsStopped();
 
     void buttonPositionReturnBack();
 
-    public void showProgress();
+    void showProgress();
 
-    public void hideProgress();
+    void hideProgress();
 }

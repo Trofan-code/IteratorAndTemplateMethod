@@ -1,21 +1,13 @@
 package com.example.taskfox3.ui.fragment;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.PersistableBundle;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -37,7 +29,7 @@ import java.util.List;
 public class BenchmarkFragment extends Fragment implements CompoundButton.OnCheckedChangeListener, BenchmarkView {
 
     public static final String TYPE = "type";
-    private final BenchmarksRecyclerViewAdapter adapter = new BenchmarksRecyclerViewAdapter();
+    private final BenchmarksAdapter adapter = new BenchmarksAdapter();
     private CollectionViewModel viewModel;
     private EditText editTextOperations;
     private EditText editTextThreads;
@@ -59,16 +51,11 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         final Bundle args = this.getArguments();
         final int type = args.getInt(TYPE, Types.COLLECTIONS);
         viewModel = new ViewModelProvider(this, new FactoryCollectionViewModel(type)).get(CollectionViewModel.class);
         viewModel.setBenchmarkView(this);
         setRetainInstance(true);
-
-
-
-
     }
 
     @Override
@@ -79,7 +66,7 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-       // progressBar = view.findViewById(R.id.progressBar);
+
         final RecyclerView recyclerView = view.findViewById(R.id.recycler_view_for_tab);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
@@ -88,69 +75,46 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
         editTextThreads = view.findViewById(R.id.et_threads);
         swStart = view.findViewById(R.id.btn_start_stop);
         swStart.setOnCheckedChangeListener(this);
-
-
-
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        Log.d(TAG, "onStart");
         if (adapter.isEmpty()) {
             viewModel.getNewItemsList();
         }
-
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
     }
 
     @Override
     public void onDestroy() {
-        Log.d(TAG, "onDestroy");
         super.onDestroy();
         viewModel.removeMyCustomObjectListener(this);
     }
 
-
-
-
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        Log.d(TAG, "onCheckedChanged");
         viewModel.onCalculationStateChangeClicked(getString(editTextOperations), getString(editTextThreads), b);
-
     }
 
     @Override
     public void buttonPositionReturnBack(){
         swStart.toggle();
-
-
-
         // как вернуть обратно
-
     }
 
     @Override
     public void showProgress() {
-        //adapter.stateOfProgressBar();
+        handler.post(() -> adapter.setProgressVisibility(true));
     }
 
     @Override
     public void hideProgress() {
-        //adapter.hideProgress();
-
+        handler.post(() -> adapter.setProgressVisibility(false));
     }
 
 
     private String getString(EditText editText) {
-        return editText.getText().toString();
+        return editText.getText().toString().trim();
     }
 
     @Override
@@ -170,53 +134,16 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
 
     @Override
     public void updateItem(BenchmarkItem newItem, int position) {
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                adapter.setNewItem(newItem, position);
-                Log.d(TAG, " updateItem  updateItem  updateItem  updateItem updateItem");
-
-
-            }
-        });
+        handler.post(() -> adapter.setNewItem(newItem, position));
     }
-
-    @Override
-    public void startProgressBar(boolean b) {
-        handler.post(new Runnable() {
-
-            @Override
-            public void run() {
-
-
-                adapter.setStateOfProgressBar(b);
-
-            }
-        });
-    }
-
-
 
     @Override
     public void returnMessageCalcDone() {
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(getActivity(),"Calculation is over!!!!!!!!!!!!",Toast.LENGTH_SHORT).show();
-            }
-        });
-
+        Toast.makeText(getActivity(), "Calculation is over!!!!!!!!!!!!", Toast.LENGTH_SHORT).show();
     }
+
     @Override
     public void returnMessageCalcIsStopped() {
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(getActivity(),"Calculation is stopped!",Toast.LENGTH_SHORT).show();
-            }
-        });
-
+        Toast.makeText(getActivity(), "Calculation is stopped!", Toast.LENGTH_SHORT).show();
     }
-
-
 }
