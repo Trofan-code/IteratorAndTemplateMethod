@@ -35,7 +35,7 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     private EditText editTextThreads;
     private ToggleButton swStart;
     private static final String TAG = "MyApp";
-    final Handler handler =  new Handler(Looper.getMainLooper());
+    final Handler handler = new Handler(Looper.getMainLooper());
 
 
     public static BenchmarkFragment newInstance(int type) { //prichodit 0-coll, 1-mapy
@@ -75,6 +75,7 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
         editTextThreads = view.findViewById(R.id.et_threads);
         swStart = view.findViewById(R.id.btn_start_stop);
         swStart.setOnCheckedChangeListener(this);
+
     }
 
     @Override
@@ -92,12 +93,34 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        viewModel.onCalculationStateChangeClicked(getString(editTextOperations), getString(editTextThreads), b);
+    public void onStop() {
+       // swStart.setChecked(false);
+
+        super.onStop();
     }
 
     @Override
-    public void buttonPositionReturnBack(){
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        if (compoundButton.isPressed()) {
+            viewModel.onCalculationStateChangeClicked(getString(editTextOperations), getString(editTextThreads), b);
+            // do something related to user click/tap
+        } else if(compoundButton.performClick()) {
+
+
+            swStart.toggle();
+
+            // do something related to programmatically state changes (checked/unchecked)
+        }
+
+
+
+
+    }
+
+    @Override
+    public void buttonPositionStopped() {
+
+         //swStart.setChecked(false);
         swStart.toggle();
         // как вернуть обратно
     }
@@ -144,6 +167,7 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
 
     @Override
     public void returnMessageCalcIsStopped() {
+
         Toast.makeText(getActivity(), "Calculation is stopped!", Toast.LENGTH_SHORT).show();
     }
 }

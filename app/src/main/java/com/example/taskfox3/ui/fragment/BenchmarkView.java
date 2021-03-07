@@ -18,7 +18,7 @@ public interface BenchmarkView {
 
     void returnMessageCalcIsStopped();
 
-    void buttonPositionReturnBack();
+    void buttonPositionStopped();
 
     void showProgress();
 

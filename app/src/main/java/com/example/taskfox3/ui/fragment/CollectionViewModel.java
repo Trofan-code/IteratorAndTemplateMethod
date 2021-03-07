@@ -41,35 +41,41 @@ public class CollectionViewModel extends ViewModel {
         if (isStart) {
             if (elements.length() == 0) {
                 benchmarkView.operationError();
-                benchmarkView.buttonPositionReturnBack();
+                benchmarkView.buttonPositionStopped();
 
             } else if (threads.length() == 0) {
                 benchmarkView.threadsError();
-                benchmarkView.buttonPositionReturnBack();
+                benchmarkView.buttonPositionStopped();
             }
             if (elements.length() != 0 && threads.length() != 0) {
                 final List<BenchmarkItem> newCountItems = benchmarkModel.createNewTasks();
                 final List<BenchmarkItem> copyItems = new ArrayList<>(newCountItems);
                 ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
-
                 if (hasListener()) {
                     benchmarkView.showProgress();
                 }
                 for (BenchmarkItem item : newCountItems) {
                     executor.submit(() -> {
                         item.setMeasuredTime(benchmarkModel.measureTime(item, Integer.parseInt(elements)));
-
                         benchmarkView.updateItem(item, newCountItems.indexOf(item));
                         copyItems.remove(item);
 
                         if (copyItems.isEmpty()) {
+                            benchmarkView.buttonPositionStopped();
+
                             benchmarkView.returnMessageCalcDone();
+
                             if (hasListener()) {
                                 benchmarkView.hideProgress();
+
+
                             }
                         }
                     });
+
+
                 }
+
             }
         }
     }
