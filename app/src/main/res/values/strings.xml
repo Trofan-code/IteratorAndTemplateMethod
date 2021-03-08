@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">TaskFox3</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="app_name">Collection&amp;Maps Benchmark</string>
+    <string name="tab_text_1">ArrayList</string>
+    <string name="tab_text_2">Map</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_1">Название операции</string>
@@ -21,6 +21,9 @@
 
     <string name="start">Start</string>
     <string name="stop">Stop</string>
+
+    <string name="calculation_over">Calculation is over!</string>
+    <string name="calculation_stop">Calculation is stopped!</string>
 
     <string name="name_oper_map_1">Adding new</string>
     <string name="name_oper_map_2">Search by key</string>

@@ -42,7 +42,6 @@ public class CollectionViewModel extends ViewModel {
     public void onCalculationStateChangeClicked(String elements, String threads, boolean isStart) {
 
 
-
         if (isStart) {
             if (elements.length() == 0) {
                 benchmarkView.operationError();
@@ -61,31 +60,40 @@ public class CollectionViewModel extends ViewModel {
                     benchmarkView.showProgress();
                 }
                 for (BenchmarkItem item : newCountItems) {
-                    try {
+
+
                     executor.submit(() -> {
-                        item.setMeasuredTime(benchmarkModel.measureTime(item, Integer.parseInt(elements)));
+                        //try {
+                            item.setMeasuredTime(benchmarkModel.measureTime(item, Integer.parseInt(elements)));
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        /*}catch (Exception e){
+                                e.printStackTrace();}*/
                         benchmarkView.updateItem(item, newCountItems.indexOf(item));
                         copyItems.remove(item);
-
-                        if (copyItems.isEmpty()) {
-                            benchmarkView.returnMessageCalcDone();
-                        }
                         if (hasListener()) {
                             benchmarkView.hideProgress();
-                            benchmarkView.buttonPositionStopped();
-
-                            //benchmarkView.returnMessageCalcIsStopped();
+                            if (copyItems.isEmpty()) {
+                                benchmarkView.returnMessageCalcDone();
+                                benchmarkView.buttonPositionStopped();
+                            }
                         }
                     });
-                }catch (Exception e){
-                    e.printStackTrace();}
                 }
+
             }
-           if (!isStart) {
-                benchmarkView.returnMessageCalcIsStopped();
-                executor.shutdownNow();
-            }
+
         }
+         if (!isStart) {
+            benchmarkView.hideProgress();
+            benchmarkView.returnMessageCalcIsStopped();
+            executor.shutdownNow();
+            benchmarkView.buttonPositionStopped();
+        }
+
 
     }
 }

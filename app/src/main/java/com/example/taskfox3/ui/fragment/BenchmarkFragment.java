@@ -96,7 +96,7 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
-            viewModel.onCalculationStateChangeClicked(getString(editTextOperations), getString(editTextThreads), b);
+        viewModel.onCalculationStateChangeClicked(getString(editTextOperations), getString(editTextThreads), b);
 
     }
 
@@ -104,10 +104,10 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     public void buttonPositionStopped() {
 
         handler.post(() -> {
-                if(swStart.isChecked()) {
-                    swStart.setChecked(false);
-                }
-                });
+            if (swStart.isChecked()) {
+                swStart.setChecked(false);
+            }
+        });
 
     }
 
@@ -148,12 +148,12 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
 
     @Override
     public void returnMessageCalcDone() {
-        handler.post(() ->Toast.makeText(getActivity(), "Calculation is over!!!!!!!!!!!!", Toast.LENGTH_SHORT).show());
+        handler.post(() -> Toast.makeText(getActivity(), R.string.calculation_over, Toast.LENGTH_SHORT).show());
     }
 
     @Override
     public void returnMessageCalcIsStopped() {
 
-        handler.post(() ->Toast.makeText(getActivity(), "Calculation is stopped!", Toast.LENGTH_SHORT).show());
+        handler.post(() -> Toast.makeText(getActivity(), R.string.calculation_stop, Toast.LENGTH_SHORT).show());
     }
 }
