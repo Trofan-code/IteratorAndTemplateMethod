@@ -92,37 +92,23 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
         viewModel.removeMyCustomObjectListener(this);
     }
 
-    @Override
-    public void onStop() {
-       // swStart.setChecked(false);
-
-        super.onStop();
-    }
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        if (compoundButton.isPressed()) {
+
             viewModel.onCalculationStateChangeClicked(getString(editTextOperations), getString(editTextThreads), b);
-            // do something related to user click/tap
-        } else if(compoundButton.performClick()) {
-
-
-            swStart.toggle();
-
-            // do something related to programmatically state changes (checked/unchecked)
-        }
-
-
-
 
     }
 
     @Override
     public void buttonPositionStopped() {
 
-         //swStart.setChecked(false);
-        swStart.toggle();
-        // как вернуть обратно
+        handler.post(() -> {
+                if(swStart.isChecked()) {
+                    swStart.setChecked(false);
+                }
+                });
+
     }
 
     @Override
@@ -162,12 +148,12 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
 
     @Override
     public void returnMessageCalcDone() {
-        Toast.makeText(getActivity(), "Calculation is over!!!!!!!!!!!!", Toast.LENGTH_SHORT).show();
+        handler.post(() ->Toast.makeText(getActivity(), "Calculation is over!!!!!!!!!!!!", Toast.LENGTH_SHORT).show());
     }
 
     @Override
     public void returnMessageCalcIsStopped() {
 
-        Toast.makeText(getActivity(), "Calculation is stopped!", Toast.LENGTH_SHORT).show();
+        handler.post(() ->Toast.makeText(getActivity(), "Calculation is stopped!", Toast.LENGTH_SHORT).show());
     }
 }

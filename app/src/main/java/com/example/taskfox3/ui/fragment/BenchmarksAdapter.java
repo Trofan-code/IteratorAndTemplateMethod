@@ -82,7 +82,7 @@ public class BenchmarksAdapter extends RecyclerView.Adapter<BenchmarksAdapter.Be
             if (benchmarkItem.getMeasuredTime() == -1) {
                 operationTime.setText("--.--");
             } else {
-                operationTime.setText(String.valueOf(benchmarkItem.getMeasuredTime()));
+                operationTime.setText(String.valueOf(benchmarkItem.getMeasuredTime())+" ms");
             }
             progressBar.setVisibility(benchmarkItem.isInProgress() ? View.VISIBLE : View.INVISIBLE);
         }

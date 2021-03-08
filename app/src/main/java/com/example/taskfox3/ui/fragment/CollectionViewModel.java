@@ -13,6 +13,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class CollectionViewModel extends ViewModel {
     private final BenchmarkModel benchmarkModel;
     private BenchmarkView benchmarkView;
+    ThreadPoolExecutor executor;
+
 
     public CollectionViewModel(BenchmarkModel benchmarkModel) {
         this.benchmarkModel = benchmarkModel;
@@ -38,6 +40,9 @@ public class CollectionViewModel extends ViewModel {
 
 
     public void onCalculationStateChangeClicked(String elements, String threads, boolean isStart) {
+
+
+
         if (isStart) {
             if (elements.length() == 0) {
                 benchmarkView.operationError();
@@ -48,35 +53,39 @@ public class CollectionViewModel extends ViewModel {
                 benchmarkView.buttonPositionStopped();
             }
             if (elements.length() != 0 && threads.length() != 0) {
+                executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
+
                 final List<BenchmarkItem> newCountItems = benchmarkModel.createNewTasks();
                 final List<BenchmarkItem> copyItems = new ArrayList<>(newCountItems);
-                ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
                 if (hasListener()) {
                     benchmarkView.showProgress();
                 }
                 for (BenchmarkItem item : newCountItems) {
+                    try {
                     executor.submit(() -> {
                         item.setMeasuredTime(benchmarkModel.measureTime(item, Integer.parseInt(elements)));
                         benchmarkView.updateItem(item, newCountItems.indexOf(item));
                         copyItems.remove(item);
 
                         if (copyItems.isEmpty()) {
+                            benchmarkView.returnMessageCalcDone();
+                        }
+                        if (hasListener()) {
+                            benchmarkView.hideProgress();
                             benchmarkView.buttonPositionStopped();
 
-                            benchmarkView.returnMessageCalcDone();
-
-                            if (hasListener()) {
-                                benchmarkView.hideProgress();
-
-
-                            }
+                            //benchmarkView.returnMessageCalcIsStopped();
                         }
                     });
-
-
+                }catch (Exception e){
+                    e.printStackTrace();}
                 }
-
+            }
+           if (!isStart) {
+                benchmarkView.returnMessageCalcIsStopped();
+                executor.shutdownNow();
             }
         }
+
     }
 }
