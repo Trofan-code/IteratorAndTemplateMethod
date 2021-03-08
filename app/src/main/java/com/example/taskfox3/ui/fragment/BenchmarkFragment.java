@@ -101,7 +101,7 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     }
 
     @Override
-    public void buttonPositionStopped() {
+    public void buttonStopped() {
 
         handler.post(() -> {
             if (swStart.isChecked()) {
@@ -147,12 +147,12 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     }
 
     @Override
-    public void returnMessageCalcDone() {
+    public void messageCalcDone() {
         handler.post(() -> Toast.makeText(getActivity(), R.string.calculation_over, Toast.LENGTH_SHORT).show());
     }
 
     @Override
-    public void returnMessageCalcIsStopped() {
+    public void messageCalcIsStopped() {
 
         handler.post(() -> Toast.makeText(getActivity(), R.string.calculation_stop, Toast.LENGTH_SHORT).show());
     }

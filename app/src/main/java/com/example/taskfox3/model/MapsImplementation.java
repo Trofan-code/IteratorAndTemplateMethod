@@ -23,7 +23,7 @@ public class  MapsImplementation implements BenchmarkModel {
     @Override
     public long measureTime(BenchmarkItem task, int amount) {
 
-        Map<Integer,Integer> map = returnHashMap(amount);
+        Map<Integer,Integer> map = createHashMap(amount);
 
         switch (task.getTaskName()) {
             case R.string.name_oper_map_1:
@@ -41,7 +41,7 @@ public class  MapsImplementation implements BenchmarkModel {
        
     }
 
-    public Map<Integer, Integer> returnHashMap(int elements) {
+    public Map<Integer, Integer> createHashMap(int elements) {
         Map<Integer, Integer> myHashMap = new HashMap<>();
         List<Integer> keyAndValue = new ArrayList<Integer>();
         for (int i = 0; i < elements - 1; i++) {

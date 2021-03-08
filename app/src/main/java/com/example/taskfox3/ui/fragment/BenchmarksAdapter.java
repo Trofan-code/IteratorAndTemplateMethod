@@ -1,5 +1,6 @@
 package com.example.taskfox3.ui.fragment;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,12 +78,15 @@ public class BenchmarksAdapter extends RecyclerView.Adapter<BenchmarksAdapter.Be
             progressBar = itemView.findViewById(R.id.progressBar);
         }
 
+
         public void bindItem(BenchmarkItem benchmarkItem) {
             operationName.setText(benchmarkItem.getTaskName());
             if (benchmarkItem.getMeasuredTime() == -1) {
-                operationTime.setText("--.--");
+                operationTime.setText(R.string.text_for_first_time);
             } else {
-                operationTime.setText(String.valueOf(benchmarkItem.getMeasuredTime())+" ms");
+                operationTime.setText(String.valueOf(benchmarkItem.getMeasuredTime())+R.string.nanosec);
+                //перестало появлятся на экране
+                //????
             }
             progressBar.setVisibility(benchmarkItem.isInProgress() ? View.VISIBLE : View.INVISIBLE);
         }

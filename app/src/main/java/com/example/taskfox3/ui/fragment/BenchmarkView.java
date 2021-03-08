@@ -14,11 +14,11 @@ public interface BenchmarkView {
 
     void updateItem(BenchmarkItem newItem, int position);
 
-    void returnMessageCalcDone();
+    void messageCalcDone();
 
-    void returnMessageCalcIsStopped();
+    void messageCalcIsStopped();
 
-    void buttonPositionStopped();
+    void buttonStopped();
 
     void showProgress();
 

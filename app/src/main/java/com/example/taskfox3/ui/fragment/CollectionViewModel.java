@@ -13,7 +13,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class CollectionViewModel extends ViewModel {
     private final BenchmarkModel benchmarkModel;
     private BenchmarkView benchmarkView;
-    ThreadPoolExecutor executor;
+    private ThreadPoolExecutor executor;
+    final List<BenchmarkItem> copyItems = new ArrayList<>();
 
 
     public CollectionViewModel(BenchmarkModel benchmarkModel) {
@@ -42,26 +43,24 @@ public class CollectionViewModel extends ViewModel {
     public void onCalculationStateChangeClicked(String elements, String threads, boolean isStart) {
 
 
+
         if (isStart) {
             if (elements.length() == 0) {
                 benchmarkView.operationError();
-                benchmarkView.buttonPositionStopped();
+                benchmarkView.buttonStopped();
 
             } else if (threads.length() == 0) {
                 benchmarkView.threadsError();
-                benchmarkView.buttonPositionStopped();
+                benchmarkView.buttonStopped();
             }
+            final List<BenchmarkItem> newCountItems = benchmarkModel.createNewTasks();
+            //final List<BenchmarkItem> copyItems = new ArrayList<>(newCountItems);
             if (elements.length() != 0 && threads.length() != 0) {
                 executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
-
-                final List<BenchmarkItem> newCountItems = benchmarkModel.createNewTasks();
-                final List<BenchmarkItem> copyItems = new ArrayList<>(newCountItems);
                 if (hasListener()) {
                     benchmarkView.showProgress();
                 }
                 for (BenchmarkItem item : newCountItems) {
-
-
                     executor.submit(() -> {
                         //try {
                             item.setMeasuredTime(benchmarkModel.measureTime(item, Integer.parseInt(elements)));
@@ -76,23 +75,40 @@ public class CollectionViewModel extends ViewModel {
                         copyItems.remove(item);
                         if (hasListener()) {
                             benchmarkView.hideProgress();
-                            if (copyItems.isEmpty()) {
-                                benchmarkView.returnMessageCalcDone();
-                                benchmarkView.buttonPositionStopped();
-                            }
+                            benchmarkView.messageCalcDone();
                         }
+
+
+                      /*  if (isStart&&copyItems.isEmpty()) {
+                            benchmarkView.buttonStopped();
+                        }else  {
+                            benchmarkView.hideProgress();
+                            benchmarkView.messageCalcIsStopped();
+                            benchmarkView.buttonStopped();
+                            executor.shutdownNow();
+                        }*/
+
+                            /*else if (!isStart&&!copyItems.isEmpty()) {
+                            benchmarkView.hideProgress();
+                            benchmarkView.messageCalcIsStopped();
+                            benchmarkView.buttonStopped();
+                            executor.shutdownNow();
+
+                        }*/
                     });
                 }
 
+            }/*if (!isStart&&!copyItems.isEmpty()) {
+                benchmarkView.hideProgress();
+                benchmarkView.messageCalcIsStopped();
+                benchmarkView.buttonStopped();
+                executor.shutdownNow();
+
+            }else {}*/
+
             }
 
-        }
-         if (!isStart) {
-            benchmarkView.hideProgress();
-            benchmarkView.returnMessageCalcIsStopped();
-            executor.shutdownNow();
-            benchmarkView.buttonPositionStopped();
-        }
+
 
 
     }
