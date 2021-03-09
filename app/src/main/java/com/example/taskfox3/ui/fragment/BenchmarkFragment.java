@@ -28,6 +28,7 @@ import java.util.List;
 
 public class BenchmarkFragment extends Fragment implements CompoundButton.OnCheckedChangeListener, BenchmarkView {
 
+
     public static final String TYPE = "type";
     private final BenchmarksAdapter adapter = new BenchmarksAdapter();
     private CollectionViewModel viewModel;
@@ -147,7 +148,7 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     }
 
     @Override
-    public void messageCalcDone() {
+    public void messageCalcOver() {
         handler.post(() -> Toast.makeText(getActivity(), R.string.calculation_over, Toast.LENGTH_SHORT).show());
     }
 

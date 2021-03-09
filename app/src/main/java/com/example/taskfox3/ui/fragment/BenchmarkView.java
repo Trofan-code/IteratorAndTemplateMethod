@@ -14,7 +14,7 @@ public interface BenchmarkView {
 
     void updateItem(BenchmarkItem newItem, int position);
 
-    void messageCalcDone();
+    void messageCalcOver();
 
     void messageCalcIsStopped();
 

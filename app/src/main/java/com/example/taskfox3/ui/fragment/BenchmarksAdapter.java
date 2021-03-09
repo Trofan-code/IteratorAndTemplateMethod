@@ -1,6 +1,8 @@
 package com.example.taskfox3.ui.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +62,6 @@ public class BenchmarksAdapter extends RecyclerView.Adapter<BenchmarksAdapter.Be
     }
 
 
-
     public boolean isEmpty() {
         return items.isEmpty();
     }
@@ -82,9 +83,10 @@ public class BenchmarksAdapter extends RecyclerView.Adapter<BenchmarksAdapter.Be
         public void bindItem(BenchmarkItem benchmarkItem) {
             operationName.setText(benchmarkItem.getTaskName());
             if (benchmarkItem.getMeasuredTime() == -1) {
-                operationTime.setText(R.string.text_for_first_time);
+                operationTime.setText(itemView.getContext().getResources().getString(R.string.text_for_first_time));
             } else {
-                operationTime.setText(String.valueOf(benchmarkItem.getMeasuredTime())+R.string.nanosec);
+                operationTime.setText(String.valueOf(benchmarkItem.getMeasuredTime()) + itemView.getContext().getResources().getString(R.string.nanosec));
+
                 //перестало появлятся на экране
                 //????
             }
