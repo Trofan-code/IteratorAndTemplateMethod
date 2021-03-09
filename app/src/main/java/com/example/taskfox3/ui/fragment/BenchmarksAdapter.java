@@ -86,9 +86,6 @@ public class BenchmarksAdapter extends RecyclerView.Adapter<BenchmarksAdapter.Be
                 operationTime.setText(itemView.getContext().getResources().getString(R.string.text_for_first_time));
             } else {
                 operationTime.setText(String.valueOf(benchmarkItem.getMeasuredTime()) + itemView.getContext().getResources().getString(R.string.nanosec));
-
-                //перестало появлятся на экране
-                //????
             }
             progressBar.setVisibility(benchmarkItem.isInProgress() ? View.VISIBLE : View.INVISIBLE);
         }

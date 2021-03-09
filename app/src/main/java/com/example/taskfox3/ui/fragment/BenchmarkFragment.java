@@ -39,9 +39,8 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     final Handler handler = new Handler(Looper.getMainLooper());
 
 
-    public static BenchmarkFragment newInstance(int type) { //prichodit 0-coll, 1-mapy
+    public static BenchmarkFragment newInstance(int type) {
         final BenchmarkFragment benchmarkFragment = new BenchmarkFragment();
-        // use arguments to store type
         final Bundle args = new Bundle();
         args.putInt(TYPE, type);
         benchmarkFragment.setArguments(args);

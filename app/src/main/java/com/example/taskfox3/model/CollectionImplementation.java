@@ -35,7 +35,7 @@ public class CollectionImplementation implements BenchmarkModel {
                 return addingInTheMiddle(dataListBenchmark);
 
             case R.string.name_oper_3:
-                return  addingInTheEnd(dataListBenchmark);
+                return addingInTheEnd(dataListBenchmark);
 
             case R.string.name_oper_4:
                 return searchByValue(dataListBenchmark);

@@ -7,7 +7,6 @@ import com.example.taskfox3.model.BenchmarkModel;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -42,9 +41,8 @@ public class CollectionViewModel extends ViewModel {
     public void onCalculationStateChangeClicked(String elements, String threads, boolean isStart) {
 
         final List<BenchmarkItem> newCountItems;
-        //= benchmarkModel.createNewTasks();
         final List<BenchmarkItem> copyItems;
-        //= new ArrayList<>(newCountItems);
+
 
         if (isStart) {
             if (elements.length() == 0) {
@@ -66,16 +64,11 @@ public class CollectionViewModel extends ViewModel {
                 for (BenchmarkItem item : newCountItems) {
                     executor.submit(() -> {
                         item.setMeasuredTime(benchmarkModel.measureTime(item, Integer.parseInt(elements)));
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
                         benchmarkView.updateItem(item, newCountItems.indexOf(item));
                         copyItems.remove(item);
                         if (copyItems.isEmpty()) {
                             executor = null;
-                            if (hasListener()&&executor==null) {
+                            if (hasListener() && executor == null) {
                                 benchmarkView.messageCalcOver();
                                 benchmarkView.hideProgress();
                                 benchmarkView.buttonStopped();
@@ -83,9 +76,9 @@ public class CollectionViewModel extends ViewModel {
                         }
                     });
 
-                } //konec FORAAAA
+                }
 
-            } //koniec elements.length() != 0 && threads.length() != 0
+            }
         } else {
             if (executor != null) {
                 benchmarkView.hideProgress();
@@ -97,46 +90,5 @@ public class CollectionViewModel extends ViewModel {
         }
     }
 }
-//else if ( executor != null) {
-//                    benchmarkView.hideProgress();
-//                    benchmarkView.messageCalcIsStopped();
-//                    benchmarkView.buttonStopped();
-//                    executor.shutdownNow();
-//
-//                }
-
-
-
-                      /*  if (isStart&&copyItems.isEmpty()) {
-                            benchmarkView.buttonStopped();
-                        }else  {
-                            benchmarkView.hideProgress();
-                            benchmarkView.messageCalcIsStopped();
-                            benchmarkView.buttonStopped();
-                            executor.shutdownNow();
-                        }*/
-
-                            /*else if (!isStart&&!copyItems.isEmpty()) {
-                            benchmarkView.hideProgress();
-                            benchmarkView.messageCalcIsStopped();
-                            benchmarkView.buttonStopped();
-                            executor.shutdownNow();
-
-                        }*/
-
-               /* if (!isStart&&!copyItems.isEmpty()) {
-                    benchmarkView.hideProgress();
-                    benchmarkView.messageCalcIsStopped();
-                    benchmarkView.buttonStopped();
-                    executor.shutdownNow();
-                }*/
-
-            /*if (!isStart&&!copyItems.isEmpty()) {
-                benchmarkView.hideProgress();
-                benchmarkView.messageCalcIsStopped();
-                benchmarkView.buttonStopped();
-                executor.shutdownNow();
-
-            }else {}*/
 
 

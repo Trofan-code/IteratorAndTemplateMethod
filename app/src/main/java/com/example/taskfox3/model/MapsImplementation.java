@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class  MapsImplementation implements BenchmarkModel {
+public class MapsImplementation implements BenchmarkModel {
 
     @Override
     public List<BenchmarkItem> createNewTasks() {
@@ -23,22 +23,22 @@ public class  MapsImplementation implements BenchmarkModel {
     @Override
     public long measureTime(BenchmarkItem task, int amount) {
 
-        Map<Integer,Integer> map = createHashMap(amount);
+        Map<Integer, Integer> map = createHashMap(amount);
 
         switch (task.getTaskName()) {
             case R.string.name_oper_map_1:
-               return   addingNew(map);
+                return addingNew(map);
 
             case R.string.name_oper_map_2:
-              return searchByKey(map);
+                return searchByKey(map);
 
             case R.string.name_oper_map_3:
-               return removing(map);
+                return removing(map);
 
             default:
                 throw new RuntimeException("Exeption in calculation time");
         }
-       
+
     }
 
     public Map<Integer, Integer> createHashMap(int elements) {
@@ -55,21 +55,21 @@ public class  MapsImplementation implements BenchmarkModel {
         return myHashMap;
     }
 
-    private long addingNew(Map<Integer,Integer> map) {
+    private long addingNew(Map<Integer, Integer> map) {
         long time = System.nanoTime();
         map.put(0, 0);
         time = System.nanoTime() - time;
         return time;
     }
 
-    private long searchByKey(Map<Integer,Integer> map) {
+    private long searchByKey(Map<Integer, Integer> map) {
         long time = System.nanoTime();
         map.put(0, 0);
         time = System.nanoTime() - time;
         return time;
     }
 
-    private long removing(Map<Integer,Integer> map) {
+    private long removing(Map<Integer, Integer> map) {
         long time = System.nanoTime();
         map.put(0, 0);
         time = System.nanoTime() - time;
