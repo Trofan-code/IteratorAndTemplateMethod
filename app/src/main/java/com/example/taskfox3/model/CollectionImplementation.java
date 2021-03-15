@@ -12,47 +12,138 @@ public class CollectionImplementation implements BenchmarkModel {
     @Override
     public List<BenchmarkItem> createNewTasks() {
         final List<BenchmarkItem> items = new ArrayList<>();
-        items.add(new BenchmarkItem(R.string.name_oper_1));
-        items.add(new BenchmarkItem(R.string.name_oper_2));
-        items.add(new BenchmarkItem(R.string.name_oper_3));
-        items.add(new BenchmarkItem(R.string.name_oper_4));
-        items.add(new BenchmarkItem(R.string.name_oper_5));
-        items.add(new BenchmarkItem(R.string.name_oper_6));
-        items.add(new BenchmarkItem(R.string.name_oper_7));
+        items.add(new BenchmarkItem(R.string.name_oper_1,true));
+        items.add(new BenchmarkItem(R.string.name_oper_1_array,false));
+        items.add(new BenchmarkItem(R.string.name_oper_1_linked,false));
+        items.add(new BenchmarkItem(R.string.name_oper_1_copyOn,false));
+        items.add(new BenchmarkItem(R.string.name_oper_2,true));
+        items.add(new BenchmarkItem(R.string.name_oper_2_array,false));
+        items.add(new BenchmarkItem(R.string.name_oper_2_linked,false));
+        items.add(new BenchmarkItem(R.string.name_oper_2_copyOn,false));
+        items.add(new BenchmarkItem(R.string.name_oper_3,true));
+        items.add(new BenchmarkItem(R.string.name_oper_3_array,false));
+        items.add(new BenchmarkItem(R.string.name_oper_3_linked,false));
+        items.add(new BenchmarkItem(R.string.name_oper_3_copyOn,false));
+        items.add(new BenchmarkItem(R.string.name_oper_4,true));
+        items.add(new BenchmarkItem(R.string.name_oper_4_array,false));
+        items.add(new BenchmarkItem(R.string.name_oper_4_linked,false));
+        items.add(new BenchmarkItem(R.string.name_oper_4_copyOn,false));
+        items.add(new BenchmarkItem(R.string.name_oper_5,true));
+        items.add(new BenchmarkItem(R.string.name_oper_5_array,false));
+        items.add(new BenchmarkItem(R.string.name_oper_5_linked,false));
+        items.add(new BenchmarkItem(R.string.name_oper_5_copyOn,false));
+        items.add(new BenchmarkItem(R.string.name_oper_6,true));
+        items.add(new BenchmarkItem(R.string.name_oper_6_array,false));
+        items.add(new BenchmarkItem(R.string.name_oper_6_linked,false));
+        items.add(new BenchmarkItem(R.string.name_oper_6_copyOn,false));
+        items.add(new BenchmarkItem(R.string.name_oper_7,true));
+        items.add(new BenchmarkItem(R.string.name_oper_7_array,false));
+        items.add(new BenchmarkItem(R.string.name_oper_7_linked,false));
+        items.add(new BenchmarkItem(R.string.name_oper_7_copyOn,false));
         return items;
     }
 
 
     @Override
     public long measureTime(BenchmarkItem task, int amount) {
-        ArrayList<Integer> dataListBenchmark = new ArrayList<>(Collections.nCopies(amount, 1));
+        ArrayList<Integer> dataArrayListBenchmark = new ArrayList<>(Collections.nCopies(amount, 1));
+        ArrayList<Integer> dataLinkedListBenchmark = new ArrayList<>(Collections.nCopies(amount, 1));
+        ArrayList<Integer> dataCopyOnWriteArrayListBenchmark = new ArrayList<>(Collections.nCopies(amount, 1));
+
+
 
         switch (task.getTaskName()) {
-            case R.string.name_oper_1:
-                return addingInTheBeginning(dataListBenchmark);
 
-            case R.string.name_oper_2:
-                return addingInTheMiddle(dataListBenchmark);
+            case R.string.name_oper_1_array:
 
-            case R.string.name_oper_3:
-                return addingInTheEnd(dataListBenchmark);
+                return addingInTheBeginning(dataArrayListBenchmark);
 
-            case R.string.name_oper_4:
-                return searchByValue(dataListBenchmark);
+            case R.string.name_oper_1_linked:
 
-            case R.string.name_oper_5:
-                return removingInTheBeginning(dataListBenchmark);
+                return addingInTheBeginning(dataLinkedListBenchmark);
 
-            case R.string.name_oper_6:
-                return removingInTheMiddle(dataListBenchmark);
+            case R.string.name_oper_1_copyOn:
 
-            case R.string.name_oper_7:
-                return removingInTheEnd(dataListBenchmark);
+                return addingInTheBeginning(dataCopyOnWriteArrayListBenchmark);
+
+            case R.string.name_oper_2_array:
+
+                return addingInTheMiddle(dataArrayListBenchmark);
+
+            case R.string.name_oper_2_linked:
+
+                return addingInTheBeginning(dataLinkedListBenchmark);
+
+            case R.string.name_oper_2_copyOn:
+
+                return addingInTheBeginning(dataCopyOnWriteArrayListBenchmark);
+
+            case R.string.name_oper_3_array:
+
+                return addingInTheEnd(dataArrayListBenchmark);
+
+            case R.string.name_oper_3_linked:
+
+                return addingInTheBeginning(dataLinkedListBenchmark);
+
+            case R.string.name_oper_3_copyOn:
+
+                return addingInTheBeginning(dataCopyOnWriteArrayListBenchmark);
+
+            case R.string.name_oper_4_array:
+                return searchByValue(dataArrayListBenchmark);
+
+            case R.string.name_oper_4_linked:
+
+                return addingInTheBeginning(dataLinkedListBenchmark);
+
+            case R.string.name_oper_4_copyOn:
+
+                return addingInTheBeginning(dataCopyOnWriteArrayListBenchmark);
+
+            case R.string.name_oper_5_array:
+
+                return removingInTheBeginning(dataArrayListBenchmark);
+
+            case R.string.name_oper_5_linked:
+
+                return addingInTheBeginning(dataLinkedListBenchmark);
+
+            case R.string.name_oper_5_copyOn:
+
+                return addingInTheBeginning(dataCopyOnWriteArrayListBenchmark);
+
+            case R.string.name_oper_6_array:
+
+                return removingInTheMiddle(dataArrayListBenchmark);
+
+            case R.string.name_oper_6_linked:
+
+                return addingInTheBeginning(dataLinkedListBenchmark);
+
+            case R.string.name_oper_6_copyOn:
+
+                return addingInTheBeginning(dataCopyOnWriteArrayListBenchmark);
+
+            case R.string.name_oper_7_array:
+
+                return removingInTheEnd(dataArrayListBenchmark);
+
+            case R.string.name_oper_7_linked:
+
+                return addingInTheBeginning(dataLinkedListBenchmark);
+
+            case R.string.name_oper_7_copyOn:
+
+                return addingInTheBeginning(dataCopyOnWriteArrayListBenchmark);
+
 
             default:
-                throw new RuntimeException("Exeption in calculation time");
+                throw new RuntimeException("Exception in calculation time");
         }
     }
+
+
 
 
     private long addingInTheBeginning(ArrayList<Integer> dataListBenchmark) {

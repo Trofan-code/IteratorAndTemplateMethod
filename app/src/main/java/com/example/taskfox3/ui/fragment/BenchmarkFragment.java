@@ -114,12 +114,14 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     @Override
     public void showProgress() {
         handler.post(() -> adapter.setProgressVisibility(true));
+
     }
 
     @Override
     public void hideProgress() {
         handler.post(() -> adapter.setProgressVisibility(false));
     }
+
 
 
     private String getString(EditText editText) {

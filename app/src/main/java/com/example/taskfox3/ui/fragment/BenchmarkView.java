@@ -23,4 +23,6 @@ public interface BenchmarkView {
     void showProgress();
 
     void hideProgress();
+
+
 }

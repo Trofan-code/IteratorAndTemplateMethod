@@ -8,13 +8,41 @@
     <string name="title_2">Среднее время</string>
     <string name="title_3">Прогресс</string>
 
-    <string name="name_oper_1">Adding in the beginning</string>
-    <string name="name_oper_2">Adding in the middle</string>
-    <string name="name_oper_3">Adding in the end</string>
-    <string name="name_oper_4">Search by value</string>
-    <string name="name_oper_5">Removing in the beginning</string>
-    <string name="name_oper_6">Removing in the middle</string>
-    <string name="name_oper_7">Removing in the end</string>
+    <string name="name_oper_1">Adding in the beginning :</string>
+    <string name="name_oper_1_array"> ArrayList</string>
+    <string name="name_oper_1_linked">LinkedList</string>
+    <string name="name_oper_1_copyOn">CopyOnWriteArrayList</string>
+
+    <string name="name_oper_2">Adding in the middle :</string>
+    <string name="name_oper_2_array"> ArrayList</string>
+    <string name="name_oper_2_linked">LinkedList</string>
+    <string name="name_oper_2_copyOn">CopyOnWriteArrayList</string>
+
+    <string name="name_oper_3">Adding in the end :</string>
+    <string name="name_oper_3_array"> ArrayList</string>
+    <string name="name_oper_3_linked">LinkedList</string>
+    <string name="name_oper_3_copyOn">CopyOnWriteArrayList</string>
+
+    <string name="name_oper_4">Search by value :</string>
+    <string name="name_oper_4_array"> ArrayList</string>
+    <string name="name_oper_4_linked">LinkedList</string>
+    <string name="name_oper_4_copyOn">CopyOnWriteArrayList</string>
+
+    <string name="name_oper_5">Removing in the beginning :</string>
+    <string name="name_oper_5_array"> ArrayList</string>
+    <string name="name_oper_5_linked">LinkedList</string>
+    <string name="name_oper_5_copyOn">CopyOnWriteArrayList</string>
+
+    <string name="name_oper_6">Removing in the middle :</string>
+    <string name="name_oper_6_array"> ArrayList</string>
+    <string name="name_oper_6_linked">LinkedList</string>
+    <string name="name_oper_6_copyOn">CopyOnWriteArrayList</string>
+
+    <string name="name_oper_7">Removing in the end :</string>
+    <string name="name_oper_7_array"> ArrayList</string>
+    <string name="name_oper_7_linked">LinkedList</string>
+    <string name="name_oper_7_copyOn">CopyOnWriteArrayList</string>
+
     <string name="hint_only_num">Only number</string>
     <string name="operations">Operations</string>
     <string name="threads">Threads</string>
@@ -23,16 +51,24 @@
     <string name="stop">Stop</string>
 
 
-    <string name="nanosec">ns</string>
+    <string name="ms"> ms</string>
     <string name="text_for_first_time">--.--</string>
 
     <string name="calculation_over">Calculation is over!</string>
     <string name="calculation_stop">Calculation is stopped!</string>
 
     <string name="name_oper_map_1">Adding new</string>
+    <string name="name_oper_map_1_tree_map">TreeMap</string>
+    <string name="name_oper_map_1_hash_map">HashMap</string>
+
     <string name="name_oper_map_2">Search by key</string>
+    <string name="name_oper_map_2_tree_map">TreeMap</string>
+    <string name="name_oper_map_2_hash_map">HashMap</string>
+
     <string name="name_oper_map_3">Removing</string>
-    <string name="time_zero">0</string>
+    <string name="name_oper_map_3_tree_map">TreeMap</string>
+    <string name="name_oper_map_3_hash_map">HashMap</string>
+
     <string name="error_1">Num of operation is required!</string>
     <string name="error_2">Num of threads is required!</string>
     <string name="default_time">--.--</string>

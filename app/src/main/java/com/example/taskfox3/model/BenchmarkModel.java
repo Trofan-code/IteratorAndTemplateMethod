@@ -9,4 +9,6 @@ public interface BenchmarkModel {
     List<BenchmarkItem> createNewTasks();
 
     long measureTime(BenchmarkItem task, int amount);
+
+
 }

@@ -1,8 +1,5 @@
 package com.example.taskfox3.ui.fragment;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +47,7 @@ public class BenchmarksAdapter extends RecyclerView.Adapter<BenchmarksAdapter.Be
     }
 
 
+
     public void setItems(List<BenchmarkItem> items) {
         this.items.clear();
         this.items.addAll(items);
@@ -81,13 +79,27 @@ public class BenchmarksAdapter extends RecyclerView.Adapter<BenchmarksAdapter.Be
 
 
         public void bindItem(BenchmarkItem benchmarkItem) {
+
             operationName.setText(benchmarkItem.getTaskName());
             if (benchmarkItem.getMeasuredTime() == -1) {
-                operationTime.setText(itemView.getContext().getResources().getString(R.string.text_for_first_time));
-            } else {
-                operationTime.setText(String.valueOf(benchmarkItem.getMeasuredTime()) + itemView.getContext().getResources().getString(R.string.nanosec));
+                if(benchmarkItem.isTitle()){
+
+                    operationTime.setText(" ");
+                }else
+                operationTime.setText(itemView.getContext().getString(R.string.text_for_first_time));
             }
-            progressBar.setVisibility(benchmarkItem.isInProgress() ? View.VISIBLE : View.INVISIBLE);
+            else {
+                operationTime.setText(String.valueOf(benchmarkItem.getMeasuredTime()) + itemView.getContext().getString(R.string.ms));
+            }
+            if (benchmarkItem.isTitle()){
+                progressBar.setVisibility(View.INVISIBLE);
+            }
+
+
+            progressBar.setVisibility(benchmarkItem.isInProgress()&&!benchmarkItem.isTitle() ? View.VISIBLE : View.INVISIBLE);
+
+
+
         }
     }
 }
