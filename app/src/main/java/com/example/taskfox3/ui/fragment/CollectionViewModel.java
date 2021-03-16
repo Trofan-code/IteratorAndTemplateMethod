@@ -14,6 +14,7 @@ public class CollectionViewModel extends ViewModel {
     private final BenchmarkModel benchmarkModel;
     private BenchmarkView benchmarkView;
     private ThreadPoolExecutor executor;
+    private int MAXVALUEOFINT = 2147483647;
 /*    По факту остается:
 - анимация появления и исчезновения прогрессбара
 - строковые ресурсы с форматированием/placeholder
@@ -49,10 +50,11 @@ public class CollectionViewModel extends ViewModel {
 
         final List<BenchmarkItem> newCountItems;
         final List<BenchmarkItem> copyItems;
+        int elementNumber = Integer.parseInt(elements);
 
 
         if (isStart) {
-            if (elements.length() == 0) {
+            if (elements.length() == 0 && elementNumber > MAXVALUEOFINT) {
                 benchmarkView.operationError();
                 benchmarkView.buttonStopped();
 
@@ -76,11 +78,12 @@ public class CollectionViewModel extends ViewModel {
                         benchmarkView.updateItem(item, newCountItems.indexOf(item));
                         try {
                             Thread.sleep(1000);
-                        }catch (Exception e){
+                        } catch (Exception e) {
 
                         }
                         copyItems.remove(item);
                         if (copyItems.isEmpty()) {
+                            executor.shutdownNow();
                             executor = null;
                             if (hasListener() && executor == null) {
                                 benchmarkView.messageCalcOver();
@@ -93,14 +96,12 @@ public class CollectionViewModel extends ViewModel {
                 }
 
             }
-        } else {
-            if (executor != null) {
-                benchmarkView.hideProgress();
-                benchmarkView.messageCalcIsStopped();
-                benchmarkView.buttonStopped();
-                executor.shutdownNow();
+        } else if (executor != null) {
+            benchmarkView.hideProgress();
+            benchmarkView.messageCalcIsStopped();
+            benchmarkView.buttonStopped();
+            executor.shutdownNow();
 
-            }
         }
     }
 }

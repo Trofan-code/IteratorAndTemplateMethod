@@ -75,6 +75,7 @@ public class MapsImplementation implements BenchmarkModel {
         }
         return myHashMap;
     }
+
     public Map<Integer, Integer> createTreeMap(int elements) {
         Map<Integer, Integer> myTreeMap = new TreeMap<>();
         List<Integer> keyAndValue = new ArrayList<Integer>();
@@ -93,17 +94,16 @@ public class MapsImplementation implements BenchmarkModel {
         long time = System.nanoTime();
 
 
-
         map.put(0, 0);
         time = System.nanoTime() - time;
-        return  time;
+        return time;
     }
 
     private long searchByKey(Map<Integer, Integer> map) {
         long time = System.nanoTime();
         map.put(0, 0);
         time = System.nanoTime() - time;
-        return  TimeUnit.NANOSECONDS.toMillis(time);
+        return TimeUnit.NANOSECONDS.toMillis(time);
     }
 
     private long removing(Map<Integer, Integer> map) {
@@ -111,6 +111,6 @@ public class MapsImplementation implements BenchmarkModel {
 
         map.put(0, 0);
         time = System.nanoTime() - time;
-        return  TimeUnit.NANOSECONDS.toMillis(time);
+        return TimeUnit.NANOSECONDS.toMillis(time);
     }
 }

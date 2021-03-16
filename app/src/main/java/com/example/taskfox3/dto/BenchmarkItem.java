@@ -9,9 +9,9 @@ public class BenchmarkItem {
     private final int taskName;
     private long measuredTime;
 
-    public BenchmarkItem(int taskName,boolean isTitle) {
+    public BenchmarkItem(int taskName, boolean isTitle) {
         this.taskName = taskName;
-        this.isTitle=isTitle;
+        this.isTitle = isTitle;
         this.measuredTime = DEFAULT_TIME;
     }
 
@@ -22,6 +22,7 @@ public class BenchmarkItem {
     public void setIsInProgress(boolean startOrNotProgressBar) {
         this.isInProgress = startOrNotProgressBar;
     }
+
     public boolean isTitle() {
         return isTitle;
     }

@@ -123,7 +123,6 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
     }
 
 
-
     private String getString(EditText editText) {
         return editText.getText().toString().trim();
     }
