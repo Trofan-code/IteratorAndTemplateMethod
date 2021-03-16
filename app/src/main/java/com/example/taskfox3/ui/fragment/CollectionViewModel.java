@@ -14,7 +14,7 @@ public class CollectionViewModel extends ViewModel {
     private final BenchmarkModel benchmarkModel;
     private BenchmarkView benchmarkView;
     private ThreadPoolExecutor executor;
-    private int MAXVALUEOFINT = 2147483647;
+
 /*    По факту остается:
 - анимация появления и исчезновения прогрессбара
 - строковые ресурсы с форматированием/placeholder
@@ -42,6 +42,15 @@ public class CollectionViewModel extends ViewModel {
         }
     }
 
+    public int parseNumbers(String elements){
+        try {
+            return Integer.parseInt(elements);
+
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+    }
+
     private boolean hasListener() {
         return benchmarkView != null;
     }
@@ -49,11 +58,9 @@ public class CollectionViewModel extends ViewModel {
     public void onCalculationStateChangeClicked(String elements, String threads, boolean isStart) {
         final List<BenchmarkItem> newCountItems;
         final List<BenchmarkItem> copyItems;
-        int elementNumber = Integer.parseInt(elements);
-
 
         if (isStart) {
-            if (elements.length() == 0 && elementNumber > MAXVALUEOFINT) {
+            if (elements.length() == 0 ) {
                 benchmarkView.operationError();
                 benchmarkView.buttonStopped();
 
@@ -61,18 +68,20 @@ public class CollectionViewModel extends ViewModel {
                 benchmarkView.threadsError();
                 benchmarkView.buttonStopped();
             }
+            if (elements.length() != 0 && threads.length() != 0 && parseNumbers(elements)<Integer.MAX_VALUE) {
+                int elementNumber = Integer.parseInt(elements);
+                int elementThreads = Integer.parseInt(threads);
 
-            if (elements.length() != 0 && threads.length() != 0) {
                 newCountItems = benchmarkModel.createNewTasks();
                 copyItems = new ArrayList<>(newCountItems);
-                executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(Integer.parseInt(threads));
+                executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(elementThreads);
                 if (hasListener()) {
                     benchmarkView.showProgress();
                 }
                 for (BenchmarkItem item : newCountItems) {
                     executor.submit(() -> {
                         try {
-                            item.setMeasuredTime(benchmarkModel.measureTime(item, Integer.parseInt(elements)));
+                            item.setMeasuredTime(benchmarkModel.measureTime(item, elementNumber));
                         } catch (Throwable e) {
                             e.printStackTrace();
                         }
@@ -91,6 +100,9 @@ public class CollectionViewModel extends ViewModel {
 
                 }
 
+            }else {
+                benchmarkView.buttonStopped();
+                benchmarkView.messageErrorNumberOfOperation();
             }
         } else if (executor != null) {
             benchmarkView.hideProgress();

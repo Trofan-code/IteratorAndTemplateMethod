@@ -92,25 +92,20 @@ public class MapsImplementation implements BenchmarkModel {
 
     private long addingNew(Map<Integer, Integer> map) {
         long time = System.nanoTime();
-
-
         map.put(0, 0);
-        time = System.nanoTime() - time;
-        return time;
+        return (System.nanoTime() - time)/1000;
     }
 
     private long searchByKey(Map<Integer, Integer> map) {
         long time = System.nanoTime();
         map.put(0, 0);
-        time = System.nanoTime() - time;
-        return TimeUnit.NANOSECONDS.toMillis(time);
+        return (System.nanoTime() - time)/1000;
+
     }
 
     private long removing(Map<Integer, Integer> map) {
         long time = System.nanoTime();
-
         map.put(0, 0);
-        time = System.nanoTime() - time;
-        return TimeUnit.NANOSECONDS.toMillis(time);
+        return (System.nanoTime() - time)/1000;
     }
 }

@@ -147,42 +147,42 @@ public class CollectionImplementation implements BenchmarkModel {
     private long addingInTheBeginning(List<Integer> dataListBenchmark) {
         long time = System.nanoTime();
         dataListBenchmark.add(0, 2);
-        return System.nanoTime() - time;
+        return (System.nanoTime() - time)/1000;
     }
 
     private long addingInTheMiddle(ArrayList<Integer> dataListBenchmark) {
         long time = System.nanoTime();
         dataListBenchmark.add((dataListBenchmark.size() / 2), 2);
-        return System.nanoTime() - time;
+        return (System.nanoTime() - time)/1000;
     }
 
     private long addingInTheEnd(ArrayList<Integer> dataListBenchmark) {
         long time = System.nanoTime();
         dataListBenchmark.add((dataListBenchmark.size() - 1), 3);
-        return System.nanoTime() - time;
+        return (System.nanoTime() - time)/1000;
     }
 
     private long searchByValue(ArrayList<Integer> dataListBenchmark) {
         long time = System.nanoTime();
         dataListBenchmark.contains(374);
-        return System.nanoTime() - time;
+        return (System.nanoTime() - time)/1000;
     }
 
     private long removingInTheBeginning(ArrayList<Integer> dataListBenchmark) {
         long time = System.nanoTime();
         dataListBenchmark.remove(0);
-        return System.nanoTime() - time;
+        return (System.nanoTime() - time)/1000;
     }
 
     private long removingInTheMiddle(ArrayList<Integer> dataListBenchmark) {
         long time = System.nanoTime();
         dataListBenchmark.remove((dataListBenchmark.size() / 2));
-        return System.nanoTime() - time;
+        return (System.nanoTime() - time)/1000;
     }
 
     private long removingInTheEnd(ArrayList<Integer> dataListBenchmark) {
         long time = System.nanoTime();
         dataListBenchmark.remove((dataListBenchmark.size() - 1));
-        return System.nanoTime() - time;
+        return (System.nanoTime() - time)/1000;
     }
 }
