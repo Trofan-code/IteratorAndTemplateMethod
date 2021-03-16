@@ -11,4 +11,6 @@ public interface BenchmarkModel {
     long measureTime(BenchmarkItem task, int amount);
 
 
+
+
 }

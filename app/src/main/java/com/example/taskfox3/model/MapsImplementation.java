@@ -98,14 +98,16 @@ public class MapsImplementation implements BenchmarkModel {
 
     private long searchByKey(Map<Integer, Integer> map) {
         long time = System.nanoTime();
-        map.put(0, 0);
+        map.get(0);
         return (System.nanoTime() - time)/1000;
 
     }
 
     private long removing(Map<Integer, Integer> map) {
         long time = System.nanoTime();
-        map.put(0, 0);
+        map.remove(0);
         return (System.nanoTime() - time)/1000;
     }
+
+
 }

@@ -44,8 +44,7 @@ public class CollectionViewModel extends ViewModel {
 
     public int parseNumbers(String elements){
         try {
-            return Integer.parseInt(elements);
-
+                return Integer.parseInt(elements);
         } catch (NumberFormatException e) {
             return -1;
         }
@@ -56,8 +55,8 @@ public class CollectionViewModel extends ViewModel {
     }
 
     public void onCalculationStateChangeClicked(String elements, String threads, boolean isStart) {
-        final List<BenchmarkItem> newCountItems;
-        final List<BenchmarkItem> copyItems;
+
+
 
         if (isStart) {
             if (elements.length() == 0 ) {
@@ -68,12 +67,11 @@ public class CollectionViewModel extends ViewModel {
                 benchmarkView.threadsError();
                 benchmarkView.buttonStopped();
             }
-            if (elements.length() != 0 && threads.length() != 0 && parseNumbers(elements)<Integer.MAX_VALUE) {
+            if (elements.length() != 0 && threads.length() != 0 && parseNumbers(elements)<Integer.MAX_VALUE && parseNumbers(elements)!=-1) {
                 int elementNumber = Integer.parseInt(elements);
                 int elementThreads = Integer.parseInt(threads);
-
-                newCountItems = benchmarkModel.createNewTasks();
-                copyItems = new ArrayList<>(newCountItems);
+                final List<BenchmarkItem> newCountItems = benchmarkModel.createNewTasks();
+                final List<BenchmarkItem> copyItems = new ArrayList<>(newCountItems);
                 executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(elementThreads);
                 if (hasListener()) {
                     benchmarkView.showProgress();
@@ -100,9 +98,9 @@ public class CollectionViewModel extends ViewModel {
 
                 }
 
-            }else {
+            }else if(parseNumbers(elements)==-1) {
                 benchmarkView.buttonStopped();
-                benchmarkView.messageErrorNumberOfOperation();
+                benchmarkView.messageErrorLargeSizeOperation();
             }
         } else if (executor != null) {
             benchmarkView.hideProgress();

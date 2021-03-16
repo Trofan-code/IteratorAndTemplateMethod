@@ -156,7 +156,7 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
         handler.post(() -> Toast.makeText(getActivity(), R.string.calculation_stop, Toast.LENGTH_SHORT).show());
     }
     @Override
-    public void messageErrorNumberOfOperation() {
+    public void messageErrorLargeSizeOperation() {
 
         handler.post(() -> Toast.makeText(getActivity(), R.string.error__numb_operation, Toast.LENGTH_SHORT).show());
     }

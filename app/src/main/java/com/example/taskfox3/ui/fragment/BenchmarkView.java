@@ -24,7 +24,7 @@ public interface BenchmarkView {
 
     void hideProgress();
 
-    public void messageErrorNumberOfOperation();
+    void messageErrorLargeSizeOperation();
 
 
 }
