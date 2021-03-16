@@ -47,7 +47,6 @@ public class CollectionViewModel extends ViewModel {
     }
 
     public void onCalculationStateChangeClicked(String elements, String threads, boolean isStart) {
-
         final List<BenchmarkItem> newCountItems;
         final List<BenchmarkItem> copyItems;
         int elementNumber = Integer.parseInt(elements);
@@ -72,24 +71,21 @@ public class CollectionViewModel extends ViewModel {
                 }
                 for (BenchmarkItem item : newCountItems) {
                     executor.submit(() -> {
-
-                        item.setMeasuredTime(benchmarkModel.measureTime(item, Integer.parseInt(elements)));
-
-                        benchmarkView.updateItem(item, newCountItems.indexOf(item));
                         try {
-                            Thread.sleep(1000);
-                        } catch (Exception e) {
-
+                            item.setMeasuredTime(benchmarkModel.measureTime(item, Integer.parseInt(elements)));
+                        } catch (Throwable e) {
+                            e.printStackTrace();
                         }
+                        benchmarkView.updateItem(item, newCountItems.indexOf(item));
                         copyItems.remove(item);
                         if (copyItems.isEmpty()) {
-                            executor.shutdownNow();
-                            executor = null;
-                            if (hasListener() && executor == null) {
+                            if (hasListener()) {
                                 benchmarkView.messageCalcOver();
                                 benchmarkView.hideProgress();
                                 benchmarkView.buttonStopped();
                             }
+                            executor.shutdownNow();
+                            executor = null;
                         }
                     });
 
@@ -101,9 +97,7 @@ public class CollectionViewModel extends ViewModel {
             benchmarkView.messageCalcIsStopped();
             benchmarkView.buttonStopped();
             executor.shutdownNow();
-
+            executor = null;
         }
     }
 }
-
-

@@ -52,7 +52,6 @@ public class CollectionImplementation implements BenchmarkModel {
         LinkedList<Integer> dataLinkedListBenchmark = new LinkedList<>(Collections.nCopies(amount, 1));
         CopyOnWriteArrayList<Integer> dataCopyOnWriteArrayListBenchmark = new CopyOnWriteArrayList<>(Collections.nCopies(amount, 1));
 
-
         switch (task.getTaskName()) {
 
             case R.string.name_oper_1_array:

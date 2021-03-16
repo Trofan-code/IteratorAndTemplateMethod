@@ -30,13 +30,12 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
 
 
     public static final String TYPE = "type";
+    private final Handler handler = new Handler(Looper.getMainLooper());
     private final BenchmarksAdapter adapter = new BenchmarksAdapter();
     private CollectionViewModel viewModel;
     private EditText editTextOperations;
     private EditText editTextThreads;
     private ToggleButton swStart;
-    private static final String TAG = "MyApp";
-    final Handler handler = new Handler(Looper.getMainLooper());
 
 
     public static BenchmarkFragment newInstance(int type) {
@@ -102,7 +101,6 @@ public class BenchmarkFragment extends Fragment implements CompoundButton.OnChec
 
     @Override
     public void buttonStopped() {
-
         handler.post(() -> {
             if (swStart.isChecked()) {
                 swStart.setChecked(false);
