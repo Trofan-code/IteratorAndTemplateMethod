@@ -1,5 +1,5 @@
 # CollectionsandMapsBenchmark
-Collections and Maps
+# Collections and Maps
 Application
 Create an application running various operations on Collections and Maps, calculate and display the average execution time of these operations (time in milliseconds).
 Description
@@ -31,5 +31,5 @@ o	removing.
 •	In case of screen rotation/recreation of activity, the computation process should not be stopped.
 
 
-Technology stack
+# Technology stack
 •	Language - Java
